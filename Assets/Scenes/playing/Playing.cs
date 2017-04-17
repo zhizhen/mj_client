@@ -73,7 +73,7 @@ public class Playing : MonoBehaviour {
 	}
 
 	GameObject create_selector(GameObject prefab){
-		GameObject o = GameObject.Instantiate (prefab, new Vector3(0,0,0), Quaternion.identity);
+		GameObject o = GameObject.Instantiate (prefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 		o.transform.SetParent (GameObject.Find ("board").transform);
 		hide_selector (o);
 		return o;
@@ -84,7 +84,7 @@ public class Playing : MonoBehaviour {
 	}
 
 	void show_selector(GameObject o, int row, int col){
-		o.transform.SetPositionAndRotation (GetPos (row, col), Quaternion.identity);
+		//o.transform.SetPositionAndRotation (GetPos (row, col), Quaternion.identity);
 		o.GetComponent<Renderer>().enabled = true;
 	}
 
@@ -100,7 +100,7 @@ public class Playing : MonoBehaviour {
 			}
 
 			Vector3 pos = new Vector3 (x + (i % 9) * r, y - i / 9 * r, 0);
-			GameObject cm = GameObject.Instantiate (cm_map[c], pos, Quaternion.identity);
+			GameObject cm = GameObject.Instantiate (cm_map[c], pos, Quaternion.identity) as GameObject;
 			cm.transform.SetParent (GameObject.Find ("board").transform);
 			cms.Add(i, cm);
 		}
