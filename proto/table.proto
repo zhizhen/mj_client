@@ -8,12 +8,15 @@ message MatchRsp{
 	required int32 err_no = 1;
 }
 
+message Role {  
+  required int32 id = 1;  
+  required string name = 2; 
+  required int32 pos = 3; 
+}
+
 // 匹配结果
 message MatchResult{
-	required bool i_am_red = 1;
-	required string name = 2;
-	required int32 lv = 3;
-	required int32 icon = 4;
+	repeated Role roles = 1;
 }
 
 // 准备
@@ -47,12 +50,6 @@ message Move
 message MoveReq
 {
 	required Move move = 1;
-}
-
-message MoveRsp
-{
-	required int32 err_no = 1;
-	optional Move move = 2;
 }
 
 message MoveNotify

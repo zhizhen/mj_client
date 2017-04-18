@@ -64,7 +64,7 @@ public class GameApp : MonoBehaviour {
         GameObject.DontDestroyOnLoad(this.gameObject);
         for (int i = 0; i < frameActions.Length; i++)
             frameActions[i].Invoke();
-       
+        ProtoRes.GetInstance();
 	}
 
 
