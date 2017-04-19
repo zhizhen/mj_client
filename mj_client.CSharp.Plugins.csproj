@@ -77,9 +77,11 @@
     <Compile Include="Assets\Plugins\MonoBehaviourExt.cs" />
     <Compile Include="Assets\Plugins\PluginIOSTool.cs" />
     <Compile Include="Assets\Plugins\PluginTool.cs" />
+    <Compile Include="Assets\Plugins\SimpleLoader.cs" />
     <Compile Include="Assets\Plugins\Singleton.cs" />
     <Compile Include="Assets\Plugins\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\Plugins\TickManager.cs" />
+    <Compile Include="Assets\Plugins\UI\UILoading.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />

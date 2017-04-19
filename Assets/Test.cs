@@ -11,7 +11,6 @@ public class Test : MonoBehaviour {
             Card card = new Card(Random.Range(1, 4), Random.Range(1, 9));
             CardMgr.Instance.addList(card);
         }
-       
         Debug.Log(getString(CardMgr.Instance.List));
         CardMgr.Instance.sort();
         Debug.Log(getString(CardMgr.Instance.List));
