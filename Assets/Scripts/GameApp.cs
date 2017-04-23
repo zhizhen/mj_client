@@ -11,7 +11,7 @@ public class GameApp : MonoBehaviour {
     private int step, resStep, resTotal = 4;
     private readonly int otherTotal = 2 + aspet;
     public readonly Action[] frameActions = new Action[]{
-        InitSound,InitSimpleLoader,InitPlugin
+        InitSound,InitSimpleLoader,InitPlugin,InitUIRoot
     };
 
     private bool isInit = false;
@@ -42,10 +42,11 @@ public class GameApp : MonoBehaviour {
     }
     public static void InitUIRoot()
     {
-        ResourceManager.Instance.DownLoadBundle(URLConst.UI_ROOT, delegate(object obj)
-        {
-            UIRootBack(obj);
-        }, ResourceManager.UI_PRIORITY);
+        GameObject rootCanvas = ResourceManager.GetGameObject(URLConst.GetUI("UIRoot"));
+        Transform canvas = rootCanvas.transform.FindChild("UICanvas");
+        rootCanvas.SetActive(true);
+        GameObject.DontDestroyOnLoad(rootCanvas);
+
         GameObject eventSystem = GameObject.Find("EventSystem");
         if (eventSystem == null)
         {
@@ -56,15 +57,10 @@ public class GameApp : MonoBehaviour {
         }
         GameObject.DontDestroyOnLoad(eventSystem);
     }
-    private static void UIRootBack(object obj)
+    private static void setUIRoot()
     {
-        GameObject UIRootCanvas = ResourceManager.GetGameObject(URLConst.UI_ROOT, false);
-        UIRootCanvas.name = "UIRoot";
-        GameObject.DontDestroyOnLoad(UIRootCanvas);
-        GameObject UICanvas = UIRootCanvas.transform.FindChild("UICanvas").gameObject;
-        TestPanel.Instance.load();
+        Transform tran = GameObject.Find("UIRoot").transform;
     }
-
     private static void InitSimpleLoader()
     {
         if (_gameObject.GetComponent<SimpleLoader>() == null)
@@ -163,6 +159,8 @@ public class GameApp : MonoBehaviour {
     {
         showProgress = false;
         UILoading.CloseLoading();
-        InitUIRoot();
+        setUIRoot();
+        //TestPanel.Instance.load();
+        LoginPanel.Instance.load();
     }
 }

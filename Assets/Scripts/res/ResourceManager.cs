@@ -643,6 +643,6 @@ public class ResourceManager : MonoBehaviour {
             }
             hasReleaseSharedAlpha = true;
         }
-        return GameObject.Instantiate(original) as GameObject;
+        return GameObjectExt.Instantiate(original) as GameObject;
     }
 }

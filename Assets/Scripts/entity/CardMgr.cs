@@ -84,7 +84,7 @@ public class CardMgr : Singleton<CardMgr> {
         else
             return false;
     }
-    //先不考虑明扛暗扛
+    //先不考虑明扛暗扛 
     public bool isGang(Card card)
     {
         int num = 0;

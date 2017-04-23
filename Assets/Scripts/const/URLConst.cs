@@ -97,6 +97,6 @@ public class URLConst{
         return SCENE_PATH+"ScenePrefab"+sceneId+EXTEND_ASSETBUNDLE;
     }
     public static List<string> listInitGameRes = new List<string>{
-        SHADER_CONFIG,LUA_CONFIG,CONFIG_CONFIG,ICON_ATLAS_PATH,SHARED_ETC_PATH,GetUI("UIRootCanvas")
+        SHADER_CONFIG,LUA_CONFIG,CONFIG_CONFIG,ICON_ATLAS_PATH,SHARED_ETC_PATH,GetUI("UIRoot")
     };
 }
