@@ -85,7 +85,7 @@ public class IconMgr:Singleton<IconMgr>{
 #if _DEBUG
 		if(configSprites==null)
 			configSprites = new Dictionary<string,UnityEngine.Object>();
-		Sprite[] assets = Resources.LoadAll<Sprite>("GameAssets/Assetbundles/UI/Icon/");
+		Sprite[] assets = Resources.LoadAll<Sprite>("GameAsset/Assetbundles/UI/Icon/");
 		for(int i=0;i<assets.Length;i++)
 		{
 			var textAsset = assets[i];

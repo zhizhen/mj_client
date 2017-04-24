@@ -83,10 +83,11 @@
     <Compile Include="Assets\Scripts\const\GameConfig.cs" />
     <Compile Include="Assets\Scripts\const\URL.cs" />
     <Compile Include="Assets\Scripts\const\URLConst.cs" />
+    <Compile Include="Assets\Scripts\controller\BattleController.cs" />
     <Compile Include="Assets\Scripts\controller\LoginController.cs" />
-    <Compile Include="Assets\Scripts\controller\MatchController.cs" />
     <Compile Include="Assets\Scripts\controller\RoleController.cs" />
     <Compile Include="Assets\Scripts\controller\RoomController.cs" />
+    <Compile Include="Assets\Scripts\controller\TableController.cs" />
     <Compile Include="Assets\Scripts\entity\Card.cs" />
     <Compile Include="Assets\Scripts\entity\CardConst.cs" />
     <Compile Include="Assets\Scripts\entity\CardController.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\manager\TextureMgr.cs" />
     <Compile Include="Assets\Scripts\network\network.cs" />
     <Compile Include="Assets\Scripts\panel\BasePanel.cs" />
+    <Compile Include="Assets\Scripts\panel\BattlePanel.cs" />
     <Compile Include="Assets\Scripts\panel\HallPanel.cs" />
     <Compile Include="Assets\Scripts\panel\LoginPanel.cs" />
     <Compile Include="Assets\Scripts\panel\PanelTag.cs" />

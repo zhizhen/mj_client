@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class HallPanel : BasePanel
 {
-
     private static HallPanel instance;
     public static HallPanel Instance
     {
@@ -32,23 +31,22 @@ public class HallPanel : BasePanel
 
         _create.onClick.AddListener(delegate
         {
-            createRoom();
+            createTable();
         });
 
         _join.onClick.AddListener(delegate
         {
-            joinRoom(1);
+            joinTable(1);
         });
 
     }
 
-    private void createRoom()
+    private void createTable()
     {
-
+        ProtoReq.CreateTable();
     }
-
-    private void joinRoom(int roomId)
+    private void joinTable(int id)
     {
-
+        ProtoReq.JoinTable(id);
     }
 }

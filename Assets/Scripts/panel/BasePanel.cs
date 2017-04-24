@@ -100,8 +100,11 @@ public class BasePanel{
     }
 
     public virtual void startUp(object obj = null)
-    { 
-        
+    {
+        for (int i = 0; i < _root.transform.childCount - 1; i++)
+        {
+            _root.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     public virtual void AddListener()

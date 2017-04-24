@@ -13,41 +13,21 @@ public class ProtoReq{
         NetClient.Instance().WriteMsg("Login.LoginReq", login);
     }
 
-    public static void Match()
+    public static void CreateTable()
     {
-        Table.MatchReq match = new Table.MatchReq();
-        NetClient.Instance().WriteMsg("Table.MatchReq", match);
+        Table.CreateReq table = new CreateReq();
+        NetClient.Instance().WriteMsg("Table.CreateReq", table);
     }
 
-    public static void GetRoomList()
+    public static void JoinTable(int id)
     {
-        Room.RoomListReq roomList = new Room.RoomListReq();
-        NetClient.Instance().WriteMsg("Room.RoomListReq", roomList);
+        Table.JoinReq table = new JoinReq();
+        NetClient.Instance().WriteMsg("Table.JoinTable", table);
     }
-
-    public static void EnterRoom(int roomId)
-    {
-        Room.EnterReq enter = new Room.EnterReq();
-        enter.room_id = roomId;
-        NetClient.Instance().WriteMsg("Room.EnterReq", enter);
-    }
-
-    public static void LeaveRoom()
-    {
-        Room.LeaveReq leave = new Room.LeaveReq();
-        NetClient.Instance().WriteMsg("Room.LeaveReq", leave);
-    }
-
     public static void Ready()
     {
         Table.ReadyReq ready = new Table.ReadyReq();
         NetClient.Instance().WriteMsg("Table.ReadyReq", ready);
-    }
-    public static void MoveReq(Move move)
-    {
-        Table.MoveReq moveReq = new Table.MoveReq();
-        moveReq.move = move;
-        NetClient.Instance().WriteMsg("Table.MoveReq", moveReq);
     }
 
 }

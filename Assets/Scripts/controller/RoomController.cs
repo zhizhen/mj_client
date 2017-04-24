@@ -5,15 +5,9 @@ using Room;
 
 public class RoomController : Singleton<RoomController> {
 
-    private List<RoomInfo> _roomList;
 
     public RoomController()
     {
-        _roomList = new List<RoomInfo>();
-    }
-
-    public void InitRoomList()
-    { 
-            
+       
     }
 }

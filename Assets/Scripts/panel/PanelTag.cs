@@ -7,4 +7,5 @@ public class PanelTag{
     public const string LOGIN_PANEL = "UILogin";
     public const string HALL_PANEL = "UIHall";
     public const string ROOM_PANEL = "UIRoom";
+    public const string BATTLE_PANEL = "UIBattle";
 }

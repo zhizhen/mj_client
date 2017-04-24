@@ -32,7 +32,9 @@ public class CardController{
         _gangCardList = new List<int>[5];
     }
     public void init()
-    { }
+    {
+
+    }
     //起牌,加入新牌并排序
     public bool addCard(int type,int num)
     {

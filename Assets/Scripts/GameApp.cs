@@ -66,7 +66,6 @@ public class GameApp : MonoBehaviour {
         if (_gameObject.GetComponent<SimpleLoader>() == null)
         {
             _gameObject.AddComponent<SimpleLoader>();
-            GameObject.Instantiate(Resources.Load<UnityEngine.Object>("UILoading"));
         }
     }
 
@@ -82,7 +81,7 @@ public class GameApp : MonoBehaviour {
         GameObject.Instantiate(Resources.Load<UnityEngine.Object>("UILoading"));
         OnLoadUILoading();
         ProtoRes.GetInstance();
-        
+        IconMgr.GetInstance();
 	}
 
     void Update()
