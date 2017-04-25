@@ -34,6 +34,11 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.StartNotify", start_notify);
         dic.Add("Table.MoveNotify", move_notify);
         dic.Add("Table.Cards", get_cards);
+        dic.Add("Table.Turn", turn);
+        dic.Add("Table.Play", play);
+        dic.Add("Table.Gang", gang);
+        dic.Add("Table.Pass", pass);
+        dic.Add("Table.NewCard", newCard);
     }
 
    
@@ -109,5 +114,32 @@ public class ProtoRes:Singleton<ProtoRes>{
         TableController.Instance.getCards((Table.Cards)msg.body);
     }
 
+    private void turn(Msg msg)
+    {
+
+    }
+
+    private void play(Msg msg)
+    {
+
+
+    }
+
+    private void gang(Msg msg)
+    {
+
+
+    }
+
+    private void pass(Msg msg)
+    {
+
+
+    }
+    private void newCard(Msg msg)
+    {
+
+
+    }
     #endregion 
 }

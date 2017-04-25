@@ -44,6 +44,8 @@ public class GameApp : MonoBehaviour {
     {
         GameObject rootCanvas = ResourceManager.GetGameObject(URLConst.GetUI("UIRoot"));
         Transform canvas = rootCanvas.transform.FindChild("UICanvas");
+        GameObject tips = rootCanvas.transform.FindChild("TipsLayer").gameObject;
+        QuickTips.InitQuickTipsLayer(tips, 100);
         rootCanvas.SetActive(true);
         GameObject.DontDestroyOnLoad(rootCanvas);
 
@@ -77,6 +79,7 @@ public class GameApp : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Debug.Log("游戏开始");
+        GameConst.driver = this;
         GameObject.DontDestroyOnLoad(this.gameObject);
         GameObject.Instantiate(Resources.Load<UnityEngine.Object>("UILoading"));
         OnLoadUILoading();

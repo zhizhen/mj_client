@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public static class UtilsExtends {
 
@@ -37,7 +38,7 @@ public static class UtilsExtends {
         if (kGo.transform.parent != null)
         {
             kGo.transform.parent = null;
-            Object.DontDestroyOnLoad(kGo);
+            UnityEngine.Object.DontDestroyOnLoad(kGo);
         }
         kGo.ResetAll();
         kGo.SetActiveZExt(false);
@@ -108,5 +109,13 @@ public static class UtilsExtends {
                 kGO.transform.position -= 10000 * Vector3.one;
             }
         }
+    }
+
+    static public long GetTimeStamp()
+    {
+        long intresult = 0;
+        System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+        intresult = (long)(DateTime.Now - startTime).TotalSeconds;
+        return intresult;
     }
 }
