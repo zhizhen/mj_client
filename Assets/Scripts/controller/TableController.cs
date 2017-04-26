@@ -15,4 +15,14 @@ public class TableController :Singleton<TableController> {
         Debug.Log("收到牌");
     }
 
+    public void createdTable(Table.CreateRsp create)
+    {
+        Debug.Log("桌子号" + create.tab_id);
+        RoomPanel.Instance.load(); 
+    }
+
+    public void joinedTable(Table.JoinRsp join)
+    {
+        RoomPanel.Instance.load();
+    }
 }

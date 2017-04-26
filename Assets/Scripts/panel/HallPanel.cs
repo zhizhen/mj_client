@@ -59,7 +59,7 @@ public class HallPanel : BasePanel
             {
                 joinTable(num);
                 Debug.Log("num" + num);
-                RoomPanel.Instance.load();
+                //RoomPanel.Instance.load();
             }
 
         });

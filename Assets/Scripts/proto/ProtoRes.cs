@@ -78,12 +78,12 @@ public class ProtoRes:Singleton<ProtoRes>{
     #region table
     private void createTable_rsp(Msg msg)
     {
-
+        TableController.Instance.createdTable((Table.CreateRsp)msg.body);
     }
     private void joinTable_rsp(Msg msg)
-    { 
-        
-     }
+    {
+        TableController.Instance.joinedTable((Table.JoinRsp)msg.body);
+    }
 
     private void matchResult_rsp(Msg msg)
     {
