@@ -80,9 +80,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameApp.cs" />
     <Compile Include="Assets\Scripts\Log.cs" />
-    <Compile Include="Assets\Scripts\const\GameConfig.cs" />
-    <Compile Include="Assets\Scripts\const\URL.cs" />
-    <Compile Include="Assets\Scripts\const\URLConst.cs" />
     <Compile Include="Assets\Scripts\controller\BattleController.cs" />
     <Compile Include="Assets\Scripts\controller\LoginController.cs" />
     <Compile Include="Assets\Scripts\controller\RoleController.cs" />
@@ -210,9 +207,13 @@
     <Compile Include="Assets\Scripts\tools\DefaultModelPools.cs" />
     <Compile Include="Assets\Scripts\tools\DoTweenUtils.cs" />
     <Compile Include="Assets\Scripts\tools\EventDispatcher.cs" />
-    <Compile Include="Assets\Scripts\tools\FileTools.cs" />
+    <Compile Include="Assets\Scripts\tools\GameConst.cs" />
+    <Compile Include="Assets\Scripts\tools\IzObjectPool.cs" />
+    <Compile Include="Assets\Scripts\tools\IzPoolElement.cs" />
     <Compile Include="Assets\Scripts\tools\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\tools\QuickTips.cs" />
     <Compile Include="Assets\Scripts\tools\SharedManager.cs" />
+    <Compile Include="Assets\Scripts\tools\Updater.cs" />
     <Compile Include="Assets\Scripts\tools\UtilsExtends.cs" />
     <Compile Include="Assets\Test.cs" />
   </ItemGroup>

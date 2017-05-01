@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CardController{
+public class CardController:Singleton<CardController>{
 
-    private List<int>[] _myCardList;//起的类型牌
+    public List<int>[] _myCardList;//起的类型牌
     private List<int>[] _pengCardList;//碰的类型牌
     private List<int>[] _gangCardList;//扛的类型牌
 
-    private Card _lastCard;//最后起的牌
+    public Card _lastCard;//最后起的牌
 
     private bool _9LBD;//是否听连宝灯牌型
     private bool _13Y;//是否听13幺
@@ -30,10 +30,26 @@ public class CardController{
         _myCardList = new List<int>[5];
         _pengCardList = new List<int>[5];
         _gangCardList = new List<int>[5];
+        for (int i = 0; i < 5; i++)
+        {
+            List<int> list1 = new List<int>();
+            _myCardList[i] = list1;
+            List<int> list2 = new List<int>();
+            _pengCardList[i] = list2;
+            List<int> list3 = new List<int>();
+            _gangCardList[i] = list3;
+        }
+        _lastCard = new Card();
+        _tempPengCardList = new List<Card>();
+        _tempGangCardList = new List<Card>();
     }
     public void init()
     {
-
+        for (int i = 0; i < 13; i++)
+        {
+            int value = Random.Range(1, 35);
+            addCard(CardConst.getCardInfo(value).type, CardConst.getCardInfo(value).value);
+        }
     }
     //起牌,加入新牌并排序
     public bool addCard(int type,int num)
@@ -42,7 +58,7 @@ public class CardController{
         bool _find = false;
         for (int i = 0; i < size; i++)
         {
-            if (_myCardList[type][i] > type)
+            if (_myCardList[type][i] > num)
             {
                 _myCardList[type].Insert(i, num);
                 _find = true;
@@ -205,7 +221,13 @@ public class CardController{
     //输出牌
     public void printAllCard()
     {
-
+        for (int i = 0; i < _myCardList.Length; i++)
+        {
+            for (int j = 0; j < _myCardList[i].Count; j++)
+            {
+                Debug.Log(i + "-" + _myCardList[i][j]);
+            }
+        }
     }
     //输出某张牌
     public void printCard(int type, int num)

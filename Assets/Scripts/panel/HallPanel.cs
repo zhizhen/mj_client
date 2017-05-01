@@ -69,7 +69,8 @@ public class HallPanel : BasePanel
 
     private void createTable()
     {
-        ProtoReq.CreateTable();
+        //ProtoReq.CreateTable();
+        RoomPanel.Instance.load();
     }
     private void joinTable(int id)
     {

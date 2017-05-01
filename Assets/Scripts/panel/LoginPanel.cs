@@ -33,13 +33,19 @@ public class LoginPanel : BasePanel {
             login();
         });
         connect();
+
+        //test
+        GameObject obj = GameObject.Instantiate(_login.gameObject) as GameObject;
+        //obj.transform.position = Vector3.zero;
+        obj.transform.position = new Vector3(Screen.width, Screen.height, 0);
+        obj.transform.parent = _login.transform.parent;
     }
 
     private void login()
     {
         //QuickTips.ShowRedQuickTips("消息");
-        //HallPanel.Instance.load();
-        ProtoReq.Login();
+        HallPanel.Instance.load();
+        //ProtoReq.Login();
 
     }
 

@@ -140,12 +140,11 @@ public class IconMgr:Singleton<IconMgr>{
 		if (kImage == null)
 			return false;
         kImage.texture = TextureMgr.Instance.GetTextureByName(TextureMgr.TEXT_ICONLOAD);
-        string path = Application.dataPath + "/" + imageId + ".png";
 
 #if UNITY_EDITOR
-
+        string path = Application.dataPath + "/" + imageId + ".png";
 #else
-		string NavMeshPath = URL.localCachePath+"Photos/"+imageId+".png";
+		string path = URL.localCachePath+"Photos/"+imageId+".png";
 #endif
 
         if (FileTools.IsExistFile (path)) {
