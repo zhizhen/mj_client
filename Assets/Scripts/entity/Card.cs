@@ -1,19 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-public class Card: IComparable<Card>
+public class Card : IComparable<Card>
 {
     private int _cardType;
     private int _cardNum;
     private bool _isOut;
+    private int _bigNum;
     public Card()
     {
-            
+
     }
     public Card(int type, int num)
     {
         _cardType = type;
         _cardNum = num;
+        _bigNum = CardConst.GetCardBigNum(type, num);
+    }
+
+    public Card(int bigNum)
+    {
+        _bigNum = bigNum;
+        _cardType = CardConst.getCardInfo(bigNum).type;
+        _cardNum = CardConst.getCardInfo(bigNum).value;
+    }
+
+    public Card(int type,int value,int bigNum)
+    {
+
+        _cardType = type;
+        _cardNum = value;
+        _bigNum = bigNum;
     }
     public int CompareTo(Card card)
     {
@@ -75,6 +92,19 @@ public class Card: IComparable<Card>
         set
         {
             _isOut = value;
+        }
+    }
+
+    public int BigNum
+    {
+        get
+        {
+            return _bigNum;
+        }
+
+        set
+        {
+            _bigNum = value;
         }
     }
 }

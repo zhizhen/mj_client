@@ -644,7 +644,7 @@ public class CardController:Singleton<CardController>{
             {
                 i13YSize[i] = false;
             }
-            foreach (var item in _myCardList[0])
+            foreach (var item in _myCardList[CARD_TYPE.ZFB])
             {
                 if (item == 1)
                     i13YSize[0] = true;
@@ -654,7 +654,7 @@ public class CardController:Singleton<CardController>{
                     i13YSize[2] = true;
             }
             //东南西北风
-            foreach (var item in _myCardList[1])
+            foreach (var item in _myCardList[CARD_TYPE.风])
             {
                 if (item == 1)
                 {
@@ -668,7 +668,7 @@ public class CardController:Singleton<CardController>{
                     i13YSize[6] = true;
             }
             //一九万
-            foreach (var item in _myCardList[2])
+            foreach (var item in _myCardList[CARD_TYPE.万])
             {
                 if (item == 1)
                     i13YSize[7] = true;
@@ -677,7 +677,7 @@ public class CardController:Singleton<CardController>{
             }
 
             //一九条
-            foreach (var item in _myCardList[3])
+            foreach (var item in _myCardList[CARD_TYPE.条])
             {
                 if (item == 1)
                     i13YSize[9] = true;
@@ -686,7 +686,7 @@ public class CardController:Singleton<CardController>{
             }
 
             //一九饼
-            foreach (var item in _myCardList[4])
+            foreach (var item in _myCardList[CARD_TYPE.饼])
             {
                 if (item == 1)
                     i13YSize[11] = true;
@@ -759,9 +759,9 @@ public class CardController:Singleton<CardController>{
     {
         if (_gangCardList[0].Count == 8)
         {
-            if (_myCardList[0].Count == 5)
+            if (_myCardList[CARD_TYPE.ZFB].Count == 5)
             {
-                if (check5Card(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2], _myCardList[0][3], _myCardList[0][4]))
+                if (check5Card(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2], _myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]))
                 {
                     return true;
                 }
@@ -771,9 +771,9 @@ public class CardController:Singleton<CardController>{
                 }
             }
 
-            else if (_myCardList[0].Count == 2)
+            else if (_myCardList[CARD_TYPE.ZFB].Count == 2)
             {
-                if (checkAACard(_myCardList[0][0], _myCardList[0][1]) == false)
+                if (checkAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1]) == false)
                 {
                     return false;
                 }
@@ -882,12 +882,12 @@ public class CardController:Singleton<CardController>{
     {
         bool t_OK = false;
         int iJiangNum = 0;
-        int iSize = _myCardList[0].Count;
+        int iSize = _myCardList[CARD_TYPE.ZFB].Count;
         if (iSize > 0)
         {
             if (iSize == 2)
             {
-                if (!checkAACard(_myCardList[0][0], _myCardList[0][1]))
+                if (!checkAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1]))
                 {
                     return false;
                 }
@@ -898,18 +898,18 @@ public class CardController:Singleton<CardController>{
             }
             else if (iSize == 3)
             {
-                if (!checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]))
+                if (!checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]))
                 {
                     return false;
                 }
             }
             else if (iSize == 5)
             {
-                if (checkAACard(_myCardList[0][0], _myCardList[0][1]) && checkAAACard(_myCardList[0][2], _myCardList[0][3], _myCardList[0][4]))
+                if (checkAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][2], _myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAACard(_myCardList[0][3], _myCardList[0][4]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]))
                 {
                     iJiangNum++;
                 }
@@ -920,15 +920,15 @@ public class CardController:Singleton<CardController>{
             }
             else if (iSize == 8)
             {
-                if (checkAACard(_myCardList[0][0], _myCardList[0][1]) && checkAAACard(_myCardList[0][2], _myCardList[0][3], _myCardList[0][4]) && checkAAACard(_myCardList[0][5], _myCardList[0][6], _myCardList[0][7]))
+                if (checkAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][2], _myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][5], _myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAAACard(_myCardList[0][3], _myCardList[0][4], _myCardList[0][5]) && checkAACard(_myCardList[0][6], _myCardList[0][7]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4], _myCardList[CARD_TYPE.ZFB][5]) && checkAACard(_myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAAACard(_myCardList[0][3], _myCardList[0][4], _myCardList[0][5]) && checkAACard(_myCardList[0][6], _myCardList[0][7]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4], _myCardList[CARD_TYPE.ZFB][5]) && checkAACard(_myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]))
                 {
                     iJiangNum++;
                 }
@@ -939,19 +939,19 @@ public class CardController:Singleton<CardController>{
             }
             else if (iSize == 11)
             {
-                if (checkAACard(_myCardList[0][0], _myCardList[0][1]) && checkAAACard(_myCardList[0][2], _myCardList[0][3], _myCardList[0][4]) && checkAAACard(_myCardList[0][5], _myCardList[0][6], _myCardList[0][7]) && checkAAACard(_myCardList[0][8], _myCardList[0][9], _myCardList[0][10]))
+                if (checkAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][2], _myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][5], _myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][8], _myCardList[CARD_TYPE.ZFB][9], _myCardList[CARD_TYPE.ZFB][10]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAACard(_myCardList[0][3], _myCardList[0][4]) && checkAAACard(_myCardList[0][5], _myCardList[0][6], _myCardList[0][7]) && checkAAACard(_myCardList[0][8], _myCardList[0][9], _myCardList[0][10]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][5], _myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][8], _myCardList[CARD_TYPE.ZFB][9], _myCardList[CARD_TYPE.ZFB][10]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAAACard(_myCardList[0][3], _myCardList[0][4], _myCardList[0][5]) && checkAACard(_myCardList[0][6], _myCardList[0][7]) && checkAAACard(_myCardList[0][8], _myCardList[0][9], _myCardList[0][10]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4], _myCardList[CARD_TYPE.ZFB][5]) && checkAACard(_myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][8], _myCardList[CARD_TYPE.ZFB][9], _myCardList[CARD_TYPE.ZFB][10]))
                 {
                     iJiangNum++;
                 }
-                else if (checkAAACard(_myCardList[0][0], _myCardList[0][1], _myCardList[0][2]) && checkAAACard(_myCardList[0][3], _myCardList[0][4], _myCardList[0][5]) && checkAAACard(_myCardList[0][6], _myCardList[0][7], _myCardList[0][8]) && checkAACard(_myCardList[0][9], _myCardList[0][10]))
+                else if (checkAAACard(_myCardList[CARD_TYPE.ZFB][0], _myCardList[CARD_TYPE.ZFB][1], _myCardList[CARD_TYPE.ZFB][2]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][3], _myCardList[CARD_TYPE.ZFB][4], _myCardList[CARD_TYPE.ZFB][5]) && checkAAACard(_myCardList[CARD_TYPE.ZFB][6], _myCardList[CARD_TYPE.ZFB][7], _myCardList[CARD_TYPE.ZFB][8]) && checkAACard(_myCardList[CARD_TYPE.ZFB][9], _myCardList[CARD_TYPE.ZFB][10]))
                 {
                     iJiangNum++;
                 }
@@ -962,30 +962,30 @@ public class CardController:Singleton<CardController>{
             }
 
             //东西南北
-            iSize = _myCardList[1].Count;
+            iSize = _myCardList[CARD_TYPE.风].Count;
             if (iSize > 0)
             {
                 if (iSize == 2)
                 {
-                    if (!checkAACard(_myCardList[1][0], _myCardList[1][1]))
+                    if (!checkAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1]))
                         return false;
                     else
                         iJiangNum++;
                 }
                 else if (iSize == 3)
                 {
-                    if (!checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]))
+                    if (!checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 5)
                 {
-                    if (checkAACard(_myCardList[1][0], _myCardList[1][1]) && checkAAACard(_myCardList[1][2], _myCardList[1][3], _myCardList[1][4]))
+                    if (checkAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1]) && checkAAACard(_myCardList[CARD_TYPE.风][2], _myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAACard(_myCardList[1][3], _myCardList[1][4]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]))
                     {
                         iJiangNum++;
                     }
@@ -996,15 +996,15 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 8)
                 {
-                    if (checkAACard(_myCardList[1][0], _myCardList[1][1]) && checkAAACard(_myCardList[1][2], _myCardList[1][3], _myCardList[1][4]) && checkAAACard(_myCardList[1][5], _myCardList[1][6], _myCardList[1][7]))
+                    if (checkAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1]) && checkAAACard(_myCardList[CARD_TYPE.风][2], _myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]) && checkAAACard(_myCardList[CARD_TYPE.风][5], _myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAACard(_myCardList[1][3], _myCardList[1][4]) && checkAAACard(_myCardList[1][5], _myCardList[1][6], _myCardList[1][7]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]) && checkAAACard(_myCardList[CARD_TYPE.风][5], _myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAAACard(_myCardList[1][3], _myCardList[1][4], _myCardList[1][5]) && checkAACard(_myCardList[1][6], _myCardList[1][7]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4], _myCardList[CARD_TYPE.风][5]) && checkAACard(_myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]))
                     {
                         iJiangNum++;
                     }
@@ -1013,19 +1013,19 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 11)
                 {
-                    if (checkAACard(_myCardList[1][0], _myCardList[1][1]) && checkAAACard(_myCardList[1][2], _myCardList[1][3], _myCardList[1][4]) && checkAAACard(_myCardList[1][5], _myCardList[1][6], _myCardList[1][7]) && checkAAACard(_myCardList[1][8], _myCardList[1][9], _myCardList[1][10]))
+                    if (checkAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1]) && checkAAACard(_myCardList[CARD_TYPE.风][2], _myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]) && checkAAACard(_myCardList[CARD_TYPE.风][5], _myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]) && checkAAACard(_myCardList[CARD_TYPE.风][8], _myCardList[CARD_TYPE.风][9], _myCardList[CARD_TYPE.风][10]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAACard(_myCardList[1][3], _myCardList[1][4]) && checkAAACard(_myCardList[1][5], _myCardList[1][6], _myCardList[1][7]) && checkAAACard(_myCardList[1][8], _myCardList[1][9], _myCardList[1][10]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4]) && checkAAACard(_myCardList[CARD_TYPE.风][5], _myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]) && checkAAACard(_myCardList[CARD_TYPE.风][8], _myCardList[CARD_TYPE.风][9], _myCardList[CARD_TYPE.风][10]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAAACard(_myCardList[1][3], _myCardList[1][4], _myCardList[1][5]) && checkAACard(_myCardList[1][6], _myCardList[1][7]) && checkAAACard(_myCardList[1][8], _myCardList[1][9], _myCardList[1][10]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4], _myCardList[CARD_TYPE.风][5]) && checkAACard(_myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7]) && checkAAACard(_myCardList[CARD_TYPE.风][8], _myCardList[CARD_TYPE.风][9], _myCardList[CARD_TYPE.风][10]))
                     {
                         iJiangNum++;
                     }
-                    else if (checkAAACard(_myCardList[1][0], _myCardList[1][1], _myCardList[1][2]) && checkAAACard(_myCardList[1][3], _myCardList[1][4], _myCardList[1][5]) && checkAAACard(_myCardList[1][6], _myCardList[1][7], _myCardList[1][8]) && checkAACard(_myCardList[1][9], _myCardList[1][10]))
+                    else if (checkAAACard(_myCardList[CARD_TYPE.风][0], _myCardList[CARD_TYPE.风][1], _myCardList[CARD_TYPE.风][2]) && checkAAACard(_myCardList[CARD_TYPE.风][3], _myCardList[CARD_TYPE.风][4], _myCardList[CARD_TYPE.风][5]) && checkAAACard(_myCardList[CARD_TYPE.风][6], _myCardList[CARD_TYPE.风][7], _myCardList[CARD_TYPE.风][8]) && checkAACard(_myCardList[CARD_TYPE.风][9], _myCardList[CARD_TYPE.风][10]))
                     {
                         iJiangNum++;
                     }
@@ -1036,12 +1036,12 @@ public class CardController:Singleton<CardController>{
                     return false;
             }
             //万
-            iSize = _myCardList[2].Count;
+            iSize = _myCardList[CARD_TYPE.万].Count;
             if (iSize > 0)
             {
                 if (iSize == 2)
                 {
-                    if (!checkAACard(_myCardList[2][0], _myCardList[2][1]))
+                    if (!checkAACard(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1]))
                     {
                         return false;
                     }
@@ -1052,9 +1052,9 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 3)
                 {
-                    if (!checkAAACard(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2]))
+                    if (!checkAAACard(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2]))
                     {
-                        if (!checkABCCard(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2]))
+                        if (!checkABCCard(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2]))
                         {
                             return false;
                         }
@@ -1062,7 +1062,7 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 5)
                 {
-                    if (!check5Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4]))
+                    if (!check5Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4]))
                     {
                         return false;
                     }
@@ -1073,14 +1073,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 6)
                 {
-                    if (!check6Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5]))
+                    if (!check6Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 8)
                 {
-                    if (!check8Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5], _myCardList[2][6], _myCardList[2][7]))
+                    if (!check8Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5], _myCardList[CARD_TYPE.万][6], _myCardList[CARD_TYPE.万][7]))
                     {
                         return false;
                     }
@@ -1091,14 +1091,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 9)
                 {
-                    if (!check9Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5], _myCardList[2][6], _myCardList[2][7], _myCardList[2][8]))
+                    if (!check9Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5], _myCardList[CARD_TYPE.万][6], _myCardList[CARD_TYPE.万][7], _myCardList[CARD_TYPE.万][8]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 11)
                 {
-                    if (!check11Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5], _myCardList[2][6], _myCardList[2][7], _myCardList[2][8], _myCardList[2][9], _myCardList[2][10]))
+                    if (!check11Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5], _myCardList[CARD_TYPE.万][6], _myCardList[CARD_TYPE.万][7], _myCardList[CARD_TYPE.万][8], _myCardList[CARD_TYPE.万][9], _myCardList[CARD_TYPE.万][10]))
                     {
                         return false;
                     }
@@ -1109,14 +1109,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 12)
                 {
-                    if (!check12Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5], _myCardList[2][6], _myCardList[2][7], _myCardList[2][8], _myCardList[2][9], _myCardList[2][10], _myCardList[2][11]))
+                    if (!check12Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5], _myCardList[CARD_TYPE.万][6], _myCardList[CARD_TYPE.万][7], _myCardList[CARD_TYPE.万][8], _myCardList[CARD_TYPE.万][9], _myCardList[CARD_TYPE.万][10], _myCardList[CARD_TYPE.万][11]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 14)
                 {
-                    if (!check14Card(_myCardList[2][0], _myCardList[2][1], _myCardList[2][2], _myCardList[2][3], _myCardList[2][4], _myCardList[2][5], _myCardList[2][6], _myCardList[2][7], _myCardList[2][8], _myCardList[2][9], _myCardList[2][10], _myCardList[2][11], _myCardList[2][12], _myCardList[2][13]))
+                    if (!check14Card(_myCardList[CARD_TYPE.万][0], _myCardList[CARD_TYPE.万][1], _myCardList[CARD_TYPE.万][2], _myCardList[CARD_TYPE.万][3], _myCardList[CARD_TYPE.万][4], _myCardList[CARD_TYPE.万][5], _myCardList[CARD_TYPE.万][6], _myCardList[CARD_TYPE.万][7], _myCardList[CARD_TYPE.万][8], _myCardList[CARD_TYPE.万][9], _myCardList[CARD_TYPE.万][10], _myCardList[CARD_TYPE.万][11], _myCardList[CARD_TYPE.万][12], _myCardList[CARD_TYPE.万][13]))
                     {
                         return false;
                     }
@@ -1132,12 +1132,12 @@ public class CardController:Singleton<CardController>{
             }
 
             //条
-            iSize = _myCardList[3].Count;
+            iSize = _myCardList[CARD_TYPE.条].Count;
             if (iSize > 0)
             {
                 if (iSize == 2)
                 {
-                    if (!checkAACard(_myCardList[3][0], _myCardList[3][1]))
+                    if (!checkAACard(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1]))
                     {
                         return false;
                     }
@@ -1148,9 +1148,9 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 3)
                 {
-                    if (!checkAAACard(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2]))
+                    if (!checkAAACard(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2]))
                     {
-                        if (!checkABCCard(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2]))
+                        if (!checkABCCard(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2]))
                         {
                             return false;
                         }
@@ -1158,7 +1158,7 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 5)
                 {
-                    if (!check5Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4]))
+                    if (!check5Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4]))
                     {
                         return false;
                     }
@@ -1169,14 +1169,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 6)
                 {
-                    if (!check6Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5]))
+                    if (!check6Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 8)
                 {
-                    if (!check8Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5], _myCardList[3][6], _myCardList[3][7]))
+                    if (!check8Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5], _myCardList[CARD_TYPE.条][6], _myCardList[CARD_TYPE.条][7]))
                     {
                         return false;
                     }
@@ -1187,14 +1187,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 9)
                 {
-                    if (!check9Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5], _myCardList[3][6], _myCardList[3][7], _myCardList[3][8]))
+                    if (!check9Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5], _myCardList[CARD_TYPE.条][6], _myCardList[CARD_TYPE.条][7], _myCardList[CARD_TYPE.条][8]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 11)
                 {
-                    if (!check11Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5], _myCardList[3][6], _myCardList[3][7], _myCardList[3][8], _myCardList[3][9], _myCardList[3][10]))
+                    if (!check11Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5], _myCardList[CARD_TYPE.条][6], _myCardList[CARD_TYPE.条][7], _myCardList[CARD_TYPE.条][8], _myCardList[CARD_TYPE.条][9], _myCardList[CARD_TYPE.条][10]))
                     {
                         return false;
                     }
@@ -1205,14 +1205,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 12)
                 {
-                    if (!check12Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5], _myCardList[3][6], _myCardList[3][7], _myCardList[3][8], _myCardList[3][9], _myCardList[3][10], _myCardList[3][11]))
+                    if (!check12Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5], _myCardList[CARD_TYPE.条][6], _myCardList[CARD_TYPE.条][7], _myCardList[CARD_TYPE.条][8], _myCardList[CARD_TYPE.条][9], _myCardList[CARD_TYPE.条][10], _myCardList[CARD_TYPE.条][11]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 14)
                 {
-                    if (!check14Card(_myCardList[3][0], _myCardList[3][1], _myCardList[3][2], _myCardList[3][3], _myCardList[3][4], _myCardList[3][5], _myCardList[3][6], _myCardList[3][7], _myCardList[3][8], _myCardList[3][9], _myCardList[3][10], _myCardList[3][11], _myCardList[3][12], _myCardList[3][13]))
+                    if (!check14Card(_myCardList[CARD_TYPE.条][0], _myCardList[CARD_TYPE.条][1], _myCardList[CARD_TYPE.条][2], _myCardList[CARD_TYPE.条][3], _myCardList[CARD_TYPE.条][4], _myCardList[CARD_TYPE.条][5], _myCardList[CARD_TYPE.条][6], _myCardList[CARD_TYPE.条][7], _myCardList[CARD_TYPE.条][8], _myCardList[CARD_TYPE.条][9], _myCardList[CARD_TYPE.条][10], _myCardList[CARD_TYPE.条][11], _myCardList[CARD_TYPE.条][12], _myCardList[CARD_TYPE.条][13]))
                     {
                         return false;
                     }
@@ -1229,12 +1229,12 @@ public class CardController:Singleton<CardController>{
             }
 
             //饼  
-            iSize = _myCardList[4].Count;
+            iSize = _myCardList[CARD_TYPE.饼].Count;
             if (iSize > 0)
             {
                 if (iSize == 2)
                 {
-                    if (!checkAACard(_myCardList[4][0], _myCardList[4][1]))
+                    if (!checkAACard(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1]))
                     {
                         return false;
                     }
@@ -1245,9 +1245,9 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 3)
                 {
-                    if (!checkAAACard(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2]))
+                    if (!checkAAACard(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2]))
                     {
-                        if (!checkABCCard(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2]))
+                        if (!checkABCCard(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2]))
                         {
                             return false;
                         }
@@ -1255,7 +1255,7 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 5)
                 {
-                    if (!check5Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4]))
+                    if (!check5Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4]))
                     {
                         return false;
                     }
@@ -1266,14 +1266,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 6)
                 {
-                    if (!check6Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5]))
+                    if (!check6Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 8)
                 {
-                    if (!check8Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5], _myCardList[4][6], _myCardList[4][7]))
+                    if (!check8Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5], _myCardList[CARD_TYPE.饼][6], _myCardList[CARD_TYPE.饼][7]))
                     {
                         return false;
                     }
@@ -1284,14 +1284,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 9)
                 {
-                    if (!check9Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5], _myCardList[4][6], _myCardList[4][7], _myCardList[4][8]))
+                    if (!check9Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5], _myCardList[CARD_TYPE.饼][6], _myCardList[CARD_TYPE.饼][7], _myCardList[CARD_TYPE.饼][8]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 11)
                 {
-                    if (!check11Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5], _myCardList[4][6], _myCardList[4][7], _myCardList[4][8], _myCardList[4][9], _myCardList[4][10]))
+                    if (!check11Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5], _myCardList[CARD_TYPE.饼][6], _myCardList[CARD_TYPE.饼][7], _myCardList[CARD_TYPE.饼][8], _myCardList[CARD_TYPE.饼][9], _myCardList[CARD_TYPE.饼][10]))
                     {
                         return false;
                     }
@@ -1302,14 +1302,14 @@ public class CardController:Singleton<CardController>{
                 }
                 else if (iSize == 12)
                 {
-                    if (!check12Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5], _myCardList[4][6], _myCardList[4][7], _myCardList[4][8], _myCardList[4][9], _myCardList[4][10], _myCardList[4][11]))
+                    if (!check12Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5], _myCardList[CARD_TYPE.饼][6], _myCardList[CARD_TYPE.饼][7], _myCardList[CARD_TYPE.饼][8], _myCardList[CARD_TYPE.饼][9], _myCardList[CARD_TYPE.饼][10], _myCardList[CARD_TYPE.饼][11]))
                     {
                         return false;
                     }
                 }
                 else if (iSize == 14)
                 {
-                    if (!check14Card(_myCardList[4][0], _myCardList[4][1], _myCardList[4][2], _myCardList[4][3], _myCardList[4][4], _myCardList[4][5], _myCardList[4][6], _myCardList[4][7], _myCardList[4][8], _myCardList[4][9], _myCardList[4][10], _myCardList[4][11], _myCardList[4][12], _myCardList[4][13]))
+                    if (!check14Card(_myCardList[CARD_TYPE.饼][0], _myCardList[CARD_TYPE.饼][1], _myCardList[CARD_TYPE.饼][2], _myCardList[CARD_TYPE.饼][3], _myCardList[CARD_TYPE.饼][4], _myCardList[CARD_TYPE.饼][5], _myCardList[CARD_TYPE.饼][6], _myCardList[CARD_TYPE.饼][7], _myCardList[CARD_TYPE.饼][8], _myCardList[CARD_TYPE.饼][9], _myCardList[CARD_TYPE.饼][10], _myCardList[CARD_TYPE.饼][11], _myCardList[CARD_TYPE.饼][12], _myCardList[CARD_TYPE.饼][13]))
                     {
                         return false;
                     }

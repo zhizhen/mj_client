@@ -2,6 +2,31 @@
 using System.Collections;
 
 public class CardConst {
+
+    public static int GetCardBigNum(int type, int num)
+    {
+        int bigNum = 0;
+        switch (type)
+        {
+            case CARD_TYPE.万:
+                bigNum = num;
+                break;
+            case CARD_TYPE.条:
+                bigNum = num + 9;
+                break;
+            case CARD_TYPE.饼:
+                bigNum = num + 18;
+                break;
+            case CARD_TYPE.风:
+                bigNum = num + 27;
+                break;
+            case CARD_TYPE.ZFB:
+                bigNum = num + 32;
+                break;
+        }
+
+        return bigNum;
+    }
     public static CardInfo getCardInfo(int num)
     {
         CardInfo info = new CardInfo();
@@ -12,12 +37,12 @@ public class CardConst {
         }
         else if (num >= 10 && num <= 18)
         {
-            info.type = CARD_TYPE.饼;
+            info.type = CARD_TYPE.条;
             info.value = num - 9;
         }
         else if (num >= 19 && num <= 27)
         {
-            info.type = CARD_TYPE.条;
+            info.type = CARD_TYPE.饼;
             info.value = num - 18;
         }
         else if (num >= 28 && num <= 31)
@@ -36,11 +61,11 @@ public class CardConst {
 
 public class CARD_TYPE
 {
-    public const int ZFB = 0;
-    public const int 风 = 1;
-    public const int 万 = 2;
-    public const int 条 = 3;
-    public const int 饼 = 4;
+    public const int ZFB = 5;
+    public const int 风 = 4;
+    public const int 万 = 1;
+    public const int 条 = 2;
+    public const int 饼 = 3;
 }
 
 public class CARD_STATE

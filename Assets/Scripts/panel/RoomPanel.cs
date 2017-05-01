@@ -35,32 +35,39 @@ public class RoomPanel : BasePanel {
     private GameObject _always;
     private GameObject _before;
     private GameObject _after;
+
+    private GameObject _card;
+
+    private GameObject _self;
+    private GameObject _top;
+    private GameObject _left;
+    private GameObject _right;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
-        _zhunbei = uiSprite.FindChild("Button").GetComponent<Button>();
-        _get = uiSprite.FindChild("get").GetComponent<Button>();
-        _list = uiSprite.FindChild("list").gameObject;
-        _grid = _list.transform.FindChild("grid").gameObject;
-        _last = uiSprite.FindChild("last").gameObject;
-        _otherCardClick = uiSprite.FindChild("OtherCardClick").GetComponent<Button>();
-        _last.SetActive(false);
-        _list.SetActive(false);
+        //_zhunbei = uiSprite.FindChild("Button").GetComponent<Button>();
+        //_get = uiSprite.FindChild("get").GetComponent<Button>();
+        //_list = uiSprite.FindChild("list").gameObject;
+        //_grid = _list.transform.FindChild("grid").gameObject;
+        //_last = uiSprite.FindChild("last").gameObject;
+        //_otherCardClick = uiSprite.FindChild("OtherCardClick").GetComponent<Button>();
+        //_last.SetActive(false);
+        //_list.SetActive(false);
 
-        _zhunbei.onClick.AddListener(delegate
-        {
-            //ProtoReq.Ready();
-            CardController.Instance.init();
-            //CardController.Instance.printAllCard();
-            initCard();
-        });
-        _get.onClick.AddListener(delegate {
-            int value = Random.Range(1, 35);
-            _curCard = value;
-            IconMgr.Instance.SetImage(_last.transform.FindChild("value").GetComponent<Image>(),CardConst.getCardInfo(value).type+"_"+CardConst.getCardInfo(value).value);
-            _last.SetActive(true);
-        });
-        addClick();
+        //_zhunbei.onClick.AddListener(delegate
+        //{
+        //    //ProtoReq.Ready();
+        //    CardController.Instance.init();
+        //    //CardController.Instance.printAllCard();
+        //    initCard();
+        //});
+        //_get.onClick.AddListener(delegate {
+        //    int value = Random.Range(1, 35);
+        //    _curCard = value;
+        //    IconMgr.Instance.SetImage(_last.transform.FindChild("value").GetComponent<Image>(),CardConst.getCardInfo(value).type+"_"+CardConst.getCardInfo(value).value);
+        //    _last.SetActive(true);
+        //});
+        //addClick();
 
 
 
@@ -68,9 +75,47 @@ public class RoomPanel : BasePanel {
         _before = uiSprite.FindChild("before").gameObject;
         _after = uiSprite.FindChild("after").gameObject;
 
+        _card = uiSprite.FindChild("card").gameObject;
+        _self = _card.transform.FindChild("self").gameObject;
+        _top = _card.transform.FindChild("top").gameObject;
+        _left = _card.transform.FindChild("left").gameObject;
+        _right = _card.transform.FindChild("right").gameObject;
+      
+        inittest();
 
     }
 
+    private void inittest()
+    {
+        CardProxy card1 = _self.GetComponent<CardProxy>();
+        for (int i = 0; i < card1.cards.Length; i++)
+        {
+            IconMgr.Instance.SetImage(card1.cards[i].transform.FindChild("value").GetComponent<Image>(), "xia_1_" + Random.Range(1, 34));
+
+        }
+
+        CardProxy card2 = _top.GetComponent<CardProxy>();
+        for (int i = 0; i < card2.cards.Length; i++)
+        {
+            IconMgr.Instance.SetImage(card2.cards[i].transform.FindChild("value").GetComponent<Image>(), "shang1_" + Random.Range(1, 34));
+
+        }
+
+
+        CardProxy card3 = _left.GetComponent<CardProxy>();
+        for (int i = 0; i < card3.cards.Length; i++)
+        {
+            IconMgr.Instance.SetImage(card3.cards[i].transform.FindChild("value").GetComponent<Image>(), "zuo1_" + Random.Range(1, 34));
+
+        }
+
+        CardProxy card4 = _right.GetComponent<CardProxy>();
+        for (int i = 0; i < card4.cards.Length; i++)
+        {
+            IconMgr.Instance.SetImage(card4.cards[i].transform.FindChild("value").GetComponent<Image>(), "you1_" + Random.Range(1, 34));
+
+        }
+    }
     private void initCard()
     {
         int index = 0;
