@@ -112,7 +112,7 @@ public class RoomPanel : BasePanel {
         {
             for (int j = 0; j < CardController.Instance._myCardList[i].Count; j++)
             {
-                IconMgr.Instance.SetImage(_selfCard.transform.FindChild("hand/grid").transform.GetChild(index).FindChild("value").GetComponent<Image>(), "zm1_01_"+CardConst.GetCardBigNum(i,CardController.Instance._myCardList[i][j]));
+                IconMgr.Instance.SetImage(_selfCard.transform.FindChild("hand/grid").transform.GetChild(index).FindChild("value").GetComponent<Image>(), "zm1_"+CardConst.GetCardBigNum(i,CardController.Instance._myCardList[i][j]));
                 index++;
             }
         }

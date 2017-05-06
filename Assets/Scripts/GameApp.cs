@@ -163,6 +163,7 @@ public class GameApp : MonoBehaviour {
         UILoading.CloseLoading();
         setUIRoot();
         //TestPanel.Instance.load();
+        SoundMgr._instance.bgmPlay("beijing_dating");
         LoginPanel.Instance.load();
     }
 }
