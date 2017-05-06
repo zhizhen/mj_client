@@ -582,4 +582,161 @@ public class FileTools
 			streamWriter.Close ();
 		}
 	}
+    //获取父目录
+    public static string getParentFolder(string folder)
+    {
+        return folder.Substring(0, folder.LastIndexOf("/"));
+    }
+    //获取项目路径
+    private static string projectPath = getParentFolder(Application.dataPath);
+    public static string getProjectPath(string path = "")
+    {
+        string result = projectPath;
+        if (path.Equals("") == false)
+        {
+            result += "/" + path;
+        }
+        return result;
+    }
+
+    public static string getBaseNameWithoutExt(string file)
+    {
+        string baseName = getBaseName(file);
+        return baseName.Substring(0, baseName.LastIndexOf("."));
+    }
+
+    public static string getBaseName(string file)
+    {
+        return file.Substring(file.LastIndexOf("/") + 1);
+    }
+
+    public static string getGuidFromResFile(string resFile)
+    {
+        string assetPath = getRelativePath(resFile);
+        string assetMetaPath = assetPath + ".meta";
+        string guidStr = getGuidFromMetaFile(assetMetaPath);
+        return guidStr;
+    }
+    public static string getRelativePath(string path)
+    {
+        return path.Replace(Application.dataPath, "Assets");
+    }
+
+    public static string getGuidFromMetaFile(string metaFile)
+    {
+        string content = readFile(metaFile);
+        foreach (string line in content.Split('\n'))
+        {
+            if (line.StartsWith("guid:"))
+            {
+                return line.Substring(5).Trim();
+            }
+        }
+        throw new System.Exception("未能获取meta文件中的guid属性");
+
+    }
+
+    public static string readFile(string file)
+    {
+        FileStream fs = new FileStream(file, FileMode.Open);
+        StreamReader sr = new StreamReader(fs);
+        string content = sr.ReadToEnd();
+        sr.Close();
+        fs.Close();
+        return content;
+    }
+
+    public static List<string> ignoreFileEnds = new List<string>() { ".meta", ".svn" };
+    public static List<string> getAllFilesInFolder(string folder, bool isFormatSeparator = true)
+    {
+        List<string> result = new List<string>(Directory.GetFiles(folder));
+        List<string> subFolders = new List<string>(Directory.GetDirectories(folder));
+
+        for (int i = 0; i < result.Count; i++)
+        {
+            foreach (string ignoreEnd in ignoreFileEnds)
+            {
+                if (result[i].EndsWith(ignoreEnd))
+                {
+                    result.RemoveAt(i);
+                    i = i - 1;
+                    break;
+                }
+            }
+        }
+        foreach (string subFolder in subFolders)
+        {
+            bool isIgnore = false;
+            foreach (string ignoreEnd in ignoreFileEnds)
+            {
+                if (subFolder.EndsWith(ignoreEnd))
+                {
+                    isIgnore = true;
+                    break;
+                }
+            }
+            if (isIgnore) { continue; }
+            result.AddRange(getAllFilesInFolder(subFolder, false));
+        }
+
+        if (isFormatSeparator)
+        {
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].Replace(@"\", "/");
+            }
+        }
+        return result;
+    }
+
+    public static string deleteFileOrFolder(string path)
+    {
+        if (File.Exists(path))
+        {
+            new FileInfo(path).Delete();
+        }
+        else if (Directory.Exists(path))
+        {
+            new DirectoryInfo(path).Delete(true);
+        }
+        return path;
+    }
+
+    public static string getFileMd5(string file)
+    {
+        FileStream f = new FileStream(file, FileMode.Open);
+        System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+        byte[] retVal = md5.ComputeHash(f);
+        f.Close();
+        md5.Clear();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < retVal.Length; i++)
+        {
+            sb.Append(retVal[i].ToString("x2"));
+        }
+        return sb.ToString();
+    }
+
+    public static bool writeFile(string file,string content)
+    {
+
+        createFolderForFile(file);
+        FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
+        StreamWriter sw = new StreamWriter(fs);
+        sw.Write(content);
+        sw.Flush();
+        sw.Close();
+        fs.Close();
+        return true;
+    }
+
+    public static string createFolderForFile(string file)
+    {
+        DirectoryInfo folder = Directory.GetParent(file);
+        if (folder.Exists == false)
+        {
+            folder.Create();
+        }
+        return file;
+    }
 }

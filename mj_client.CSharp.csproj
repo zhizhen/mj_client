@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\entity\CardConst.cs" />
     <Compile Include="Assets\Scripts\entity\CardController.cs" />
     <Compile Include="Assets\Scripts\entity\CardMgr.cs" />
+    <Compile Include="Assets\Scripts\manager\DataMgr.cs" />
     <Compile Include="Assets\Scripts\manager\IconMgr.cs" />
     <Compile Include="Assets\Scripts\manager\SoundMgr.cs" />
     <Compile Include="Assets\Scripts\manager\TextureMgr.cs" />

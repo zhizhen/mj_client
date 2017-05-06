@@ -35,10 +35,9 @@ public class LoginPanel : BasePanel {
         connect();
 
         //test
-        GameObject obj = GameObject.Instantiate(_login.gameObject) as GameObject;
-        //obj.transform.position = Vector3.zero;
-        obj.transform.position = new Vector3(Screen.width, Screen.height, 0);
-        obj.transform.parent = _login.transform.parent;
+        //GameObject obj = GameObject.Instantiate(_login.gameObject) as GameObject;
+        //obj.transform.position = new Vector3(Screen.width, Screen.height, 0);
+        //obj.transform.parent = _login.transform.parent;
     }
 
     private void login()

@@ -42,35 +42,16 @@ public class RoomPanel : BasePanel {
     private GameObject _top;
     private GameObject _left;
     private GameObject _right;
+
+    private Button _hu;
+    private Button _gang;
+    private Button _peng;
+    private Button _pass;
+
+    private GameObject _selfCard;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
-        //_zhunbei = uiSprite.FindChild("Button").GetComponent<Button>();
-        //_get = uiSprite.FindChild("get").GetComponent<Button>();
-        //_list = uiSprite.FindChild("list").gameObject;
-        //_grid = _list.transform.FindChild("grid").gameObject;
-        //_last = uiSprite.FindChild("last").gameObject;
-        //_otherCardClick = uiSprite.FindChild("OtherCardClick").GetComponent<Button>();
-        //_last.SetActive(false);
-        //_list.SetActive(false);
-
-        //_zhunbei.onClick.AddListener(delegate
-        //{
-        //    //ProtoReq.Ready();
-        //    CardController.Instance.init();
-        //    //CardController.Instance.printAllCard();
-        //    initCard();
-        //});
-        //_get.onClick.AddListener(delegate {
-        //    int value = Random.Range(1, 35);
-        //    _curCard = value;
-        //    IconMgr.Instance.SetImage(_last.transform.FindChild("value").GetComponent<Image>(),CardConst.getCardInfo(value).type+"_"+CardConst.getCardInfo(value).value);
-        //    _last.SetActive(true);
-        //});
-        //addClick();
-
-
-
         _always = uiSprite.FindChild("always").gameObject;
         _before = uiSprite.FindChild("before").gameObject;
         _after = uiSprite.FindChild("after").gameObject;
@@ -80,9 +61,16 @@ public class RoomPanel : BasePanel {
         _top = _card.transform.FindChild("top").gameObject;
         _left = _card.transform.FindChild("left").gameObject;
         _right = _card.transform.FindChild("right").gameObject;
-      
-        inittest();
 
+        _hu = _after.transform.FindChild("hu").GetComponent<Button>();
+        _gang = _after.transform.FindChild("gang").GetComponent<Button>();
+        _peng = _after.transform.FindChild("peng").GetComponent<Button>();
+        _pass = _after.transform.FindChild("pass").GetComponent<Button>();
+
+        _selfCard = uiSprite.FindChild("selfCard").gameObject;
+        inittest();
+        initCard();
+        addClick();
     }
 
     private void inittest()
@@ -118,39 +106,55 @@ public class RoomPanel : BasePanel {
     }
     private void initCard()
     {
+        CardController.Instance.init();
         int index = 0;
         for (int i = 0; i < CardController.Instance._myCardList.Length; i++)
         {
             for (int j = 0; j < CardController.Instance._myCardList[i].Count; j++)
             {
-                IconMgr.Instance.SetImage(_grid.transform.GetChild(index).FindChild("value").GetComponent<Image>(), i + "_" + CardController.Instance._myCardList[i][j]);
+                IconMgr.Instance.SetImage(_selfCard.transform.FindChild("hand/grid").transform.GetChild(index).FindChild("value").GetComponent<Image>(), "zm1_01_"+CardConst.GetCardBigNum(i,CardController.Instance._myCardList[i][j]));
                 index++;
             }
         }
-        _list.SetActive(true);
+        //_list.SetActive(true);
     }
 
     private void addClick()
     {
-        for (int i = 0; i < _grid.transform.childCount; i++)
-        {
-            int num = i;
-            Transform button = _grid.transform.GetChild(num);
-            button.GetComponent<Button>().onClick.AddListener(delegate
-            {
+        //for (int i = 0; i < _grid.transform.childCount; i++)
+        //{
+        //    int num = i;
+        //    Transform button = _grid.transform.GetChild(num);
+        //    button.GetComponent<Button>().onClick.AddListener(delegate
+        //    {
 
-                string name = button.FindChild("value").GetComponent<Image>().sprite.name;
-                string[] str = name.Split('_');
-                CardController.Instance.delCard(int.Parse(str[0]), int.Parse(str[1]));
-                CardController.Instance.addCard(CardConst.getCardInfo(_curCard).type, CardConst.getCardInfo(_curCard).value);
-                _last.SetActive(false);
-                initCard();
-            });
-        }
+        //        string name = button.FindChild("value").GetComponent<Image>().sprite.name;
+        //        string[] str = name.Split('_');
+        //        CardController.Instance.delCard(int.Parse(str[0]), int.Parse(str[1]));
+        //        CardController.Instance.addCard(CardConst.getCardInfo(_curCard).type, CardConst.getCardInfo(_curCard).value);
+        //        _last.SetActive(false);
+        //        initCard();
+        //    });
+        //}
 
-        _last.GetComponent<Button>().onClick.AddListener(delegate
+        //_last.GetComponent<Button>().onClick.AddListener(delegate
+        //{
+        //    _last.SetActive(false);
+        //});
+
+        _hu.onClick.AddListener(delegate
         {
-            _last.SetActive(false);
+            //CardController.Instance.hu
+        });
+        _gang.onClick.AddListener(delegate {
+            CardController.Instance.gang(0,0);
+        });
+        _peng.onClick.AddListener(delegate {
+            CardController.Instance.peng(0, 0);
+        });
+
+        _pass.onClick.AddListener(delegate {
+            
         });
     }
 }

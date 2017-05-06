@@ -50,7 +50,7 @@ public class CardConst {
             info.type = CARD_TYPE.风;
             info.value = num - 27;
         }
-        else if (num >= 32 && num <= 35)
+        else if (num >= 32 && num <= 34)
         {
             info.type = CARD_TYPE.ZFB;
             info.value = num - 31;
@@ -61,11 +61,11 @@ public class CardConst {
 
 public class CARD_TYPE
 {
-    public const int ZFB = 5;
-    public const int 风 = 4;
-    public const int 万 = 1;
-    public const int 条 = 2;
-    public const int 饼 = 3;
+    public const int ZFB = 4;
+    public const int 风 = 3;
+    public const int 万 = 0;
+    public const int 条 = 1;
+    public const int 饼 = 2;
 }
 
 public class CARD_STATE
