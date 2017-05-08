@@ -12,9 +12,9 @@ public class TextureMgr : Singleton<TextureMgr> {
 
     private Dictionary<string, Texture> _dicRunTimeTexture;
     private string[] _strTexName = {
-        TEX_00001,
-        TEX_00002,
-        TEX_CODE,
+        //TEX_00001,
+        //TEX_00002,
+        //TEX_CODE,
         TEXT_ICONLOAD
     };
     private const string _strPathPrefix = "";

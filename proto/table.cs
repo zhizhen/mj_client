@@ -49,9 +49,9 @@ namespace Table
   {
     public JoinReq() {}
     
-    private string _tab_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tab_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string tab_id
+    private int _tab_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"tab_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int tab_id
     {
       get { return _tab_id; }
       set { _tab_id = value; }

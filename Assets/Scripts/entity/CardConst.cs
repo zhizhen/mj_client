@@ -53,7 +53,7 @@ public class CardConst {
         else if (num >= 32 && num <= 34)
         {
             info.type = CARD_TYPE.ZFB;
-            info.value = num - 31;
+            info.value = num - 32;
         }
         return info;
     }

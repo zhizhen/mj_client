@@ -67,6 +67,7 @@ public class ProtoRes:Singleton<ProtoRes>{
     private void enterRoom_rsp(Msg msg)
     {
         //RoomController.Instance.enteredRoom((Room.EnterRsp)msg.body);
+        HallPanel.Instance.load();
     }
 
     private void leaveRoom_rsp(Msg msg)

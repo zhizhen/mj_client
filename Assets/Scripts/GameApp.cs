@@ -161,6 +161,7 @@ public class GameApp : MonoBehaviour {
     {
         showProgress = false;
         UILoading.CloseLoading();
+        TextureMgr.Instance.StartLoading();
         setUIRoot();
         //TestPanel.Instance.load();
         SoundMgr._instance.bgmPlay("beijing_dating");

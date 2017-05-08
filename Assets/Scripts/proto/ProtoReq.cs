@@ -12,17 +12,24 @@ public class ProtoReq{
         login.token = "";
         NetClient.Instance().WriteMsg("Login.LoginReq", login);
     }
-
+    public static void EnterRoom()
+    {
+        Room.EnterReq room = new Room.EnterReq();
+        room.room_id = 1;
+        NetClient.Instance().WriteMsg("Room.EnterReq", room);
+    }
     public static void CreateTable()
     {
         Table.CreateReq table = new CreateReq();
+        table.token = "123";
         NetClient.Instance().WriteMsg("Table.CreateReq", table);
     }
 
     public static void JoinTable(int id)
     {
         Table.JoinReq table = new JoinReq();
-        NetClient.Instance().WriteMsg("Table.JoinTable", table);
+        table.tab_id = id;
+        NetClient.Instance().WriteMsg("Table.JoinReq", table);
     }
     public static void Ready()
     {

@@ -43,8 +43,8 @@ public class LoginPanel : BasePanel {
     private void login()
     {
         //QuickTips.ShowRedQuickTips("消息");
-        HallPanel.Instance.load();
-        //ProtoReq.Login();
+        //HallPanel.Instance.load();
+        ProtoReq.Login();
 
     }
 
@@ -52,7 +52,7 @@ public class LoginPanel : BasePanel {
     {
         Debug.Log("Start Loading...");
         NetClient network = NetClient.Instance();
-        network.Connect("127.0.0.1",8888);
+        network.Connect("123.207.241.224",8888);
         NetClient.Register();
     }
 }

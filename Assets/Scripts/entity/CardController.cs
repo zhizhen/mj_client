@@ -42,10 +42,11 @@ public class CardController:Singleton<CardController>{
         _lastCard = new Card();
         _tempPengCardList = new List<Card>();
         _tempGangCardList = new List<Card>();
+        init();
     }
     public void init()
     {
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 10; i++)
         {
             int value = Random.Range(1, 34);
             addCard(CardConst.getCardInfo(value).type, CardConst.getCardInfo(value).value);

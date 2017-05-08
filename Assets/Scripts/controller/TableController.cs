@@ -18,11 +18,18 @@ public class TableController :Singleton<TableController> {
     public void createdTable(Table.CreateRsp create)
     {
         Debug.Log("桌子号" + create.tab_id);
-        RoomPanel.Instance.load(); 
+        GameConst.tableId = create.tab_id;
+        // RoomPanel.Instance.load(); 
+        ProtoReq.JoinTable(create.tab_id);
     }
 
     public void joinedTable(Table.JoinRsp join)
     {
         RoomPanel.Instance.load();
+    }
+
+    public void ready(Table.ReadyRsp ready)
+    {
+        EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY);
     }
 }

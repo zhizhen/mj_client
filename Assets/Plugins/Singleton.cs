@@ -8,7 +8,7 @@ public class Singleton<T> where T:new()
 
     protected Singleton()
     {
-        Debug.Assert(instance == null);
+        //Debug.Assert(instance == null);
     }
     public static bool Exists
     {

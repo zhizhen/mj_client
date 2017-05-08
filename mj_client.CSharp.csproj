@@ -79,7 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameApp.cs" />
+    <Compile Include="Assets\Scripts\GameTools.cs" />
     <Compile Include="Assets\Scripts\Log.cs" />
+    <Compile Include="Assets\Scripts\Test.cs" />
     <Compile Include="Assets\Scripts\controller\BattleController.cs" />
     <Compile Include="Assets\Scripts\controller\LoginController.cs" />
     <Compile Include="Assets\Scripts\controller\RoleController.cs" />
@@ -209,6 +211,7 @@
     <Compile Include="Assets\Scripts\tools\DoTweenUtils.cs" />
     <Compile Include="Assets\Scripts\tools\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\tools\GameConst.cs" />
+    <Compile Include="Assets\Scripts\tools\GameEventConst.cs" />
     <Compile Include="Assets\Scripts\tools\IzObjectPool.cs" />
     <Compile Include="Assets\Scripts\tools\IzPoolElement.cs" />
     <Compile Include="Assets\Scripts\tools\ObjectPool.cs" />
@@ -216,7 +219,6 @@
     <Compile Include="Assets\Scripts\tools\SharedManager.cs" />
     <Compile Include="Assets\Scripts\tools\Updater.cs" />
     <Compile Include="Assets\Scripts\tools\UtilsExtends.cs" />
-    <Compile Include="Assets\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />

@@ -12,7 +12,7 @@ message CreateRsp{
 
 // 加入桌子
 message JoinReq {
-	required string tab_id = 1;
+	required int32 tab_id = 1;
 }
 
 // 加入返回

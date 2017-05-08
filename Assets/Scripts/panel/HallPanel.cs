@@ -59,7 +59,6 @@ public class HallPanel : BasePanel
             {
                 joinTable(num);
                 Debug.Log("num" + num);
-                //RoomPanel.Instance.load();
             }
 
         });
@@ -69,8 +68,7 @@ public class HallPanel : BasePanel
 
     private void createTable()
     {
-        //ProtoReq.CreateTable();
-        RoomPanel.Instance.load();
+        ProtoReq.CreateTable();
     }
     private void joinTable(int id)
     {
