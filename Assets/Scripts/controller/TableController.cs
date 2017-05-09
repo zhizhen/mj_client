@@ -13,6 +13,7 @@ public class TableController :Singleton<TableController> {
     public void getCards(Table.Cards cards)
     {
         Debug.Log("收到牌");
+        EventDispatcher.Instance.Dispatch(GameEventConst.CARD_TO_HAND);
     }
 
     public void createdTable(Table.CreateRsp create)
@@ -31,5 +32,30 @@ public class TableController :Singleton<TableController> {
     public void ready(Table.ReadyRsp ready)
     {
         EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY);
+    }
+
+    public void turn(Table.Turn turn)
+    {
+
+    }
+
+    public void play(Table.Play play)
+    {
+
+    }
+
+    public void gang(Table.Gang gang)
+    {
+
+    }
+
+    public void pass(Table.Pass pass)
+    {
+
+    }
+
+    public void newCard(Table.NewCard card)
+    {
+
     }
 }

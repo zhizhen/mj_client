@@ -117,29 +117,29 @@ public class ProtoRes:Singleton<ProtoRes>{
 
     private void turn(Msg msg)
     {
-
+        TableController.Instance.turn((Table.Turn)msg.body);
     }
 
     private void play(Msg msg)
     {
-
+        TableController.Instance.play((Table.Play)msg.body);
 
     }
 
     private void gang(Msg msg)
     {
-
+        TableController.Instance.gang((Table.Gang)msg.body);
 
     }
 
     private void pass(Msg msg)
     {
-
+        TableController.Instance.pass((Table.Pass)msg.body);
 
     }
     private void newCard(Msg msg)
     {
-
+        TableController.Instance.newCard((Table.NewCard)msg.body);
 
     }
     #endregion 

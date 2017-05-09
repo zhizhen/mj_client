@@ -101,8 +101,9 @@ public class RoomPanel : BasePanel {
     {
         for(int i=1;i<5;i++)
         {
-            IconMgr.Instance.SetHeadRawImage(_before.transform.FindChild("role" + i + "/head").GetComponent<RawImage>(), "111");
-           
+            //IconMgr.Instance.SetHeadRawImage(_before.transform.FindChild("role" + i + "/head").GetComponent<RawImage>(), "111");
+            _before.transform.FindChild("role" + i + "/head").gameObject.SetActive(false);
+            _before.transform.FindChild("role" + i + "/ready").gameObject.SetActive(true);
         }
     }
 
@@ -176,13 +177,7 @@ public class RoomPanel : BasePanel {
             //CardController.Instance.hu
         });
         _gang.onClick.AddListener(delegate {
-            CardController.Instance.gang(0,0);
-            GameObject obj = _selfCard.transform.FindChild("other/grid/gang").gameObject;
-            GameObject objItem = GameObject.Instantiate(obj);
-            objItem.transform.parent = obj.transform.parent;
-            objItem.SetActive(true);
-            IconMgr.Instance.SetImage(objItem.transform.FindChild("card4/value").GetComponent<Image>(), "zm2_" + CardConst.GetCardBigNum(0, 0));
-           
+            newPengOrGang(_selfCard.transform.FindChild("other/grid/gang").gameObject);
         });
         _peng.onClick.AddListener(delegate {
             CardController.Instance.peng(0, 0);
@@ -230,38 +225,20 @@ public class RoomPanel : BasePanel {
     {
         base.AddListener();
         EventDispatcher.Instance.AddEventListener(GameEventConst.READY_TO_PALY, onReady);
+        EventDispatcher.Instance.AddEventListener(GameEventConst.CARD_TO_HAND, getCard);
     }
 
     public override void RemoveListener()
     {
         base.RemoveListener();
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.READY_TO_PALY, onReady);
+        EventDispatcher.Instance.RemoveEventListener(GameEventConst.CARD_TO_HAND, getCard);
     }
 
     private void onReady()
     {
-        _after.SetActive(true);
-        _before.SetActive(false);
-        _hu.gameObject.SetActive(false);
-        _peng.gameObject.SetActive(false);
-        _gang.gameObject.SetActive(false);
-        _pass.gameObject.SetActive(false);
-        //_self.transform.FindChild("heCard").gameObject.SetActive(false);
-        //_right.transform.FindChild("heCard").gameObject.SetActive(false);
-        //_top.transform.FindChild("heCard").gameObject.SetActive(false);
-        //_left.transform.FindChild("heCard").gameObject.SetActive(false);
-
-        //_leftCard.transform.FindChild("hand").gameObject.SetActive(true);
-        //_leftCard.transform.FindChild("other").gameObject.SetActive(false);
-
-        //_topCard.transform.FindChild("hand").gameObject.SetActive(true);
-        //_topCard.transform.FindChild("other").gameObject.SetActive(false);
-
-        //_rightCard.transform.FindChild("hand").gameObject.SetActive(true);
-        //_rightCard.transform.FindChild("other").gameObject.SetActive(false);
-
-        //_selfCard.transform.FindChild("hand").gameObject.SetActive(true);
-        //_selfCard.transform.FindChild("other").gameObject.SetActive(false);
+       
+        ProtoReq.Ready();
 
     }
     private void weixinInvite()
@@ -272,5 +249,29 @@ public class RoomPanel : BasePanel {
     {
         EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY);
         //ProtoReq.Ready();
+    }
+    private void getCard()
+    {
+        _after.SetActive(true);
+        _before.SetActive(false);
+        _hu.gameObject.SetActive(false);
+        _peng.gameObject.SetActive(false);
+        _gang.gameObject.SetActive(false);
+        _pass.gameObject.SetActive(false);
+    }
+
+    private void newPengOrGang(GameObject gameObject)
+    {
+
+        CardController.Instance.gang(0, 0);
+        GameObject objItem = GameObject.Instantiate(gameObject);
+        objItem.transform.parent = gameObject.transform.parent;
+        objItem.SetActive(true);
+        PengAndGangProxy proxy = objItem.GetComponent<PengAndGangProxy>();
+        for (int i = 0; i < proxy.startStrs.Length; i++)
+        {
+            IconMgr.Instance.SetImage(proxy.images[i], proxy.startStrs[i] + CardConst.GetCardBigNum(0, 0));
+        }
+        
     }
 }

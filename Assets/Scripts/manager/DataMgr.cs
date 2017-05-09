@@ -18,6 +18,10 @@ public class DataMgr : Singleton<DataMgr> {
 
     public int _curCard;
 
+    public int leftCardNum;
+    public int rightCardNum;
+    public int topCardNum;
+
     public DataMgr()
     {
         _leftCardList = new List<int>();
