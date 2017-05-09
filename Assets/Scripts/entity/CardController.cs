@@ -46,17 +46,16 @@ public class CardController:Singleton<CardController>{
     }
     public void init()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            int value = Random.Range(1, 34);
-            addCard(CardConst.getCardInfo(value).type, CardConst.getCardInfo(value).value);
-        }
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    int value = Random.Range(1, 34);
+        //    addCard(CardConst.getCardInfo(value).type, CardConst.getCardInfo(value).value);
+        //}
         //printAllCard();
     }
     //起牌,加入新牌并排序
     public bool addCard(int type,int num)
     {
-        Debug.Log("type" + type);
         int size = _myCardList[type].Count;
         bool _find = false;
         for (int i = 0; i < size; i++)

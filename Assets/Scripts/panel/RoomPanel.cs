@@ -103,7 +103,7 @@ public class RoomPanel : BasePanel {
         {
             //IconMgr.Instance.SetHeadRawImage(_before.transform.FindChild("role" + i + "/head").GetComponent<RawImage>(), "111");
             _before.transform.FindChild("role" + i + "/head").gameObject.SetActive(false);
-            _before.transform.FindChild("role" + i + "/ready").gameObject.SetActive(true);
+            _before.transform.FindChild("role" + i + "/ready").gameObject.SetActive(false);
         }
     }
 
