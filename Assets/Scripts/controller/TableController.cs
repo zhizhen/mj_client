@@ -13,6 +13,10 @@ public class TableController :Singleton<TableController> {
     public void getCards(Table.Cards cards)
     {
         Debug.Log("收到牌");
+        for (int i = 0; i < cards.cards.Count; i++)
+        {
+            CardController.Instance.addCard(CardConst.getCardInfo(cards.cards[i]).type, CardConst.getCardInfo(cards.cards[i]).value);
+        }
         EventDispatcher.Instance.Dispatch(GameEventConst.CARD_TO_HAND);
     }
 

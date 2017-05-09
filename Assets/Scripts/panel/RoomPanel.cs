@@ -93,7 +93,7 @@ public class RoomPanel : BasePanel {
         _after.SetActive(false);
 
         _handCard.SetActive(false);
-        initCard();
+        //initCard();
         initHead();
         _tableNum.text = GameConst.tableId.ToString();
     }
@@ -258,6 +258,7 @@ public class RoomPanel : BasePanel {
         _peng.gameObject.SetActive(false);
         _gang.gameObject.SetActive(false);
         _pass.gameObject.SetActive(false);
+        initCard();
     }
 
     private void newPengOrGang(GameObject gameObject)
