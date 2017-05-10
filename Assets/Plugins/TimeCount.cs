@@ -9,7 +9,7 @@ public class TimeCount : MonoBehaviour {
 
     void Start()
     {
-        time = 15;
+        time = GameConst.timeCount;
     }
 
     void Update()

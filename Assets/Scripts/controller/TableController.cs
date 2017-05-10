@@ -60,6 +60,6 @@ public class TableController :Singleton<TableController> {
 
     public void newCard(Table.NewCard card)
     {
-
+        EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.card);
     }
 }
