@@ -81,7 +81,7 @@ public class RoomPanel : BasePanel {
         _topCard = _after.transform.FindChild("rightCard").gameObject;
 
         _handCard = _after.transform.FindChild("handCard").gameObject;
-        inittest();
+        //inittest();
         addClick();
     }
 
@@ -175,8 +175,10 @@ public class RoomPanel : BasePanel {
         _hu.onClick.AddListener(delegate
         {
             //CardController.Instance.hu
+
         });
         _gang.onClick.AddListener(delegate {
+            ProtoReq.Gang(0);//没记录牌
             newPengOrGang(_selfCard.transform.FindChild("other/grid/gang").gameObject);
         });
         _peng.onClick.AddListener(delegate {
@@ -185,7 +187,7 @@ public class RoomPanel : BasePanel {
         });
 
         _pass.onClick.AddListener(delegate {
-            
+            ProtoReq.Pass();
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -207,6 +209,8 @@ public class RoomPanel : BasePanel {
                 int num = GameTools.getCardNumByName(name);
                 Debug.Log("牌号:" + GameTools.getCardNumByName(name));
                 CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
+                ProtoReq.Play(num);
+                setSelfHe(num);
                 initCard();
             });
         }
@@ -217,10 +221,17 @@ public class RoomPanel : BasePanel {
             int num = GameTools.getCardNumByName(name);
             Debug.Log("牌号:" + GameTools.getCardNumByName(name));
             CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
+            ProtoReq.Play(num);
+            setSelfHe(num);
             initCard();
         });
     }
 
+    private void setSelfHe(int num)
+    {
+        IconMgr.Instance.SetImage(_self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "xia_1_"+num);
+        _self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].SetActive(true);
+    }
     public override void AddListener()
     {
         base.AddListener();

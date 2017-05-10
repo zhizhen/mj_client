@@ -56,8 +56,14 @@ namespace NetWork{
 		public bool Connect( string ip, int port){
 			try {
 				Debug.Log ("begin connect " + ip);
-				socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
-				socket.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), null);
+#if UNITY_IPHONE
+                socket = new Socket(SocketHelper.addressFamily, SocketType.Stream, ProtocolType.Tcp);
+#else
+
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+#endif
+
+                socket.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), null);
 				return true ;
 			}
 			catch {

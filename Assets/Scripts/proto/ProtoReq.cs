@@ -36,25 +36,21 @@ public class ProtoReq{
         Table.ReadyReq ready = new Table.ReadyReq();
         NetClient.Instance().WriteMsg("Table.ReadyReq", ready);
     }
-
-    public static void Cards()
-    {
-        Table.Cards card = new Table.Cards();
-        NetClient.Instance().WriteMsg("Table.Cards", card);
-    }
     public static void Turn()
     {
         Table.Turn turn = new Table.Turn();
         NetClient.Instance().WriteMsg("Table.Turn", turn);
     }
-    public static void Play()
+    public static void Play(int num)
     {
         Table.Play play = new Table.Play();
+        play.card = num;
         NetClient.Instance().WriteMsg("Table.Play", play);
     }
-    public static void Gang()
+    public static void Gang(int num)
     {
         Table.Gang gang = new Table.Gang();
+        gang.card = num;
         NetClient.Instance().WriteMsg("Table.Gang", gang);
     }
     public static void Pass()

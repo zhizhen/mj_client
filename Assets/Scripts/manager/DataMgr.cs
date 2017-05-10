@@ -22,6 +22,11 @@ public class DataMgr : Singleton<DataMgr> {
     public int rightCardNum;
     public int topCardNum;
 
+    public int selfHeCardIndex = 0;
+    public int leftHeCardIndex = 0;
+    public int rightHeCardIndex = 0;
+    public int topHeCardIndex = 0;
+
     public DataMgr()
     {
         _leftCardList = new List<int>();
