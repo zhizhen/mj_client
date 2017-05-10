@@ -72,10 +72,10 @@ public class RoomPanel : BasePanel {
         _count = _always.transform.FindChild("count").gameObject;
 
         _fun = uiSprite.transform.FindChild("fun").gameObject;
-        _hu = _fun.transform.FindChild("fun/hu").GetComponent<Button>();
-        _gang = _fun.transform.FindChild("fun/gang").GetComponent<Button>();
-        _peng = _fun.transform.FindChild("fun/peng").GetComponent<Button>();
-        _pass = _fun.transform.FindChild("fun/pass").GetComponent<Button>();
+        _hu = _fun.transform.FindChild("hu").GetComponent<Button>();
+        _gang = _fun.transform.FindChild("gang").GetComponent<Button>();
+        _peng = _fun.transform.FindChild("peng").GetComponent<Button>();
+        _pass = _fun.transform.FindChild("pass").GetComponent<Button>();
 
         //inittest();
         addClick();
@@ -88,7 +88,7 @@ public class RoomPanel : BasePanel {
         _before.SetActive(true);
         _afterBase.SetActive(false);
 
-        _handCard.SetActive(false);
+        //_handCard.SetActive(false);
         //initCard();
         initHead();
         _tableNum.text = GameConst.tableId.ToString();
