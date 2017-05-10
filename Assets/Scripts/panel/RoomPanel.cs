@@ -102,6 +102,7 @@ public class RoomPanel : BasePanel {
         _after = GameObject.Instantiate(_afterBase);
         _after.name = "after";
         _after.transform.parent = _afterBase.transform.parent;
+        _after.transform.position = _afterBase.transform.position;
         _card = _after.transform.FindChild("card").gameObject;
 
         _self = _card.transform.FindChild("self").gameObject;
