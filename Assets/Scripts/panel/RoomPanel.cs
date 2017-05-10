@@ -66,7 +66,7 @@ public class RoomPanel : BasePanel {
         base.InitPanel(uiSprite);
         _always = uiSprite.FindChild("always").gameObject;
         _before = uiSprite.FindChild("before").gameObject;
-        _afterBase = uiSprite.FindChild("afterBases").gameObject;
+        _afterBase = uiSprite.FindChild("afterBase").gameObject;
 
         _tableNum = _always.transform.FindChild("number").GetComponent<Text>();
         _count = _always.transform.FindChild("count").gameObject;
@@ -291,7 +291,7 @@ public class RoomPanel : BasePanel {
     }
     private void getCard()
     {
-        copyAfter();
+        copyAfter(); 
         _after.SetActive(true);
         _before.SetActive(false);
         _hu.gameObject.SetActive(false);
@@ -306,7 +306,7 @@ public class RoomPanel : BasePanel {
         IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
         _handCard.GetComponent<TimeCount>().time = GameConst.timeCount;
         _handCard.SetActive(true);
-        isTurn = true;
+        isTurn = true; 
     }
 
     private void newPengOrGang(GameObject gameObject)
