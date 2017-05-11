@@ -118,4 +118,25 @@ public static class UtilsExtends {
         intresult = (long)(DateTime.Now - startTime).TotalSeconds;
         return intresult;
     }
+
+    public static int server2ClientIndex(this int index)
+    {
+        int result = 0;
+        switch (GameConfig.selfIndex)
+        {
+            case 0:
+                result = index;
+                break;
+            case 1:
+                result = (index+3)%4;
+                break;
+            case 2:
+                result = (index + GameConfig.selfIndex) % 4;
+                break;
+            case 3:
+                result = (index + 1) % 4;
+                break;
+        }
+        return result;
+    }
 }

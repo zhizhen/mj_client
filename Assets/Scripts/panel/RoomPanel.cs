@@ -222,7 +222,36 @@ public class RoomPanel : BasePanel {
                 _selfCard.transform.FindChild("hand/grid").transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+    //改变其他人手牌的显示s
+    private void initOtherHandCard(int pos)
+    {
+        GameObject obj = null;
+        int sum = 0;
+        switch (pos)
+        {
+            case 1:
+                obj = _rightCard.transform.FindChild("hand/grid").gameObject;
+                sum = DataMgr.Instance.rightCardNum;
+                break;
+            case 2:
+                obj = _topCard.transform.FindChild("hand/grid").gameObject;
+                sum = DataMgr.Instance.topCardNum;
+                break;
+            case 3:
+                obj = _leftCard.transform.FindChild("hand/grid").gameObject;
+                sum = DataMgr.Instance.leftCardNum;
+                break;
+        }
 
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            if (i < sum)
+                obj.transform.GetChild(i).gameObject.SetActive(true);
+            else
+                obj.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+    }
     private void addClick()
     {
 
@@ -232,8 +261,7 @@ public class RoomPanel : BasePanel {
 
         });
         _gang.onClick.AddListener(delegate {
-            ProtoReq.Gang(0);//没记录牌
-            newPengOrGang(_selfCard.transform.FindChild("other/grid/gang").gameObject);
+           // ProtoReq.Gang(0);//没记录牌
         });
         _peng.onClick.AddListener(delegate {
             CardController.Instance.peng(0, 0);
@@ -261,56 +289,82 @@ public class RoomPanel : BasePanel {
     }
     private void setTopHe(int num)
     {
-
+        IconMgr.Instance.SetImage(_top.GetComponent<CardProxy>().cards[DataMgr.Instance.topHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "shang1_" + num);
+        _top.GetComponent<CardProxy>().cards[DataMgr.Instance.topHeCardIndex].SetActive(true);
 
     }
     private void setLeftHe(int num)
     {
-
+        IconMgr.Instance.SetImage(_left.GetComponent<CardProxy>().cards[DataMgr.Instance.leftHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "zuo1_" + num);
+        _left.GetComponent<CardProxy>().cards[DataMgr.Instance.leftHeCardIndex].SetActive(true);
     }
 
     private void setRightHe(int num)
     {
-
+        IconMgr.Instance.SetImage(_right.GetComponent<CardProxy>().cards[DataMgr.Instance.rightHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "you1_" + num);
+        _right.GetComponent<CardProxy>().cards[DataMgr.Instance.rightHeCardIndex].SetActive(true);
     }
 
-    private void selfGang()
+    private void selfGang(int card,int pos)
     {
-
-
+        CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+        initCard();
+        newPengOrGang(_selfCard.transform.FindChild("other/grid/" + pos + "Gang").gameObject, card);
     }
 
-    private void topGang()
+    private void topGang(int card, int pos)
     {
+        DataMgr.Instance.topCardNum -= 3;
+        initOtherHandCard(2);
 
+        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
     }
 
-    private void leftGang()
+    private void leftGang(int card, int pos)
     {
+        DataMgr.Instance.leftCardNum -= 3;
+        initOtherHandCard(3);
 
+        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
     }
-    private void rightGang()
+    private void rightGang(int card, int pos)
     {
+        DataMgr.Instance.rightCardNum -= 3;
+        initOtherHandCard(1);
 
+        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
     }
 
-    private void selfPeng()
-    { 
-    }
-
-    private void topPang()
+    private void selfPeng(int card,int pos)
     {
+        CardController.Instance.peng(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+        initCard();
 
+        newPengOrGang(_selfCard.transform.FindChild("other/grid/"+pos+"Peng").gameObject,card);
     }
 
-    private void leftPeng()
+    private void topPeng(int card,int pos)
     {
+        DataMgr.Instance.topCardNum -= 3;
+        initOtherHandCard(2);
 
+        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
     }
 
-    private void rightPeng()
+    private void leftPeng(int card,int pos)
     {
+        DataMgr.Instance.leftCardNum -= 3;
+        initOtherHandCard(3);
 
+        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
+    }
+
+    private void rightPeng(int card,int pos)
+    {
+        DataMgr.Instance.rightCardNum -= 3;
+        initOtherHandCard(1);
+
+        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
     }
     public override void AddListener()
     {
@@ -335,16 +389,16 @@ public class RoomPanel : BasePanel {
         switch (pos)
         {
             case 0:
-
+                setSelfHe(card);
                 break;
             case 1:
-
+                setRightHe(card);
                 break;
             case 2:
-
+                setTopHe(card);
                 break;
             case 3:
-
+                setLeftHe(card);
                 break;
         }
     }
@@ -384,17 +438,15 @@ public class RoomPanel : BasePanel {
         isTurn = true; 
     }
 
-    private void newPengOrGang(GameObject gameObject)
+    private void newPengOrGang(GameObject gameObject,int card)
     {
-
-        CardController.Instance.gang(0, 0);
         GameObject objItem = GameObject.Instantiate(gameObject);
         objItem.transform.parent = gameObject.transform.parent;
         objItem.SetActive(true);
         PengAndGangProxy proxy = objItem.GetComponent<PengAndGangProxy>();
         for (int i = 0; i < proxy.startStrs.Length; i++)
         {
-            IconMgr.Instance.SetImage(proxy.images[i], proxy.startStrs[i] + CardConst.GetCardBigNum(0, 0));
+            IconMgr.Instance.SetImage(proxy.images[i], proxy.startStrs[i] + card);
         }
         
     }
