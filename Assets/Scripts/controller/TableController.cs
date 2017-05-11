@@ -45,7 +45,7 @@ public class TableController :Singleton<TableController> {
 
     public void play(Table.Play play)
     {
-
+        EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, 0, play.card);
     }
 
     public void gang(Table.Gang gang)

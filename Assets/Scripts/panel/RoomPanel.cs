@@ -259,12 +259,66 @@ public class RoomPanel : BasePanel {
         IconMgr.Instance.SetImage(_self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "xia_1_"+num);
         _self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].SetActive(true);
     }
+    private void setTopHe(int num)
+    {
+
+
+    }
+    private void setLeftHe(int num)
+    {
+
+    }
+
+    private void setRightHe(int num)
+    {
+
+    }
+
+    private void selfGang()
+    {
+
+
+    }
+
+    private void topGang()
+    {
+
+    }
+
+    private void leftGang()
+    {
+
+    }
+    private void rightGang()
+    {
+
+    }
+
+    private void selfPeng()
+    { 
+    }
+
+    private void topPang()
+    {
+
+    }
+
+    private void leftPeng()
+    {
+
+    }
+
+    private void rightPeng()
+    {
+
+    }
     public override void AddListener()
     {
         base.AddListener();
         EventDispatcher.Instance.AddEventListener(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.AddEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
+        EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
     }
 
     public override void RemoveListener()
@@ -273,6 +327,26 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
+        EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
+    }
+
+    private void putHeCard(int pos, int card)
+    {
+        switch (pos)
+        {
+            case 0:
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+        }
     }
 
     private void onReady()
