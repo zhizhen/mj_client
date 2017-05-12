@@ -374,6 +374,9 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
+        EventDispatcher.Instance.AddEventListener<bool>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
+        EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
     }
 
     public override void RemoveListener()
@@ -384,6 +387,62 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
+        EventDispatcher.Instance.RemoveEventListener<bool>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
+        EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
+    }
+
+    private void onPeng(int pos,int fromPos,int card)
+    {
+        switch (pos)
+        {
+            case 0:
+                selfPeng(card, fromPos);
+                break;
+            case 1:
+                rightPeng(card, fromPos);
+                break;
+            case 2:
+                topPeng(card, fromPos);
+                break;
+            case 3:
+                leftPeng(card, fromPos);
+                break;
+        }
+    }
+
+    private void onGang(int pos, int fromPos, int card)
+    {
+        switch (pos)
+        {
+            case 0:
+                selfGang(card, fromPos);
+                break;
+            case 1:
+                rightGang(card, fromPos);
+                break;
+            case 2:
+                topGang(card, fromPos);
+                break;
+            case 3:
+                leftGang(card, fromPos);
+                break;
+        }
+    }
+    //收到那个人的turn
+    private void turnTo(bool boo)
+    {
+        if (boo)
+        {
+            //自己的turn
+            Debug.Log("自己的turn");
+        }
+        else
+        {
+            //比人的turn
+            Debug.Log("别人的turn");
+            beginTimeCount();
+        }
     }
     private void addPlayer()
     {
@@ -418,10 +477,7 @@ public class RoomPanel : BasePanel {
 
     private void onReady(int id)
     {
-
         _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(id) + "/ready").gameObject.SetActive(true);
-        // ProtoReq.Ready();
-
     }
     private void weixinInvite()
     {
@@ -446,11 +502,20 @@ public class RoomPanel : BasePanel {
     private void getCurCard(int num)
     {
         IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
-        _handCard.GetComponent<TimeCount>().time = GameConst.timeCount;
-        _handCard.SetActive(true);
+        beginTimeCount();
         isTurn = true; 
     }
 
+    private void beginTimeCount()
+    {
+        _count.GetComponent<TimeCount>().time = GameConst.timeCount;
+        _count.SetActive(true);
+    }
+
+    private void endTimeCount()
+    {
+        _count.SetActive(false);
+    }
     private void newPengOrGang(GameObject gameObject,int card)
     {
         GameObject objItem = GameObject.Instantiate(gameObject);

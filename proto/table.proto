@@ -15,9 +15,15 @@ message JoinReq {
 	required int32 tab_id = 1;
 }
 
+message Join {
+	required int32 id = 1;
+	required Role role = 2;
+}
+
 // 加入返回
 message JoinRsp{
 	required int32 err_no = 1;
+	repeated Role roles = 2;
 }
 
 message Role {  
@@ -26,18 +32,14 @@ message Role {
   required int32 pos = 3; 
 }
 
-// 玩家信息
-message MatchResult{
-	repeated Role roles = 1;
-}
-
 // 准备
 message ReadyReq{
 
 }
 
 // 准备结果
-message ReadyRsp{
+message Ready{
+	required int32 id = 1;
 }
 
 // 发牌
@@ -52,12 +54,22 @@ message Turn{
 
 // 打牌
 message Play{
-	required int32 card = 1;
+	required int32 id = 1;
+	required int32 card = 2;
+}
+
+// 碰
+message Peng{
+	required int32 id = 1;
+	required int32 from = 2;
+	required int32 card = 3;
 }
 
 // 杠
 message Gang{
-	required int32 card = 1;
+	required int32 id = 1;
+	required int32 from = 2;
+	required int32 card = 3;
 }
 
 // 过

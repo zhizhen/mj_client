@@ -61,6 +61,30 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Join")]
+  public partial class Join : global::ProtoBuf.IExtensible
+  {
+    public Join() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private Table.Role _role;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"role", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public Table.Role role
+    {
+      get { return _role; }
+      set { _role = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"JoinRsp")]
   public partial class JoinRsp : global::ProtoBuf.IExtensible
   {
@@ -73,6 +97,13 @@ namespace Table
       get { return _err_no; }
       set { _err_no = value; }
     }
+    private readonly global::System.Collections.Generic.List<Table.Role> _roles = new global::System.Collections.Generic.List<Table.Role>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"roles", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Table.Role> roles
+    {
+      get { return _roles; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -109,23 +140,6 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MatchResult")]
-  public partial class MatchResult : global::ProtoBuf.IExtensible
-  {
-    public MatchResult() {}
-    
-    private readonly global::System.Collections.Generic.List<Table.Role> _roles = new global::System.Collections.Generic.List<Table.Role>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"roles", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<Table.Role> roles
-    {
-      get { return _roles; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReadyReq")]
   public partial class ReadyReq : global::ProtoBuf.IExtensible
   {
@@ -136,11 +150,18 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReadyRsp")]
-  public partial class ReadyRsp : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Ready")]
+  public partial class Ready : global::ProtoBuf.IExtensible
   {
-    public ReadyRsp() {}
+    public Ready() {}
     
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -185,8 +206,46 @@ namespace Table
   {
     public Play() {}
     
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
     private int _card;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int card
+    {
+      get { return _card; }
+      set { _card = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Peng")]
+  public partial class Peng : global::ProtoBuf.IExtensible
+  {
+    public Peng() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _from;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"from", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int from
+    {
+      get { return _from; }
+      set { _from = value; }
+    }
+    private int _card;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int card
     {
       get { return _card; }
@@ -202,8 +261,22 @@ namespace Table
   {
     public Gang() {}
     
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _from;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"from", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int from
+    {
+      get { return _from; }
+      set { _from = value; }
+    }
     private int _card;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int card
     {
       get { return _card; }

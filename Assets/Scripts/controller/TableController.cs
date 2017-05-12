@@ -48,19 +48,30 @@ public class TableController :Singleton<TableController> {
     public void turn(Table.Turn turn)
     {
         Debug.Log("turn的回合");
+        if (turn.id == MainRole.Instance.Id)
+        {
+            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, true);
+        }
+        else
+        {
+            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, true);
+        }
     }
 
     public void play(Table.Play play)
     {
         Debug.Log("收到play返回");
-        EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, 0, play.card);
+        EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
     }
 
     public void gang(Table.Gang gang)
     {
-
+        EventDispatcher.Instance.Dispatch(GameEventConst.GANG, gang.id.idToPos(), gang.from.idToPos(), gang.card);
     }
-
+    public void peng(Table.Peng peng)
+    {
+        EventDispatcher.Instance.Dispatch(GameEventConst.PENG, peng.id.idToPos(), peng.from.idToPos(), peng.card);
+    }
     public void pass(Table.Pass pass)
     {
 

@@ -9,4 +9,8 @@ public class GameEventConst{
 
     public const string PUT_HE_CARD = "PUT_HE_CARD";
     public const string ADD_PLAYER = "ADD_PLAYER";
+
+    public const string TURN_TO = "TURN_TO";
+    public const string PENG = "PENG";
+    public const string GANG = "GANG";
 }

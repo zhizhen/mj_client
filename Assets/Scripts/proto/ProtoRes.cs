@@ -34,6 +34,7 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.Turn", turn);
         dic.Add("Table.Play", play);
         dic.Add("Table.Gang", gang);
+        dic.Add("Table.Peng", peng);
         dic.Add("Table.Pass", pass);
         dic.Add("Table.NewCard", newCard);
     }
@@ -90,20 +91,6 @@ public class ProtoRes:Singleton<ProtoRes>{
     {
         TableController.Instance.ready((Table.Ready)msg.body);
     }
-    private void ready_notify(Msg msg)
-    {
-        Debug.Log("收到Table.ReadyNotify");
-    }
-
-    private void start_notify(Msg msg)
-    {
-        Debug.Log("收到Table.StartNotify");
-    }
-
-    private void move_notify(Msg msg)
-    {
-        Debug.Log("收到Table.MoveNotify");
-    }
 
     private void get_cards(Msg msg)
     {
@@ -120,7 +107,10 @@ public class ProtoRes:Singleton<ProtoRes>{
         TableController.Instance.play((Table.Play)msg.body);
 
     }
-
+    private void peng(Msg msg)
+    {
+        TableController.Instance.peng((Table.Peng)msg.body);
+    }
     private void gang(Msg msg)
     {
         TableController.Instance.gang((Table.Gang)msg.body);
