@@ -13,4 +13,5 @@ public class GameEventConst{
     public const string TURN_TO = "TURN_TO";
     public const string PENG = "PENG";
     public const string GANG = "GANG";
+    public const string TIME_COUNT_END = "TIME_COUNT_END";
 }

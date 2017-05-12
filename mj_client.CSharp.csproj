@@ -209,8 +209,6 @@
     <Compile Include="Assets\Scripts\role\Player.cs" />
     <Compile Include="Assets\Scripts\tools\DefaultModelPools.cs" />
     <Compile Include="Assets\Scripts\tools\DoTweenUtils.cs" />
-    <Compile Include="Assets\Scripts\tools\EventDispatcher.cs" />
-    <Compile Include="Assets\Scripts\tools\GameEventConst.cs" />
     <Compile Include="Assets\Scripts\tools\IzObjectPool.cs" />
     <Compile Include="Assets\Scripts\tools\IzPoolElement.cs" />
     <Compile Include="Assets\Scripts\tools\ObjectPool.cs" />

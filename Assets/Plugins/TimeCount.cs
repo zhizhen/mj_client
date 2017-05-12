@@ -19,6 +19,7 @@ public class TimeCount : MonoBehaviour {
         {
             gameObject.SetActive(false);
             time = 15;
+            EventDispatcher.Instance.Dispatch(GameEventConst.TIME_COUNT_END);
         }
             
         for (int i = objCount.Length-1; i >= 0; i--)

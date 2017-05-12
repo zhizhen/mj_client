@@ -133,6 +133,7 @@ public class RoomPanel : BasePanel {
                 ProtoReq.Play(num);
                 setSelfHe(num);
                 initCard();
+                endTimeCount();
             });
         }
 
@@ -148,6 +149,7 @@ public class RoomPanel : BasePanel {
             ProtoReq.Play(num);
             setSelfHe(num);
             initCard();
+            endTimeCount();
         });
     }
     private void initHead()
@@ -377,6 +379,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<bool>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
+        EventDispatcher.Instance.AddEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
     }
 
     public override void RemoveListener()
@@ -390,6 +393,22 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<bool>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
+        EventDispatcher.Instance.RemoveEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
+    }
+    private void onTimeEnd()
+    {
+        if (isTurn)
+        {
+            isTurn = false;
+            string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
+            int num = GameTools.getCardNumByName(name);
+            Debug.Log("牌号:" + GameTools.getCardNumByName(name));
+            CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
+            ProtoReq.Play(num);
+            setSelfHe(num);
+            initCard();
+            endTimeCount();
+        }
     }
 
     private void onPeng(int pos,int fromPos,int card)
