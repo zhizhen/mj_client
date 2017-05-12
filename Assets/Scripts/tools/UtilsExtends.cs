@@ -139,4 +139,9 @@ public static class UtilsExtends {
         }
         return result;
     }
+
+    public static int idToPos(this int id)
+    {
+        return RoleController.Instance.getPlayerPos(id).server2ClientIndex();
+    }
 }

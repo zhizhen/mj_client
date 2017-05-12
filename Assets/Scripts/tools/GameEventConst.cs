@@ -8,4 +8,5 @@ public class GameEventConst{
     public const string GET_NEW_CARD = "GET_NEW_CARD";
 
     public const string PUT_HE_CARD = "PUT_HE_CARD";
+    public const string ADD_PLAYER = "ADD_PLAYER";
 }

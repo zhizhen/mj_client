@@ -27,12 +27,9 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Room.leaveRsp", leaveRoom_rsp);
 
         dic.Add("Table.CreateRsp", createTable_rsp);
+        dic.Add("Table.Join", joined);
         dic.Add("Table.JoinRsp", joinTable_rsp);
-        dic.Add("Table.MatchResult", matchResult_rsp);
-        dic.Add("Table.ReadyRsp", ready_rsp);
-        dic.Add("Table.ReadyNotify", ready_notify);
-        dic.Add("Table.StartNotify", start_notify);
-        dic.Add("Table.MoveNotify", move_notify);
+        dic.Add("Table.Ready", ready_rsp);
         dic.Add("Table.Cards", get_cards);
         dic.Add("Table.Turn", turn);
         dic.Add("Table.Play", play);
@@ -85,15 +82,13 @@ public class ProtoRes:Singleton<ProtoRes>{
     {
         TableController.Instance.joinedTable((Table.JoinRsp)msg.body);
     }
-
-    private void matchResult_rsp(Msg msg)
+    private void joined(Msg msg)
     {
-        TableController.Instance.matched((Table.MatchResult)msg.body);
+        TableController.Instance.joined((Table.Join)msg.body);
     }
-
     private void ready_rsp(Msg msg)
     {
-        Debug.Log("收到Table.ReadyRsp");
+        TableController.Instance.ready((Table.Ready)msg.body);
     }
     private void ready_notify(Msg msg)
     {

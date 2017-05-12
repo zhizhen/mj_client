@@ -152,7 +152,7 @@ public class RoomPanel : BasePanel {
     }
     private void initHead()
     {
-        for(int i=1;i<5;i++)
+        for(int i=0;i<4;i++)
         {
             //IconMgr.Instance.SetHeadRawImage(_before.transform.FindChild("role" + i + "/head").GetComponent<RawImage>(), "111");
             _before.transform.FindChild("role" + i + "/head").gameObject.SetActive(false);
@@ -369,21 +369,34 @@ public class RoomPanel : BasePanel {
     public override void AddListener()
     {
         base.AddListener();
-        EventDispatcher.Instance.AddEventListener(GameEventConst.READY_TO_PALY, onReady);
+        EventDispatcher.Instance.AddEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.AddEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
+        EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
     }
 
     public override void RemoveListener()
     {
         base.RemoveListener();
-        EventDispatcher.Instance.RemoveEventListener(GameEventConst.READY_TO_PALY, onReady);
+        EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
+        EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
     }
-
+    private void addPlayer()
+    {
+        foreach (var item in RoleController.Instance._playerDic)
+        {
+            Transform obj = _before.transform.FindChild("role" + item.Value.Pos);
+            if (obj != null)
+            {
+                IconMgr.Instance.SetHeadRawImage(obj.FindChild("head").GetComponent<RawImage>(), item.Value.Name);
+                obj.FindChild("head").gameObject.SetActive(true);
+            }
+        }
+    }
     private void putHeCard(int pos, int card)
     {
         switch (pos)
@@ -403,10 +416,11 @@ public class RoomPanel : BasePanel {
         }
     }
 
-    private void onReady()
+    private void onReady(int id)
     {
-       
-        ProtoReq.Ready();
+
+        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(id) + "/ready").gameObject.SetActive(true);
+        // ProtoReq.Ready();
 
     }
     private void weixinInvite()
@@ -415,8 +429,7 @@ public class RoomPanel : BasePanel {
     }
     private void toReady()
     {
-        EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY);
-        //ProtoReq.Ready();
+        ProtoReq.Ready();
     }
     private void getCard()
     {

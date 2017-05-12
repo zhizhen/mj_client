@@ -4,12 +4,6 @@ using System.Collections;
 public class TableController :Singleton<TableController> {
 
 
-    public void matched(Table.MatchResult match)
-    {
-        //HallPanel.Instance.DestoryPanel();
-        RoomPanel.Instance.load();
-    }
-
     public void getCards(Table.Cards cards)
     {
         Debug.Log("收到牌");
@@ -30,21 +24,35 @@ public class TableController :Singleton<TableController> {
 
     public void joinedTable(Table.JoinRsp join)
     {
+        Debug.Log("JoinRsp");
+        for (int i = 0; i < join.roles.Count; i++)
+        {
+            RoleController.Instance.addPlayer(join.roles[i]);
+            Debug.Log("role" + i + join.roles[i].name);
+        }
         RoomPanel.Instance.load();
     }
 
-    public void ready(Table.ReadyRsp ready)
+    public void joined(Table.Join join)
     {
-        EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY);
+        Debug.Log("Join");
+        RoleController.Instance.addPlayer(join.role);
+        EventDispatcher.Instance.Dispatch(GameEventConst.ADD_PLAYER);
+    }
+
+    public void ready(Table.Ready ready)
+    {
+        EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY,ready.id);
     }
 
     public void turn(Table.Turn turn)
     {
-
+        Debug.Log("turn的回合");
     }
 
     public void play(Table.Play play)
     {
+        Debug.Log("收到play返回");
         EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, 0, play.card);
     }
 
@@ -60,6 +68,7 @@ public class TableController :Singleton<TableController> {
 
     public void newCard(Table.NewCard card)
     {
+        Debug.Log("摸牌");
         EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.card);
     }
 }
