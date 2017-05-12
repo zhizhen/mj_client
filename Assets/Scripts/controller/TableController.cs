@@ -54,13 +54,14 @@ public class TableController :Singleton<TableController> {
         }
         else
         {
-            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, true);
+            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, false);
         }
     }
 
     public void play(Table.Play play)
     {
         Debug.Log("收到play返回");
+        DataMgr.Instance._curCard = play.card;
         EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
     }
 

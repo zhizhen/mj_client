@@ -1,6 +1,0 @@
-﻿log inited...
-2.6.5 (tarball)
-Start Loading...
-begin connect 127.0.0.1
-send msg Login.LoginReq
-onLogin 1 and 111

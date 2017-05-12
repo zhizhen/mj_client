@@ -40,6 +40,7 @@ public class RoomPanel : BasePanel {
     private GameObject _card;
 
     private GameObject _count;
+    private GameObject _center;
 
     private GameObject _self;
     private GameObject _top;
@@ -70,6 +71,7 @@ public class RoomPanel : BasePanel {
 
         _tableNum = _always.transform.FindChild("number").GetComponent<Text>();
         _count = _always.transform.FindChild("count").gameObject;
+        _center = _always.transform.FindChild("center").gameObject;
 
         _fun = uiSprite.transform.FindChild("fun").gameObject;
         _hu = _fun.transform.FindChild("hu").GetComponent<Button>();
@@ -87,7 +89,7 @@ public class RoomPanel : BasePanel {
         _always.SetActive(true);
         _before.SetActive(true);
         _afterBase.SetActive(false);
-
+        _fun.SetActive(false);
         //_handCard.SetActive(false);
         //initCard();
         initHead();
@@ -131,7 +133,7 @@ public class RoomPanel : BasePanel {
                 Debug.Log("牌号:" + GameTools.getCardNumByName(name));
                 CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
                 ProtoReq.Play(num);
-                setSelfHe(num);
+                //setSelfHe(num);
                 initCard();
                 endTimeCount();
             });
@@ -147,7 +149,7 @@ public class RoomPanel : BasePanel {
             Debug.Log("牌号:" + GameTools.getCardNumByName(name));
             CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
             ProtoReq.Play(num);
-            setSelfHe(num);
+            //setSelfHe(num);
             initCard();
             endTimeCount();
         });
@@ -206,6 +208,13 @@ public class RoomPanel : BasePanel {
                     _handCard.SetActive(true);
                     index++;
                     isTurn = true;
+
+                    if (CardController.Instance.checkCard(true))
+                    {
+                        _fun.SetActive(true);
+                        _hu.gameObject.SetActive(true);
+                    }
+                    beginTimeCount();
                     return;
                 }
                 IconMgr.Instance.SetImage(_selfCard.transform.FindChild("hand/grid").transform.GetChild(index).FindChild("value").GetComponent<Image>(), "zm1_"+CardConst.GetCardBigNum(i,CardController.Instance._myCardList[i][j]));
@@ -260,18 +269,33 @@ public class RoomPanel : BasePanel {
         _hu.onClick.AddListener(delegate
         {
             //CardController.Instance.hu
-
+            // ProtoReq.
+            _fun.SetActive(false);
+            _hu.gameObject.SetActive(false);
+            _peng.gameObject.SetActive(false);
+            _gang.gameObject.SetActive(false);
         });
         _gang.onClick.AddListener(delegate {
-           // ProtoReq.Gang(0);//没记录牌
+            // ProtoReq.Gang(0);//没记录牌
+            ProtoReq.Gang(DataMgr.Instance._curCard);
+            _fun.SetActive(false);
+            _hu.gameObject.SetActive(false);
+            _peng.gameObject.SetActive(false);
+            _gang.gameObject.SetActive(false);
         });
         _peng.onClick.AddListener(delegate {
-            CardController.Instance.peng(0, 0);
+            //CardController.Instance.peng(0, 0);
+            ProtoReq.Peng(DataMgr.Instance._curCard);
             isTurn = true;
+            _fun.SetActive(false);
+            _hu.gameObject.SetActive(false);
+            _peng.gameObject.SetActive(false);
+            _gang.gameObject.SetActive(false);
         });
 
         _pass.onClick.AddListener(delegate {
             ProtoReq.Pass();
+            endTimeCount();
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -400,19 +424,31 @@ public class RoomPanel : BasePanel {
         if (isTurn)
         {
             isTurn = false;
-            string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
-            int num = GameTools.getCardNumByName(name);
-            Debug.Log("牌号:" + GameTools.getCardNumByName(name));
-            CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
-            ProtoReq.Play(num);
-            setSelfHe(num);
-            initCard();
+          
+            if (_handCard.activeSelf)
+            {
+                string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
+                int num = GameTools.getCardNumByName(name);
+                Debug.Log("牌号:" + GameTools.getCardNumByName(name));
+                CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
+                ProtoReq.Play(num);
+                //setSelfHe(num);
+                initCard();
+            }
+            else
+            {
+                ProtoReq.Pass();
+            }
             endTimeCount();
         }
     }
 
     private void onPeng(int pos,int fromPos,int card)
     {
+        if (pos == GameConfig.selfIndex)
+        {
+            CardController.Instance.peng(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+        }
         switch (pos)
         {
             case 0:
@@ -432,6 +468,10 @@ public class RoomPanel : BasePanel {
 
     private void onGang(int pos, int fromPos, int card)
     {
+        if (pos == GameConfig.selfIndex)
+        {
+            CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+        }
         switch (pos)
         {
             case 0:
@@ -448,6 +488,7 @@ public class RoomPanel : BasePanel {
                 break;
         }
     }
+
     //收到那个人的turn
     private void turnTo(bool boo)
     {
@@ -455,6 +496,28 @@ public class RoomPanel : BasePanel {
         {
             //自己的turn
             Debug.Log("自己的turn");
+            Card card = new Card(DataMgr.Instance._curCard);
+            //一系列判断
+            CardController.Instance.addCard(card.CardType, card.CardNum);
+
+            if (CardController.Instance.checkCard(false))
+            {
+                _fun.SetActive(true);
+                _hu.gameObject.SetActive(true);
+            }
+            else
+            {
+                CardController.Instance.delCard(card.CardType, card.CardNum);
+                _hu.gameObject.SetActive(false);
+            }
+            if (CardController.Instance.checkPeng(card.CardType, card.CardNum))
+            {
+                _peng.gameObject.SetActive(true);
+            }
+            if (CardController.Instance.checkGang(card.CardType, card.CardNum))
+            {
+                _gang.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -516,13 +579,42 @@ public class RoomPanel : BasePanel {
         _gang.gameObject.SetActive(false);
         _pass.gameObject.SetActive(false);
         initCard();
+
+        initFeng();
+    }
+
+    private void initFeng()
+    {
+        _center.transform.localRotation = Quaternion.Euler(0, 0, 90 * (MainRole.Instance.Pos + 1));
+
+    }
+
+    private void setFengLight(int pos)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == pos)
+                _center.transform.FindChild(i.ToString()).gameObject.SetActive(true);
+            else
+                _center.transform.FindChild(i.ToString()).gameObject.SetActive(false);
+        }
     }
 
     private void getCurCard(int num)
     {
         IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
         beginTimeCount();
-        isTurn = true; 
+        isTurn = true;
+        DataMgr.Instance._curCard = num;
+        Card card = new Card(DataMgr.Instance._curCard);
+        //一系列判断
+        CardController.Instance.addCard(card.CardType, card.CardNum);
+
+        if (CardController.Instance.checkCard(true))
+        {
+            _fun.SetActive(true);
+            _hu.gameObject.SetActive(true);
+        }
     }
 
     private void beginTimeCount()
@@ -534,6 +626,10 @@ public class RoomPanel : BasePanel {
     private void endTimeCount()
     {
         _count.SetActive(false);
+        _fun.SetActive(false);
+        _hu.gameObject.SetActive(false);
+        _peng.gameObject.SetActive(false);
+        _gang.gameObject.SetActive(false);
     }
     private void newPengOrGang(GameObject gameObject,int card)
     {

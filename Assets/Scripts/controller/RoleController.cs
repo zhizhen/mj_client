@@ -14,6 +14,10 @@ public class RoleController :Singleton<RoleController> {
 
     public void addPlayer(Table.Role role)
     {
+        if (role.id == MainRole.Instance.Id)
+        {
+            MainRole.Instance.Pos = role.pos;
+        }
         Player player = new Player(role.id, role.name, role.pos);
         if (_playerDic.ContainsKey(role.id))
         {

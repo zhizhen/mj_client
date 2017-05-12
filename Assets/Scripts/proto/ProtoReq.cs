@@ -59,6 +59,13 @@ public class ProtoReq{
         NetClient.Instance().WriteMsg("Table.Pass", pass);    
     }
 
+    public static void Peng(int num)
+    {
+        Table.Peng peng = new Table.Peng();
+        peng.card = num;
+        NetClient.Instance().WriteMsg("Table.Peng", peng);
+    }
+
     public static void NetCard()
     {
         Table.NewCard card = new NewCard();

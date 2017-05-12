@@ -98,7 +98,7 @@ namespace Table
       set { _err_no = value; }
     }
     private readonly global::System.Collections.Generic.List<Table.Role> _roles = new global::System.Collections.Generic.List<Table.Role>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"roles", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, Name=@"roles", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<Table.Role> roles
     {
       get { return _roles; }
