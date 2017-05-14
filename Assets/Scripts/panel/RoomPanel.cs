@@ -374,7 +374,7 @@ public class RoomPanel : BasePanel {
     {
         DataMgr.Instance.topCardNum -= 3;
         initOtherHandCard(2);
-
+        Debug.Log("pengPos" + pos);
         newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
     }
 
@@ -382,7 +382,7 @@ public class RoomPanel : BasePanel {
     {
         DataMgr.Instance.leftCardNum -= 3;
         initOtherHandCard(3);
-
+        Debug.Log("pengPos" + pos);
         newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
     }
 
@@ -390,7 +390,7 @@ public class RoomPanel : BasePanel {
     {
         DataMgr.Instance.rightCardNum -= 3;
         initOtherHandCard(1);
-
+        Debug.Log("pengPos" + pos);
         newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
     }
     public override void AddListener()
@@ -603,7 +603,7 @@ public class RoomPanel : BasePanel {
     private void initFeng()
     {
         Debug.Log("风" + MainRole.Instance.Pos);
-        _center.transform.localRotation = Quaternion.Euler(0, 0, 90 * (MainRole.Instance.Pos + 1));
+        _center.transform.localRotation = Quaternion.Euler(0, 0, 90 * (MainRole.Instance.Pos - 1));
 
     }
 
