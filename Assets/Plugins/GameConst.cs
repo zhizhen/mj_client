@@ -9,4 +9,6 @@ public class GameConst {
 
     public static int zhuangPos = 0;
     public static bool zhuang = true;
+
+    public static int selfPos = 0;
 }
