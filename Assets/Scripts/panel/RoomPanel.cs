@@ -446,15 +446,11 @@ public class RoomPanel : BasePanel {
 
     private void onPeng(int pos,int fromPos,int card)
     {
-        if (pos == 0)
-        {
-            CardController.Instance.peng(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
-            isTurn = true;
-        }
         switch (pos)
         {
             case 0:
                 selfPeng(card, fromPos);
+                isTurn = true;
                 break;
             case 1:
                 rightPeng(card, fromPos);
@@ -470,14 +466,11 @@ public class RoomPanel : BasePanel {
 
     private void onGang(int pos, int fromPos, int card)
     {
-        if (pos == 0)
-        {
-            CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
-        }
         switch (pos)
         {
             case 0:
                 selfGang(card, fromPos);
+                isTurn = true;
                 break;
             case 1:
                 rightGang(card, fromPos);
@@ -520,6 +513,8 @@ public class RoomPanel : BasePanel {
             {
                 IconMgr.Instance.SetHeadRawImage(obj.FindChild("head").GetComponent<RawImage>(), item.Value.Name);
                 obj.FindChild("head").gameObject.SetActive(true);
+
+                _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ready").gameObject.SetActive(item.Value.IsReady);
             }
         }
     }
