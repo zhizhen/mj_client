@@ -109,6 +109,23 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Quit")]
+  public partial class Quit : global::ProtoBuf.IExtensible
+  {
+    public Quit() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Role")]
   public partial class Role : global::ProtoBuf.IExtensible
   {
@@ -263,6 +280,30 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Angang")]
+  public partial class Angang : global::ProtoBuf.IExtensible
+  {
+    public Angang() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _card;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int card
+    {
+      get { return _card; }
+      set { _card = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Gang")]
   public partial class Gang : global::ProtoBuf.IExtensible
   {
@@ -288,6 +329,23 @@ namespace Table
     {
       get { return _card; }
       set { _card = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Hu")]
+  public partial class Hu : global::ProtoBuf.IExtensible
+  {
+    public Hu() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

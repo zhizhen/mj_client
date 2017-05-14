@@ -26,6 +26,11 @@ message JoinRsp{
 	repeated Role roles = 3;
 }
 
+//退出桌子
+message Quit{
+	required int32 id = 1;
+}
+
 message Role {  
   required int32 id = 1;  
   required string name = 2; 
@@ -66,11 +71,22 @@ message Peng{
 	required int32 card = 3;
 }
 
+// 暗杠
+message Angang{
+	required int32 id = 1;
+	required int32 card = 3;
+}
+
 // 杠
 message Gang{
 	required int32 id = 1;
 	required int32 from = 2;
 	required int32 card = 3;
+}
+
+// 胡
+message Hu{
+	required int32 id = 1;
 }
 
 // 过
