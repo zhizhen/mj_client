@@ -295,7 +295,7 @@ public class RoomPanel : BasePanel {
         });
 
         _pass.onClick.AddListener(delegate {
-            ProtoReq.Pass();
+            //ProtoReq.Pass();
             endTimeCount();
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
@@ -422,26 +422,26 @@ public class RoomPanel : BasePanel {
     }
     private void onTimeEnd()
     {
-        if (isTurn)
-        {
-            isTurn = false;
+        //if (isTurn)
+        //{
+        //    isTurn = false;
           
-            if (_handCard.activeSelf)
-            {
-                string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
-                int num = GameTools.getCardNumByName(name);
-                Debug.Log("牌号:" + GameTools.getCardNumByName(name));
-                CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
-                ProtoReq.Play(num);
-                //setSelfHe(num);
-                initCard();
-            }
-            else
-            {
-                ProtoReq.Pass();
-            }
-            endTimeCount();
-        }
+        //    if (_handCard.activeSelf)
+        //    {
+        //        string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
+        //        int num = GameTools.getCardNumByName(name);
+        //        Debug.Log("牌号:" + GameTools.getCardNumByName(name));
+        //        CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
+        //        ProtoReq.Play(num);
+        //        //setSelfHe(num);
+        //        initCard();
+        //    }
+        //    else
+        //    {
+        //        ProtoReq.Pass();
+        //    }
+        //    endTimeCount();
+        //}
     }
 
     private void onPeng(int pos,int fromPos,int card)
