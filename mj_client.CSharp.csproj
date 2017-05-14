@@ -78,6 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HuTest.cs" />
     <Compile Include="Assets\Scripts\GameApp.cs" />
     <Compile Include="Assets\Scripts\GameTools.cs" />
     <Compile Include="Assets\Scripts\Log.cs" />

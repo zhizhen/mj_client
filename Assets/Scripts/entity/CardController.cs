@@ -816,7 +816,7 @@ public class CardController:Singleton<CardController>{
                     return false;
                 }
             }
-
+        }
             //东西南北
             iSize = _myCardList[CARD_TYPE.风].Count;
             if (iSize > 0)
@@ -1179,7 +1179,6 @@ public class CardController:Singleton<CardController>{
                     return false;
                 }
             } 
-        }
         if (iJiangNum == 1) return true;
         return false;
     }
