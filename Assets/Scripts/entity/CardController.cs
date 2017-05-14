@@ -715,7 +715,7 @@ public class CardController:Singleton<CardController>{
     private bool Check7D_HU()
     {
         int iDoubleNum = 0;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             int iSize = _myCardList[i].Count;
             if (iSize % 2 == 1 || iSize == 0)
