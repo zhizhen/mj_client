@@ -116,7 +116,7 @@ public class RoomPanel : BasePanel {
         _selfCard = _after.transform.FindChild("selfCard").gameObject;
         _leftCard = _after.transform.FindChild("leftCard").gameObject;
         _rightCard = _after.transform.FindChild("rightCard").gameObject;
-        _topCard = _after.transform.FindChild("rightCard").gameObject;
+        _topCard = _after.transform.FindChild("topCard").gameObject;
 
         _handCard = _after.transform.FindChild("handCard").gameObject;
 
