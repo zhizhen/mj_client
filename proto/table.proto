@@ -29,7 +29,8 @@ message JoinRsp{
 message Role {  
   required int32 id = 1;  
   required string name = 2; 
-  required int32 pos = 3; 
+  required int32 pos = 3;
+  required bool ready = 4;
 }
 
 // 准备

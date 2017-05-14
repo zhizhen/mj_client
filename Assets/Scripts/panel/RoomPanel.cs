@@ -95,6 +95,7 @@ public class RoomPanel : BasePanel {
         initHead();
         _tableNum.text = GameConst.tableId.ToString();
         _count.SetActive(false);
+        addPlayer();
     }
 
     private void copyAfter()

@@ -135,6 +135,13 @@ namespace Table
       get { return _pos; }
       set { _pos = value; }
     }
+    private bool _ready;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"ready", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool ready
+    {
+      get { return _ready; }
+      set { _ready = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -28,6 +28,7 @@ public class TableController :Singleton<TableController> {
         for (int i = 0; i < join.roles.Count; i++)
         {
             RoleController.Instance.addPlayer(join.roles[i]);
+            
             Debug.Log("role" + i + join.roles[i].name);
         }
         RoomPanel.Instance.load();
@@ -42,6 +43,7 @@ public class TableController :Singleton<TableController> {
 
     public void ready(Table.Ready ready)
     {
+        RoleController.Instance.getPlayerById(ready.id).IsReady = true;
         EventDispatcher.Instance.Dispatch(GameEventConst.READY_TO_PALY,ready.id);
     }
 

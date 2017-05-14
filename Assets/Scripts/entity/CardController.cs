@@ -720,7 +720,7 @@ public class CardController:Singleton<CardController>{
             int iSize = _myCardList[i].Count;
             if (iSize % 2 == 1 || iSize == 0)
                 return false;
-            for (int j = 0; j < iSize; j++)
+            for (int j = 0; j < iSize-1; j++)
             {
                 if (_myCardList[i][j] == _myCardList[i][j + 1])
                 {

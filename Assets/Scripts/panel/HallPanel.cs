@@ -57,10 +57,10 @@ public class HallPanel : BasePanel
             }
             else
             {
+                GameConst.tableId = num;
                 joinTable(num);
                 Debug.Log("num" + num);
             }
-
         });
         
 

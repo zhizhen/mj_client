@@ -17,8 +17,10 @@ public class RoleController :Singleton<RoleController> {
         if (role.id == MainRole.Instance.Id)
         {
             MainRole.Instance.Pos = role.pos;
+            Debug.Log("MyPos" + role.pos);
         }
         Player player = new Player(role.id, role.name, role.pos);
+        player.IsReady = role.ready;
         if (_playerDic.ContainsKey(role.id))
         {
             _playerDic.Remove(role.id);

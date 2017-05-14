@@ -129,7 +129,7 @@ public class SDKMgr : SingletonMonoBehaviour<SDKMgr> {
 	public string _outputLog;
 	void OnGUI()
 	{
-		_outputLog = GUI.TextField (new Rect (Screen.width/2, 450, 790, 100), _outputLog);
+		//_outputLog = GUI.TextField (new Rect (Screen.width/2, 450, 790, 100), _outputLog);
 	}
 	public void NewAddLog(string log)
 	{
