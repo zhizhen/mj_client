@@ -7,5 +7,6 @@ public class GameConst {
     public static int tableId;
     public static int timeCount = 15;
 
-    public static int zhuangPop;
+    public static int zhuangPos = 0;
+    public static bool zhuang = true;
 }

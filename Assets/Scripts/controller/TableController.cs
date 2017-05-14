@@ -50,11 +50,11 @@ public class TableController :Singleton<TableController> {
         Debug.Log("turn的回合");
         if (turn.id == MainRole.Instance.Id)
         {
-            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, true);
+            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, true,turn.id);
         }
         else
         {
-            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, false);
+            EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, false,turn.id);
         }
     }
 

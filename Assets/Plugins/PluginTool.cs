@@ -2,18 +2,21 @@
 using System.Collections;
 using System;
 using System.IO;
+using cn.sharesdk.unity3d;
 
 public class PluginTool:SingletonMonoBehaviour<PluginTool> {
 
     private AndroidJavaObject activity;
     public Action<string> testBack;
+
     void Start()
     {
         Init();
+ 
     }
     public bool Init()
     {
-#if UNITY_ANDROID
+#if UNITY_ANDROID&&!UNITY_EDITOR
         if (activity == null)
         {
             try
@@ -152,4 +155,5 @@ public class PluginTool:SingletonMonoBehaviour<PluginTool> {
     }
 
     #endregion
+
 }

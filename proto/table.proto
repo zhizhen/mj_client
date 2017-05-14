@@ -23,7 +23,7 @@ message Join {
 // 加入返回
 message JoinRsp{
 	required int32 err_no = 1;
-	repeated Role roles = 2;
+	repeated Role roles = 3;
 }
 
 message Role {  
@@ -74,7 +74,7 @@ message Gang{
 
 // 过
 message Pass{
-	
+	required int32 id = 1;
 }
 
 // 摸底牌

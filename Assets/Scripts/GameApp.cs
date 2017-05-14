@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.EventSystems;
+using cn.sharesdk.unity3d;
 
 public class GameApp : MonoBehaviour {
 
@@ -73,8 +74,12 @@ public class GameApp : MonoBehaviour {
 
     public static void InitPlugin()
     {
+        _gameObject.AddComponent<SDKMgr>();
+#if UNITY_ANDROID
         _gameObject.AddComponent<PluginTool>();
+#elif UNITY_IPHONE
         _gameObject.AddComponent<PluginIOSTool>();
+#endif
     }
 	// Use this for initialization
 	void Start () {
@@ -167,4 +172,6 @@ public class GameApp : MonoBehaviour {
         SoundMgr._instance.bgmPlay("beijing_dating");
         LoginPanel.Instance.load();
     }
+
+    
 }

@@ -400,7 +400,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
-        EventDispatcher.Instance.AddEventListener<bool>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
         EventDispatcher.Instance.AddEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
@@ -414,7 +414,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
-        EventDispatcher.Instance.RemoveEventListener<bool>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
@@ -445,9 +445,10 @@ public class RoomPanel : BasePanel {
 
     private void onPeng(int pos,int fromPos,int card)
     {
-        if (pos == GameConfig.selfIndex)
+        if (pos == 0)
         {
             CardController.Instance.peng(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+            isTurn = true;
         }
         switch (pos)
         {
@@ -468,7 +469,7 @@ public class RoomPanel : BasePanel {
 
     private void onGang(int pos, int fromPos, int card)
     {
-        if (pos == GameConfig.selfIndex)
+        if (pos == 0)
         {
             CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
         }
@@ -490,34 +491,17 @@ public class RoomPanel : BasePanel {
     }
 
     //收到那个人的turn
-    private void turnTo(bool boo)
+    private void turnTo(bool boo,int id)
     {
+        if (GameConst.zhuang)
+        {
+            GameConst.zhuangPos = id.idToPos();
+            GameConst.zhuang = false;
+        }
         if (boo)
         {
             //自己的turn
             Debug.Log("自己的turn");
-            Card card = new Card(DataMgr.Instance._curCard);
-            //一系列判断
-            CardController.Instance.addCard(card.CardType, card.CardNum);
-
-            if (CardController.Instance.checkCard(false))
-            {
-                _fun.SetActive(true);
-                _hu.gameObject.SetActive(true);
-            }
-            else
-            {
-                CardController.Instance.delCard(card.CardType, card.CardNum);
-                _hu.gameObject.SetActive(false);
-            }
-            if (CardController.Instance.checkPeng(card.CardType, card.CardNum))
-            {
-                _peng.gameObject.SetActive(true);
-            }
-            if (CardController.Instance.checkGang(card.CardType, card.CardNum))
-            {
-                _gang.gameObject.SetActive(true);
-            }
         }
         else
         {
@@ -555,6 +539,34 @@ public class RoomPanel : BasePanel {
                 setLeftHe(card);
                 break;
         }
+
+        if(pos!=MainRole.Instance.Id.idToPos())
+        {
+
+            Card card1 = new Card(DataMgr.Instance._curCard);
+            //一系列判断
+            CardController.Instance.addCard(card1.CardType, card1.CardNum);
+
+            if (CardController.Instance.checkCard(false))
+            {
+                _fun.SetActive(true);
+                _hu.gameObject.SetActive(true);
+            }
+            else
+            {
+                CardController.Instance.delCard(card1.CardType, card1.CardNum);
+                _hu.gameObject.SetActive(false);
+            }
+            if (CardController.Instance.checkPeng(card1.CardType, card1.CardNum))
+            {
+                _peng.gameObject.SetActive(true);
+            }
+            if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
+            {
+                _gang.gameObject.SetActive(true);
+            }
+
+        }
     }
 
     private void onReady(int id)
@@ -571,6 +583,7 @@ public class RoomPanel : BasePanel {
     }
     private void getCard()
     {
+        GameConst.zhuang = true;
         copyAfter(); 
         _after.SetActive(true);
         _before.SetActive(false);

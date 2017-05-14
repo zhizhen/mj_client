@@ -122,7 +122,7 @@ public static class UtilsExtends {
     public static int server2ClientIndex(this int index)
     {
         int result = 0;
-        switch (GameConfig.selfIndex)
+        switch (MainRole.Instance.Pos)
         {
             case 0:
                 result = index;
@@ -131,7 +131,7 @@ public static class UtilsExtends {
                 result = (index+3)%4;
                 break;
             case 2:
-                result = (index + GameConfig.selfIndex) % 4;
+                result = (index + MainRole.Instance.Pos) % 4;
                 break;
             case 3:
                 result = (index + 1) % 4;

@@ -83,6 +83,17 @@
     <Compile Include="Assets\Plugins\PluginIOSCB.cs" />
     <Compile Include="Assets\Plugins\PluginIOSTool.cs" />
     <Compile Include="Assets\Plugins\PluginTool.cs" />
+    <Compile Include="Assets\Plugins\SDKMgr.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\Android\AndroidImpl.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ContentType.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\MiniJSON.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\PlatformType.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ResponseState.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ShareContent.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ShareSDK.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\ShareSDKImpl.cs" />
+    <Compile Include="Assets\Plugins\ShareSDK\iOS\iOSImpl.cs" />
     <Compile Include="Assets\Plugins\SimpleLoader.cs" />
     <Compile Include="Assets\Plugins\Singleton.cs" />
     <Compile Include="Assets\Plugins\SingletonMonoBehaviour.cs" />
@@ -108,7 +119,6 @@
     <None Include="Assets\Scripts\protobuf-net\Web\TODO.txt" />
     <None Include="Assets\Scripts\protobuf-net\obj\Debug\protobuf-net.csproj.FileListAbsolute.txt" />
     <None Include="Assets\Scripts\protobuf-net\obj\Debug\protobuf-net.csproj.FilesWrittenAbsolute.txt" />
-    <None Include="Assets\outLog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

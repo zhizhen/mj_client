@@ -203,8 +203,8 @@ public class UIAtlasTool  {
             int imageSrcX = int.Parse(imageSrcInfo["x"].ToString());
             int imageSrcY = int.Parse(imageSrcInfo["y"].ToString());
 
-            int offsetX = (2 * imageSrcX + imageWidth - W_SIZE) / 2;
-            int offsetY = (H_SIZE - (2 * imageSrcY + imageHeight)) / 2;
+            float offsetX = (2 * imageSrcX + imageWidth - W_SIZE) / 2;
+            float offsetY = (H_SIZE - (2 * imageSrcY + imageHeight)) / 2;
 
             float pivotX = 0.5f - offsetX / imageWidth;
             float pivotY = 0.5f - offsetY / imageHeight;

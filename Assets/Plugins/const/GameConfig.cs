@@ -33,9 +33,6 @@ public class GameConfig  {
     public static string platformId;
 
     public static string unityVersion = string.Empty;
-
-    public static int selfIndex = 0;
-    public static int roleId = 0;
     public static void Init()
     {
         GameConfig.deviceUniqueIdentifier = SystemInfo.deviceUniqueIdentifier;

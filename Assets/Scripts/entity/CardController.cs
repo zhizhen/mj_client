@@ -135,8 +135,8 @@ public class CardController:Singleton<CardController>{
     //检测是否胡牌
     public bool checkCard(bool getOrPut)
     {
-        if (getOrPut == CARD_STATE.CARD_GET)
-        {
+        //if (getOrPut == CARD_STATE.CARD_GET)
+        //{
             if (checkD4X_HU())
             {
                 Debug.Log("胡大四喜");
@@ -147,77 +147,19 @@ public class CardController:Singleton<CardController>{
                 Debug.Log("胡大三元");
                 return true;
             }
-            if (checkL1S_HU())
-                return true;
-            if (Check9LBD_HU())
-                return true;
             if (Check4Gang_HU())
-                return true;
-            if (CheckL7D_HU())
-                return true;
-            if (CheckQY9_HU())
                 return true;
             if (CheckX4X_HU())
                 return true;
             if (CheckX3Y_HU())
                 return true;
-            if (Check4AK_HU())
-                return true;
-            if (Check1S2LH_HU())
-                return true;
-            if (Check1S4TS_HU())
-                return true;
-            if (Check1S4JG_HU())
-                return true;
-            if (Check1S4BG_HU())
-                return true;
-            if (Check3Gang_HU())
-                return true;
             if (Check7D_HU())
-                return true;
-            if (Check7XBK_HU())
-                return true;
-            if (CheckQSK_HU())
-                return true;
-            if (CheckQ1S_HU())
-                return true;
-            if (Check1S3TS_HU())
-                return true;
-            if (Check1S3JG_HU())
-                return true;
-            if (CheckQD_HU())
-                return true;
-            if (CheckQZ_HU())
-                return true;
-            if (CheckQX_HU())
-                return true;
-            if (CheckQL_HU())
-                return true;
-            if (Check3S2LH_HU())
-                return true;
-            if (Check1S3BG_HU())
-                return true;
-            if (CheckDDJ_HU())
                 return true;
             if (CheckHU())
             {
                 return true;
             }
-        }
-        else
-        {
-            _9LBD = Check9LBD_TING();
-            if (_9LBD)
-                return true;
-            _13Y = Check13Y_TING();
-            if (_13Y)
-                return true;
-            _4AK = Check4AK_TING();
-            if (_4AK)
-                return true;
-            return CheckTING();
-
-        }
+       // }
         return false;
     }
     //输出牌
@@ -343,13 +285,6 @@ public class CardController:Singleton<CardController>{
         }
         return false;
     }
-    //输出可碰组合
-    public void printPengChose()
-    { }
-    //输出可扛组合
-    public void printGangChose()
-    { }
-
     //检测是否胡牌
     private bool checkAACard(int value1, int value2)
     {
@@ -364,7 +299,7 @@ public class CardController:Singleton<CardController>{
             return true;
         return false;
     }
-    //检测是否散重张
+    //检测是否三重张
     private bool checkAAACard(int value1,int value2,int value3)
     {
         if(value1==value2&&value2==value3)
@@ -624,17 +559,8 @@ public class CardController:Singleton<CardController>{
         }
         return false;
     }
-    //检测是否胡绿一色  
-    private bool checkL1S_HU()
-    { return false; }
-    //检测是否胡九莲宝灯  
-    private bool Check9LBD_HU()
-    { return false; }
     //检测是否胡四杠  
     private bool Check4Gang_HU()
-    { return false; }
-    //检测是否胡连七对  
-    private bool CheckL7D_HU()
     { return false; }
     //检测是否胡十三幺  
     private bool Chekc13Y_HU()
@@ -709,9 +635,6 @@ public class CardController:Singleton<CardController>{
         }
         return false;
     }
-    //检测是否胡清幺九  
-    private bool CheckQY9_HU()
-    { return false; }
     //检测是否胡小四喜  
     private bool CheckX4X_HU()
     {
@@ -788,30 +711,6 @@ public class CardController:Singleton<CardController>{
         }
         return false;
     }
-    //检测是否胡字一色  
-    private bool CheckZ1S_HU()
-    { return false; }
-    //检测是否四暗刻  
-    private bool Check4AK_HU()
-    { return false; }
-    //检测是否一色双龙会  
-    private bool Check1S2LH_HU()
-    { return false; }
-    //检测是否一色四同顺  
-    private bool Check1S4TS_HU()
-    { return false; }
-    //检测是否一色四节高？  
-    private bool Check1S4JG_HU()
-    { return false; }
-    //检测是否一色四步高？  
-    private bool Check1S4BG_HU()
-    { return false; }
-    //检测是否三杠  
-    private bool Check3Gang_HU()
-    { return false; }
-    //检测是否混幺九  
-    private bool CheckHY9_HU()
-    { return false; }
     //检测是否七对  
     private bool Check7D_HU()
     {
@@ -834,51 +733,6 @@ public class CardController:Singleton<CardController>{
             return true;
         return false;
     }
-    //检测是否七星不靠  
-    private bool Check7XBK_HU()
-    { return false; }
-    //检测是否全双刻？  
-    private bool CheckQSK_HU()
-    { return false; }
-    //清一色  
-    private bool CheckQ1S_HU()
-    { return false; }
-    //检测是否一色三同顺  
-    private bool Check1S3TS_HU()
-    { return false; }
-    //检测是否一色三节高  
-    private bool Check1S3JG_HU()
-    { return false; }
-    //检测是否全大  
-    private bool CheckQD_HU()
-    { return false; }
-    //检测是否全中  
-    private bool CheckQZ_HU()
-    { return false; }
-    //检测是否全小  
-    private bool CheckQX_HU()
-    { return false; }
-    //检测是否青龙  
-    private bool CheckQL_HU()
-    { return false; }
-    //检测是否三色双龙会  
-    private bool Check3S2LH_HU()
-    { return false; }
-    //检测是否一色三步高  
-    private bool Check1S3BG_HU()
-    { return false; }
-    //全带五  
-    private bool CheckQD5_HU()
-    { return false; }
-    //三同刻  
-    private bool Check3TK_HU()
-    { return false; }
-    //三暗刻  
-    private bool Check3AK_HU()
-    { return false; }
-    //单钓将  
-    private bool CheckDDJ_HU()
-    { return false; }
     //检测胡  
     private bool CheckHU()
     {
@@ -1329,76 +1183,7 @@ public class CardController:Singleton<CardController>{
         if (iJiangNum == 1) return true;
         return false;
     }
-    //听牌判断  -------------------------------------------
 
-    //检测是否听九莲宝灯  
-    private bool Check9LBD_TING()
-    { return false; }
-    //检测是否听十三幺  
-    private bool Check13Y_TING()
-    { return false; }
-    //检测是否听四暗刻  
-    private bool Check4AK_TING()
-    { return false; }
-    //检测是否听牌  
-    private bool CheckTING()
-    {
-        //剑牌  
-        for (int j = 0; j < 9; j++)
-        {
-            //起牌  
-            addCard(0, j + 1);
-            if (checkCard(CARD_STATE.CARD_GET))
-            {
-                int iPaiIndex = getCardIndex(0, j + 1);
-                delCard(iPaiIndex);
-                return true;
-            }
-            else
-            {
-                int iPaiIndex = getCardIndex(0, j + 1);
-                delCard(iPaiIndex);
-            }
-        }
-        //风牌  
-        for (int j = 0; j < 9; j++)
-        {
-            //起牌  
-            addCard(1, j + 1);
-            if (checkCard(CARD_STATE.CARD_GET))
-            {
-                int iPaiIndex = getCardIndex(1, j + 1);
-                delCard(iPaiIndex);
-                return true;
-            }
-            else
-            {
-                int iPaiIndex = getCardIndex(1, j + 1);
-                delCard(iPaiIndex);
-            }
-        }
-        for (int i = 2; i < 5; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                //起牌  
-                addCard(i, j + 1);
-                if (checkCard(CARD_STATE.CARD_GET))
-                {
-                    int iPaiIndex = getCardIndex(i, j + 1);
-                    delCard(iPaiIndex);
-                    return true;
-                }
-                else
-                {
-                    int iPaiIndex = getCardIndex(i, j + 1);
-                    delCard(iPaiIndex);
-                }
-            }
-        }
-        return false;
-    }
 
-   
 }
 
