@@ -490,6 +490,12 @@ public class RoomPanel : BasePanel {
         if (GameConst.zhuang)
         {
             GameConst.zhuangPos = id.idToPos();
+            if (GameConst.zhuangPos == 1)
+                DataMgr.Instance.rightCardNum = 14;
+            if (GameConst.zhuangPos == 2)
+                DataMgr.Instance.topCardNum = 14;
+            if (GameConst.zhuangPos == 3)
+                DataMgr.Instance.leftCardNum = 14;
             GameConst.zhuang = false;
         }
         if (boo)

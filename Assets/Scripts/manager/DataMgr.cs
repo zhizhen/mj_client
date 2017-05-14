@@ -18,9 +18,9 @@ public class DataMgr : Singleton<DataMgr> {
 
     public int _curCard;
 
-    public int leftCardNum;
-    public int rightCardNum;
-    public int topCardNum;
+    public int leftCardNum = 13;
+    public int rightCardNum = 13;
+    public int topCardNum = 13;
 
     public int selfHeCardIndex = 0;
     public int leftHeCardIndex = 0;
