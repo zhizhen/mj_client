@@ -67,8 +67,8 @@ public class LoginPanel : BasePanel {
     {
         Debug.Log("Start Loading...");
         NetClient network = NetClient.Instance();
-        network.Connect("123.207.241.224",8888);
-        //network.Connect("192.168.0.119", 8888);
+        //network.Connect("123.207.241.224",8888);
+        network.Connect("192.168.0.119", 8888);
         NetClient.Register();
     }
 
