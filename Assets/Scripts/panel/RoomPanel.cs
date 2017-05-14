@@ -543,7 +543,7 @@ public class RoomPanel : BasePanel {
 
         if(pos!=MainRole.Instance.Id.idToPos())
         {
-
+            Debug.Log("检测00000");
             Card card1 = new Card(DataMgr.Instance._curCard);
             //一系列判断
             CardController.Instance.addCard(card1.CardType, card1.CardNum);
@@ -560,10 +560,12 @@ public class RoomPanel : BasePanel {
             }
             if (CardController.Instance.checkPeng(card1.CardType, card1.CardNum))
             {
+                _fun.SetActive(true);
                 _peng.gameObject.SetActive(true);
             }
             if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
             {
+                _fun.SetActive(true);
                 _gang.gameObject.SetActive(true);
             }
 
