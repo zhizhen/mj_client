@@ -446,6 +446,7 @@ public class RoomPanel : BasePanel {
 
     private void onPeng(int pos,int fromPos,int card)
     {
+        Debug.Log("转化为pos" + pos);
         switch (pos)
         {
             case 0:
