@@ -623,7 +623,7 @@ public class RoomPanel : BasePanel {
         Card card = new Card(DataMgr.Instance._curCard);
         //一系列判断
         CardController.Instance.addCard(card.CardType, card.CardNum);
-
+        _handCard.SetActive(true);
         if (CardController.Instance.checkCard(true))
         {
             _fun.SetActive(true);
