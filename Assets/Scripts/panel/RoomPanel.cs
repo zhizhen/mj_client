@@ -604,7 +604,7 @@ public class RoomPanel : BasePanel {
     private void initFeng()
     {
         Debug.Log("风" + MainRole.Instance.Pos);
-        _center.transform.localRotation = Quaternion.Euler(0, 0, 90 * (MainRole.Instance.Pos - 1));
+        _center.transform.localRotation = Quaternion.Euler(0, 0, -(90 * (MainRole.Instance.Pos-1)));
 
     }
 
