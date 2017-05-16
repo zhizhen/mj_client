@@ -48,6 +48,7 @@ public class GameApp : MonoBehaviour {
         GameObject tips = rootCanvas.transform.FindChild("TipsLayer").gameObject;
         QuickTips.InitQuickTipsLayer(tips, 100);
         rootCanvas.SetActive(true);
+        rootCanvas.transform.localScale = Vector3.one;
         GameObject.DontDestroyOnLoad(rootCanvas);
 
         GameObject eventSystem = GameObject.Find("EventSystem");
@@ -90,7 +91,23 @@ public class GameApp : MonoBehaviour {
         OnLoadUILoading();
         ProtoRes.GetInstance();
         IconMgr.GetInstance();
-	}
+        StartCoroutine("YbLoadMusic", "beijing-fangjian");
+    }
+
+    IEnumerator YbLoadMusic(string str)
+    {
+        //string path = URL.GetFileSymbol() + URL.localResPath+ "Assetbundles/" + URLConst.SOUND_PATH + str+".mp3";
+        ////AudioClip audio = Resources.LoadAsync<AudioClip>()
+        //WWW www = new WWW(path);
+        //yield return www;
+        //AudioClip a = null;
+        //if ((a = www.GetAudioClip(true,true))!=null)
+        //    GameConst._bigAudio.Add(str, a);
+        string path = "GameAsset/Assetbundles/Musics/"+str;
+        var a = Resources.LoadAsync<AudioClip>(path);
+        yield return a;
+        GameConst._bigAudio.Add(str, a.asset as AudioClip);
+    }
 
     void Update()
     {

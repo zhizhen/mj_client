@@ -53,6 +53,13 @@ public class ProtoReq{
         gang.card = num;
         NetClient.Instance().WriteMsg("Table.Gang", gang);
     }
+
+    public static void AnGang(int num)
+    {
+        Table.Angang gang = new Table.Angang();
+        gang.card = num;
+        NetClient.Instance().WriteMsg("Table.Angang", gang);
+    }
     public static void Pass()
     {
         Table.Pass pass = new Table.Pass();
@@ -70,5 +77,11 @@ public class ProtoReq{
     {
         Table.NewCard card = new NewCard();
         NetClient.Instance().WriteMsg("Table.NewCard", card);
+    }
+
+    public static void QuiTable()
+    {
+        Table.Quit quit = new Quit();
+        NetClient.Instance().WriteMsg("Table.Quit", quit);
     }
 }

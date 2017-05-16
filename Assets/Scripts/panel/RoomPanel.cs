@@ -588,6 +588,7 @@ public class RoomPanel : BasePanel {
     }
     private void getCard()
     {
+        //SoundMgr._instance.bgmPlay("beijing-fangjian");
         GameConst.zhuang = true;
         copyAfter(); 
         _after.SetActive(true);

@@ -79,9 +79,11 @@ public class BasePanel{
         component.gameObject.SetActive(true);
         component.parent = _root.transform;
         component.name = base_name;
-        
+
         component.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
         component.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
+        component.transform.localScale = Vector3.one;
 
         InitPanel(component);
         startUp(obj);

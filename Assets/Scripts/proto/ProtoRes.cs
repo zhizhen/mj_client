@@ -37,6 +37,7 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.Peng", peng);
         dic.Add("Table.Pass", pass);
         dic.Add("Table.NewCard", newCard);
+        dic.Add("Table.Angang",anGang);
     }
 
    
@@ -126,6 +127,11 @@ public class ProtoRes:Singleton<ProtoRes>{
     {
         TableController.Instance.newCard((Table.NewCard)msg.body);
 
+    }
+
+    private void anGang(Msg msg)
+    {
+        TableController.Instance.anGang((Table.Angang)msg.body);
     }
     #endregion 
 }

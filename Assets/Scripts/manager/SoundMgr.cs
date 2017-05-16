@@ -61,6 +61,12 @@ public class SoundMgr : MonoBehaviour {
             ResourceManager.Instance.DestoryResource(resource.BundlePath, false, true);
         }, null, ResourceManager.SOUND_PRIORITY);
     }
+
+    public void playBigBgm(string audioName, float volume = 1,bool isLoop = true)
+    {
+
+        bgmPlayStart(GameConst._bigAudio[audioName], audioName, volume, isLoop);
+    }
     public void soundPlay(string audioName, float volume = 1)
     { 
         ResourceManager.Instance.DownLoadBundle(URLConst.GetSound(audioName),delegate(object obj){

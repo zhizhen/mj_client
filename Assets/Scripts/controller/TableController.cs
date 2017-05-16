@@ -86,4 +86,9 @@ public class TableController :Singleton<TableController> {
         Debug.Log("摸牌");
         EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.card);
     }
+
+    public void anGang(Table.Angang gang)
+    {
+        Debug.Log("暗杠");
+    }
 }
