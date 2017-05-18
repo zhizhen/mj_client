@@ -311,25 +311,25 @@ public class RoomPanel : BasePanel {
 
     private void setSelfHe(int num)
     {
-        IconMgr.Instance.SetImage(_self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "xia_1_"+num);
-        _self.GetComponent<CardProxy>().cards[DataMgr.Instance.selfHeCardIndex].SetActive(true);
+        IconMgr.Instance.SetImage(_self.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[0]].transform.FindChild("value").GetComponent<Image>(), "xia_1_"+num);
+        _self.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[0]].SetActive(true);
     }
     private void setTopHe(int num)
     {
-        IconMgr.Instance.SetImage(_top.GetComponent<CardProxy>().cards[DataMgr.Instance.topHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "shang1_" + num);
-        _top.GetComponent<CardProxy>().cards[DataMgr.Instance.topHeCardIndex].SetActive(true);
+        IconMgr.Instance.SetImage(_top.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[2]].transform.FindChild("value").GetComponent<Image>(), "shang1_" + num);
+        _top.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[2]].SetActive(true);
 
     }
     private void setLeftHe(int num)
     {
-        IconMgr.Instance.SetImage(_left.GetComponent<CardProxy>().cards[DataMgr.Instance.leftHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "zuo1_" + num);
-        _left.GetComponent<CardProxy>().cards[DataMgr.Instance.leftHeCardIndex].SetActive(true);
+        IconMgr.Instance.SetImage(_left.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[3]].transform.FindChild("value").GetComponent<Image>(), "zuo1_" + num);
+        _left.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[3]].SetActive(true);
     }
 
     private void setRightHe(int num)
     {
-        IconMgr.Instance.SetImage(_right.GetComponent<CardProxy>().cards[DataMgr.Instance.rightHeCardIndex].transform.FindChild("value").GetComponent<Image>(), "you1_" + num);
-        _right.GetComponent<CardProxy>().cards[DataMgr.Instance.rightHeCardIndex].SetActive(true);
+        IconMgr.Instance.SetImage(_right.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[1]].transform.FindChild("value").GetComponent<Image>(), "you1_" + num);
+        _right.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[1]].SetActive(true);
     }
 
     private void selfGang(int card,int pos)
@@ -447,6 +447,22 @@ public class RoomPanel : BasePanel {
     private void onPeng(int pos,int fromPos,int card)
     {
         Debug.Log("转化为pos" + pos);
+        switch (fromPos)
+        {
+            case 0:
+                _self.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[0]].SetActive(false);
+                break;
+            case 1:
+                _right.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[1]].SetActive(false);
+                break;
+            case 2:
+                _top.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[2]].SetActive(false);
+                break;
+            case 3:
+                _left.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[3]].SetActive(false);
+                break;
+        }
+        DataMgr.Instance.heCardIndex[DataMgr.Instance.curHeIndex]--;
         switch (pos)
         {
             case 0:
@@ -542,8 +558,12 @@ public class RoomPanel : BasePanel {
                 setLeftHe(card);
                 break;
         }
-
-        if(pos!=MainRole.Instance.Id.idToPos())
+        if (pos < 4)
+        {
+            DataMgr.Instance.heCardIndex[pos]++;
+            DataMgr.Instance.curHeIndex = pos;
+        }
+        if (pos!=MainRole.Instance.Id.idToPos())
         {
             Debug.Log("检测00000");
             Card card1 = new Card(DataMgr.Instance._curCard);

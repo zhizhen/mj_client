@@ -22,10 +22,8 @@ public class DataMgr : Singleton<DataMgr> {
     public int rightCardNum = 13;
     public int topCardNum = 13;
 
-    public int selfHeCardIndex = 0;
-    public int leftHeCardIndex = 0;
-    public int rightHeCardIndex = 0;
-    public int topHeCardIndex = 0;
+    public int[] heCardIndex = { 0, 0, 0, 0 };
+    public int curHeIndex = 0;
 
     public DataMgr()
     {
