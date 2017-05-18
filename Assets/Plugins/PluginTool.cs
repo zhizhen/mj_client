@@ -79,34 +79,34 @@ public class PluginTool:SingletonMonoBehaviour<PluginTool> {
     #region test
     public string _outputLog = "";
     private uint count = 0;
-    void OnGUI()
-    {
-        _outputLog = GUI.TextField(new Rect(Screen.width / 2 - 50, 50, 300, 400), _outputLog);
-        if (GUI.Button(new Rect(40, 50, 100, 100), "TestLog"))
-        {
-            Debug.Log("Cccccccc");
-            count++;
-            //AddLog ("count = " + count.ToString ());
-            SendMsgTest("count = " + count.ToString());
-        }
+    //void OnGUI()
+    //{
+    //    _outputLog = GUI.TextField(new Rect(Screen.width / 2 - 50, 50, 300, 400), _outputLog);
+    //    if (GUI.Button(new Rect(40, 50, 100, 100), "TestLog"))
+    //    {
+    //        Debug.Log("Cccccccc");
+    //        count++;
+    //        //AddLog ("count = " + count.ToString ());
+    //        SendMsgTest("count = " + count.ToString());
+    //    }
 
-        if (GUI.Button(new Rect(40, 170, 100, 100), "Start"))
-        {
-            StartRecord(URL.localCachePath);
-        }
+    //    if (GUI.Button(new Rect(40, 170, 100, 100), "Start"))
+    //    {
+    //        StartRecord(URL.localCachePath);
+    //    }
 
-        if (GUI.Button(new Rect(40, 290, 100, 100), "Stop"))
-        {
-            StopRecord();
-        }
+    //    if (GUI.Button(new Rect(40, 290, 100, 100), "Stop"))
+    //    {
+    //        StopRecord();
+    //    }
 
-        if (GUI.Button(new Rect(40, 410, 100, 100), "Replay"))
-        {
-            PlaySound(URL.localCachePath + count + ".amr");
-        }
+    //    if (GUI.Button(new Rect(40, 410, 100, 100), "Replay"))
+    //    {
+    //        PlaySound(URL.localCachePath + count + ".amr");
+    //    }
 
 
-    }
+    //}
 
     public void SendMsgTest(string msg)
     {
