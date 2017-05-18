@@ -73,7 +73,6 @@ public class TableController :Singleton<TableController> {
     }
     public void peng(Table.Peng peng)
     {
-        Debug.LogError("benlaipeng" + RoleController.Instance.getPlayerById(peng.id).Pos);
         EventDispatcher.Instance.Dispatch(GameEventConst.PENG, peng.id.idToPos(), peng.from.idToPos(), peng.card);
     }
     public void pass(Table.Pass pass)

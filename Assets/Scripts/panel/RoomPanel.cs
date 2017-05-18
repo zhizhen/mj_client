@@ -244,24 +244,39 @@ public class RoomPanel : BasePanel {
             case 1:
                 obj = _rightCard.transform.FindChild("hand/grid").gameObject;
                 sum = DataMgr.Instance.rightCardNum;
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
+                    if (i < sum)
+                        obj.transform.GetChild(i).gameObject.SetActive(true);
+                    else
+                        obj.transform.GetChild(i).gameObject.SetActive(false);
+                }
                 break;
             case 2:
                 obj = _topCard.transform.FindChild("hand/grid").gameObject;
                 sum = DataMgr.Instance.topCardNum;
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
+                    if (i < sum)
+                        obj.transform.GetChild(i).gameObject.SetActive(true);
+                    else
+                        obj.transform.GetChild(i).gameObject.SetActive(false);
+                }
                 break;
             case 3:
                 obj = _leftCard.transform.FindChild("hand/grid").gameObject;
                 sum = DataMgr.Instance.leftCardNum;
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
+                    if (i < sum)
+                        obj.transform.GetChild(obj.transform.childCount-1-i).gameObject.SetActive(true);
+                    else
+                        obj.transform.GetChild(obj.transform.childCount - 1-i).gameObject.SetActive(false);
+                }
                 break;
         }
 
-        for (int i = 0; i < obj.transform.childCount; i++)
-        {
-            if (i < sum)
-                obj.transform.GetChild(i).gameObject.SetActive(true);
-            else
-                obj.transform.GetChild(i).gameObject.SetActive(false);
-        }
+       
 
     }
     private void addClick()
@@ -447,19 +462,20 @@ public class RoomPanel : BasePanel {
     private void onPeng(int pos,int fromPos,int card)
     {
         Debug.Log("转化为pos" + pos);
+        Debug.Log("来自pos" + fromPos);
         switch (fromPos)
         {
             case 0:
-                _self.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[0]].SetActive(false);
+                _self.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[0]-1].SetActive(false);
                 break;
             case 1:
-                _right.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[1]].SetActive(false);
+                _right.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[1]-1].SetActive(false);
                 break;
             case 2:
-                _top.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[2]].SetActive(false);
+                _top.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[2]-1].SetActive(false);
                 break;
             case 3:
-                _left.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[3]].SetActive(false);
+                _left.GetComponent<CardProxy>().cards[DataMgr.Instance.heCardIndex[3]-1].SetActive(false);
                 break;
         }
         DataMgr.Instance.heCardIndex[DataMgr.Instance.curHeIndex]--;
