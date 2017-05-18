@@ -22,12 +22,19 @@ namespace Login
       get { return _account; }
       set { _account = value; }
     }
-    private string _token;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string token
+    private string _name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string name
     {
-      get { return _token; }
-      set { _token = value; }
+      get { return _name; }
+      set { _name = value; }
+    }
+    private string _url;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

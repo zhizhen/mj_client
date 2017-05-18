@@ -39,7 +39,7 @@ public class HallPanel : BasePanel
 
         _create.onClick.AddListener(delegate
         {
-            createTable();
+            createTable(1,2,3,4,"123");
         });
 
         _join.onClick.AddListener(delegate
@@ -66,9 +66,9 @@ public class HallPanel : BasePanel
 
     }
 
-    private void createTable()
+    private void createTable(int playoffs, int times, int jiangma, int maima, string token)
     {
-        ProtoReq.CreateTable();
+        ProtoReq.CreateTable(playoffs, times, jiangma, maima, token);
     }
     private void joinTable(int id)
     {

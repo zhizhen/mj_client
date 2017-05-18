@@ -55,7 +55,7 @@ public class LoginPanel : BasePanel {
         SoundMgr._instance.playBigBgm("beijing-fangjian");
         //QuickTips.ShowRedQuickTips("消息");
         //HallPanel.Instance.load();
-        ProtoReq.Login();
+        ProtoReq.Login("sl","sl","htttp://test");
     }
 
     private void login1()

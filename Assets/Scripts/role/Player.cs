@@ -6,6 +6,7 @@ public class Player{
     private int _id;
     private string _name;
     private int _pos;
+    private string _url;
     private bool _isReady = false;
 
     public Player(int id,string name,int pos)
@@ -67,6 +68,19 @@ public class Player{
         set
         {
             _isReady = value;
+        }
+    }
+
+    public string Url
+    {
+        get
+        {
+            return _url;
+        }
+
+        set
+        {
+            _url = value;
         }
     }
 }

@@ -5,11 +5,13 @@ using Table;
 
 public class ProtoReq{
     NetClient network;
-    public static void Login()
+    public static void Login(string account,string name,string url)
     {
         Login.LoginReq login = new Login.LoginReq();
-        login.account = "";
-        login.token = "";
+        login.account = account;
+        login.name = name;
+        login.url = url;
+        MainRole.Instance.Url = url;
         NetClient.Instance().WriteMsg("Login.LoginReq", login);
     }
     public static void EnterRoom()
@@ -18,10 +20,14 @@ public class ProtoReq{
         room.room_id = 1;
         NetClient.Instance().WriteMsg("Room.EnterReq", room);
     }
-    public static void CreateTable()
+    public static void CreateTable(int playoffs,int times,int jiangma,int maima,string token)
     {
         Table.CreateReq table = new CreateReq();
-        table.token = "123";
+        table.token = token;
+        table.playoffs = playoffs;
+        table.times = times;
+        table.jiangma = jiangma;
+        table.maima = maima;
         NetClient.Instance().WriteMsg("Table.CreateReq", table);
     }
 
