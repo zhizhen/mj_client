@@ -20,12 +20,14 @@ public class RoleController :Singleton<RoleController> {
             Debug.Log("MyPos" + role.pos);
         }
         Player player = new Player(role.id, role.name, role.pos);
+        player.Url = role.url;
         player.IsReady = role.ready;
         if (_playerDic.ContainsKey(role.id))
         {
             _playerDic.Remove(role.id);
 
         }
+        Debug.Log("role:" + role.id + "|" + role.name + "|" + role.pos + "|" + role.url);
         _playerDic.Add(role.id, player);
     }
 

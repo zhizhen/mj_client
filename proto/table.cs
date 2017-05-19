@@ -22,6 +22,34 @@ namespace Table
       get { return _token; }
       set { _token = value; }
     }
+    private int _playoffs;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"playoffs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int playoffs
+    {
+      get { return _playoffs; }
+      set { _playoffs = value; }
+    }
+    private int _times;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"times", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int times
+    {
+      get { return _times; }
+      set { _times = value; }
+    }
+    private int _jiangma;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"jiangma", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int jiangma
+    {
+      get { return _jiangma; }
+      set { _jiangma = value; }
+    }
+    private int _maima;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"maima", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int maima
+    {
+      get { return _maima; }
+      set { _maima = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -158,6 +186,13 @@ namespace Table
     {
       get { return _ready; }
       set { _ready = value; }
+    }
+    private string _url;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

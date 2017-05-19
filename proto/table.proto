@@ -3,6 +3,10 @@ package Table;
 // 创建桌子
 message CreateReq{
 	required string token = 1;
+	required int32 playoffs = 2;
+	required int32 times = 3;
+	required int32 jiangma = 4;
+	required int32 maima = 5;
 }
 
 // 创建返回
@@ -36,6 +40,7 @@ message Role {
   required string name = 2; 
   required int32 pos = 3;
   required bool ready = 4;
+  required string url = 5;
 }
 
 // 准备
