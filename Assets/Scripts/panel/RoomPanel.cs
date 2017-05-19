@@ -105,6 +105,7 @@ public class RoomPanel : BasePanel {
         _after = GameObject.Instantiate(_afterBase);
         _after.name = "after";
         _after.transform.parent = _afterBase.transform.parent;
+        _after.transform.SetSiblingIndex(4);
         _after.transform.position = _afterBase.transform.position;
         _card = _after.transform.FindChild("card").gameObject;
 
@@ -351,7 +352,7 @@ public class RoomPanel : BasePanel {
     {
         CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
         initCard();
-        newPengOrGang(_selfCard.transform.FindChild("other/grid/" + pos + "Gang").gameObject, card);
+        newPengOrGang(_selfCard.transform.FindChild("other/grid/" + pos + "Gang").gameObject, card,DataMgr.Instance.selfOtherPos);
     }
 
     private void topGang(int card, int pos)
@@ -359,7 +360,7 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance.topCardNum -= 3;
         initOtherHandCard(2);
 
-        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
+        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card,DataMgr.Instance.TopOtherPos);
     }
 
     private void leftGang(int card, int pos)
@@ -367,14 +368,14 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance.leftCardNum -= 3;
         initOtherHandCard(3);
 
-        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
+        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card,DataMgr.Instance.leftOtherPos);
     }
     private void rightGang(int card, int pos)
     {
         DataMgr.Instance.rightCardNum -= 3;
         initOtherHandCard(1);
 
-        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card);
+        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Geng").gameObject, card,DataMgr.Instance.rightOtherPos);
     }
 
     private void selfPeng(int card,int pos)
@@ -382,7 +383,7 @@ public class RoomPanel : BasePanel {
         CardController.Instance.peng(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
         initCard();
 
-        newPengOrGang(_selfCard.transform.FindChild("other/grid/"+pos+"Peng").gameObject,card);
+        newPengOrGang(_selfCard.transform.FindChild("other/grid/"+pos+"Peng").gameObject,card,DataMgr.Instance.selfOtherPos);
     }
 
     private void topPeng(int card,int pos)
@@ -390,7 +391,7 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance.topCardNum -= 3;
         initOtherHandCard(2);
         Debug.Log("pengPos" + pos);
-        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
+        newPengOrGang(_topCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card,DataMgr.Instance.TopOtherPos);
     }
 
     private void leftPeng(int card,int pos)
@@ -398,7 +399,7 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance.leftCardNum -= 3;
         initOtherHandCard(3);
         Debug.Log("pengPos" + pos);
-        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
+        newPengOrGang(_leftCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card,DataMgr.Instance.leftOtherPos);
     }
 
     private void rightPeng(int card,int pos)
@@ -406,7 +407,7 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance.rightCardNum -= 3;
         initOtherHandCard(1);
         Debug.Log("pengPos" + pos);
-        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card);
+        newPengOrGang(_rightCard.transform.FindChild("other/grid/" + pos + "Peng").gameObject, card,DataMgr.Instance.rightOtherPos);
     }
     public override void AddListener()
     {
@@ -483,16 +484,20 @@ public class RoomPanel : BasePanel {
         {
             case 0:
                 selfPeng(card, fromPos);
+                DataMgr.Instance.selfOtherPos++;
                 isTurn = true;
                 break;
             case 1:
                 rightPeng(card, fromPos);
+                DataMgr.Instance.rightOtherPos++;
                 break;
             case 2:
                 topPeng(card, fromPos);
+                DataMgr.Instance.TopOtherPos++;
                 break;
             case 3:
                 leftPeng(card, fromPos);
+                DataMgr.Instance.leftOtherPos++;
                 break;
         }
     }
@@ -503,16 +508,20 @@ public class RoomPanel : BasePanel {
         {
             case 0:
                 selfGang(card, fromPos);
+                DataMgr.Instance.selfOtherPos++;
                 isTurn = true;
                 break;
             case 1:
                 rightGang(card, fromPos);
+                DataMgr.Instance.rightOtherPos++;
                 break;
             case 2:
                 topGang(card, fromPos);
+                DataMgr.Instance.TopOtherPos++;
                 break;
             case 3:
                 leftGang(card, fromPos);
+                DataMgr.Instance.leftOtherPos++;
                 break;
         }
     }
@@ -522,14 +531,18 @@ public class RoomPanel : BasePanel {
     {
         if (GameConst.zhuang)
         {
+            //默认都是十三张
             GameConst.zhuangPos = id.idToPos();
-            if (GameConst.zhuangPos == 1)
-                DataMgr.Instance.rightCardNum = 14;
-            if (GameConst.zhuangPos == 2)
-                DataMgr.Instance.topCardNum = 14;
-            if (GameConst.zhuangPos == 3)
-                DataMgr.Instance.leftCardNum = 14;
+            //if (GameConst.zhuangPos == 1)
+            //    DataMgr.Instance.rightCardNum = 14;
+            //if (GameConst.zhuangPos == 2)
+            //    DataMgr.Instance.topCardNum = 14;
+            //if (GameConst.zhuangPos == 3)
+            //    DataMgr.Instance.leftCardNum = 14;
             GameConst.zhuang = false;
+            initOtherHandCard(1);
+            initOtherHandCard(2);
+            initOtherHandCard(3);
         }
         if (boo)
         {
@@ -632,7 +645,7 @@ public class RoomPanel : BasePanel {
         _hu.gameObject.SetActive(false);
         _peng.gameObject.SetActive(false);
         _gang.gameObject.SetActive(false);
-        _pass.gameObject.SetActive(false);
+        _pass.gameObject.SetActive(true);
         initCard();
 
         initFeng();
@@ -687,10 +700,16 @@ public class RoomPanel : BasePanel {
         _peng.gameObject.SetActive(false);
         _gang.gameObject.SetActive(false);
     }
-    private void newPengOrGang(GameObject gameObject,int card)
+    private void newPengOrGang(GameObject gameObject,int card,int index)
     {
         GameObject objItem = GameObject.Instantiate(gameObject);
         objItem.transform.parent = gameObject.transform.parent;
+        PengGangPos pos = objItem.transform.parent.parent.GetComponent<PengGangPos>();
+        if (pos != null)
+        {
+            Debug.Log("有PengGangPos");
+            pos.gameObject.GetComponent<RectTransform>().anchoredPosition = pos.poss[index];
+        }
         objItem.SetActive(true);
         PengAndGangProxy proxy = objItem.GetComponent<PengAndGangProxy>();
         for (int i = 0; i < proxy.startStrs.Length; i++)

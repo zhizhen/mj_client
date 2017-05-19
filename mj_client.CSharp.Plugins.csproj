@@ -80,6 +80,7 @@
     <Compile Include="Assets\Plugins\GlobleTimer.cs" />
     <Compile Include="Assets\Plugins\ITick.cs" />
     <Compile Include="Assets\Plugins\MonoBehaviourExt.cs" />
+    <Compile Include="Assets\Plugins\PengGangPos.cs" />
     <Compile Include="Assets\Plugins\PluginIOSCB.cs" />
     <Compile Include="Assets\Plugins\PluginIOSTool.cs" />
     <Compile Include="Assets\Plugins\PluginTool.cs" />
