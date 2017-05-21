@@ -54,13 +54,21 @@ public class LoginPanel : BasePanel {
     {
         //QuickTips.ShowRedQuickTips("消息");
         //HallPanel.Instance.load();
-        ProtoReq.Login("sl","sl","htttp://test");
+
+#if !UNITY_EDITOR
+        SDKMgr.Instance.updateUserInfo = updateUserInfo;
+        SDKMgr.Instance.GetUserInfo();
+#else
+        ProtoReq.Login("sl", "sl", "htttp://test");
+#endif
+
+
     }
 
     private void login1()
     {
         SDKMgr.Instance.updateUserInfo = updateUserInfo;
-        SDKMgr.Instance.GetUserInfo();
+        SDKMgr.Instance.GetUserInfo();  
     }
 
     private void connect()
@@ -80,5 +88,6 @@ public class LoginPanel : BasePanel {
         Debug.Log("LoginPanel:openId" + openId);
         _name.text = nickName;
         SDKMgr.Instance.SetAsyncImage(imageUrl, _head);
+        ProtoReq.Login(nickName, nickName, imageUrl);
     }
 }

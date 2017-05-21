@@ -105,7 +105,7 @@ public class RoomPanel : BasePanel {
         _after = GameObject.Instantiate(_afterBase);
         _after.name = "after";
         _after.transform.parent = _afterBase.transform.parent;
-        _after.transform.SetSiblingIndex(4);
+        _after.transform.SetSiblingIndex(3);
         _after.transform.position = _afterBase.transform.position;
         _card = _after.transform.FindChild("card").gameObject;
 
@@ -311,8 +311,12 @@ public class RoomPanel : BasePanel {
         });
 
         _pass.onClick.AddListener(delegate {
-            //ProtoReq.Pass();
-            endTimeCount();
+            ProtoReq.Pass();
+            // endTimeCount();
+            _fun.SetActive(false);
+            _hu.gameObject.SetActive(false);
+            _peng.gameObject.SetActive(false);
+            _gang.gameObject.SetActive(false);
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -704,6 +708,7 @@ public class RoomPanel : BasePanel {
     {
         GameObject objItem = GameObject.Instantiate(gameObject);
         objItem.transform.parent = gameObject.transform.parent;
+        objItem.transform.localScale = new Vector3(1, 1, 1);
         PengGangPos pos = objItem.transform.parent.parent.GetComponent<PengGangPos>();
         if (pos != null)
         {

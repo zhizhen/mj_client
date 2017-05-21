@@ -491,6 +491,8 @@ public class CardController:Singleton<CardController>{
     {
         if (check3Card(value1, value2, value3) && check3Card(value4, value5, value6))
             return true;
+        if (check3Card(value1, value3, value5) && check3Card(value2, value4, value6))
+            return true;
         if (checkAABBCCCard(value1, value2, value3, value4, value5, value6))
             return true;
         if (checkAAAACard(value2, value3, value4, value5))
