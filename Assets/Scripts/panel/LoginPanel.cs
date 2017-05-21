@@ -23,37 +23,42 @@ public class LoginPanel : BasePanel {
     }
 
     private Button _login;
-
-    private Button _login1;
     private Image _head;
     private Text _name;
+
+    private Toggle _toggle;
 
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
         _login = uiSprite.FindChild("Button").GetComponent<Button>();
-
+        _toggle = uiSprite.FindChild("info/Toggle").GetComponent<Toggle>();
+        _toggle.isOn = PlayerPrefs.HasKey("check") ? true : false;
         _login.onClick.AddListener(delegate
         {
             login();
         });
+
+        _toggle.onValueChanged.AddListener(delegate
+        {
+            PlayerPrefs.SetInt("check", 1);
+            //_toggle.isOn = !_toggle.isOn;
+        });
         connect();
-
-
-        _login1 = uiSprite.FindChild("Button1").GetComponent<Button>();
         _name = uiSprite.FindChild("UserInfo/nameTxt").GetComponent<Text>();
         _head = uiSprite.FindChild("UserInfo/headImg").GetComponent<Image>();
         _name.text = "hahaha";
-        _login1.onClick.AddListener(delegate
-        {
-            login1();
-        });
     }
 
     private void login()
     {
         //QuickTips.ShowRedQuickTips("消息");
         //HallPanel.Instance.load();
+        if (!_toggle.isOn)
+        {
+            QuickTips.ShowRedQuickTips("请同意用户协议");
+            return;
+        }
 
 #if !UNITY_EDITOR
         SDKMgr.Instance.updateUserInfo = updateUserInfo;
@@ -65,11 +70,6 @@ public class LoginPanel : BasePanel {
 
     }
 
-    private void login1()
-    {
-        SDKMgr.Instance.updateUserInfo = updateUserInfo;
-        SDKMgr.Instance.GetUserInfo();  
-    }
 
     private void connect()
     {
@@ -87,6 +87,7 @@ public class LoginPanel : BasePanel {
         Debug.Log("LoginPanel:openId" + openId);
         Debug.Log("LoginPanel:openId" + openId);
         _name.text = nickName;
+        MainRole.Instance.Name = nickName;
         SDKMgr.Instance.SetAsyncImage(imageUrl, _head);
         ProtoReq.Login(nickName, nickName, imageUrl);
     }
