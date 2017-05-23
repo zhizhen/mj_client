@@ -89,5 +89,6 @@ public class TableController :Singleton<TableController> {
     public void anGang(Table.Angang gang)
     {
         Debug.Log("暗杠");
+        EventDispatcher.Instance.Dispatch<int,int>(GameEventConst.AN_GANG, gang.id.idToPos(), gang.card);
     }
 }

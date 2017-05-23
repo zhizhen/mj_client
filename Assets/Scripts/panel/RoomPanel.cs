@@ -431,6 +431,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
+        EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.AddEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
     }
 
@@ -445,6 +446,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
+        EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
     }
     private void onTimeEnd()
@@ -536,7 +538,29 @@ public class RoomPanel : BasePanel {
                 break;
         }
     }
-
+    private void onAnGang(int pos, int card)
+    {
+        switch (pos)
+        {
+            case 0:
+                selfGang(card, 0);
+                DataMgr.Instance.selfOtherPos++;
+                isTurn = true;
+                break;
+            case 1:
+                rightGang(card, 1);
+                DataMgr.Instance.rightOtherPos++;
+                break;
+            case 2:
+                topGang(card, 2);
+                DataMgr.Instance.TopOtherPos++;
+                break;
+            case 3:
+                leftGang(card, 3);
+                DataMgr.Instance.leftOtherPos++;
+                break;
+        }
+    }
     //收到那个人的turn
     private void turnTo(bool boo,int id)
     {
