@@ -148,7 +148,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string AppId = "wx8b1001ae7f3d0fdd";
 		public string AppSecret = "43096bfac81bf1ed100900e7161ee73b";
-		public bool BypassApproval = true;
+		public bool BypassApproval = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx4868b35061f87885";

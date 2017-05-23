@@ -636,6 +636,10 @@ public class RoomPanel : BasePanel {
     private void weixinInvite()
     {
         Debug.Log("微信邀请");
+#if !UNITY_EDITOR
+        SDKMgr.Instance.DoShareTestFriend(GameConst.tableId);
+#endif
+
     }
     private void toReady()
     {
@@ -683,6 +687,12 @@ public class RoomPanel : BasePanel {
         DataMgr.Instance._curCard = num;
         Card card = new Card(DataMgr.Instance._curCard);
         //一系列判断
+
+        if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
+        {
+            _fun.SetActive(true);
+            _gang.gameObject.SetActive(true);
+        }
         CardController.Instance.addCard(card.CardType, card.CardNum);
         _handCard.SetActive(true);
         if (CardController.Instance.checkCard(true))

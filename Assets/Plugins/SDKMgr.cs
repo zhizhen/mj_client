@@ -89,26 +89,27 @@ public class SDKMgr : SingletonMonoBehaviour<SDKMgr> {
 	public void DoShareTest()
 	{
 		ShareContent content = new ShareContent ();
-		content.SetText("4399 游戏分享测试Text");
+		content.SetText("分享测试Text");
 		content.SetImageUrl ("http://imga3.5054399.com/upload_pic/2017/3/23/4399_11332611981.jpg");
-		content.SetTitle ("4399 游戏分享测试");
-		content.SetUrl("http://www.4399.com");
-		content.SetShareType (ContentType.Webpage);
+        content.SetTitle("分享测试");
+        content.SetUrl("http://www.4399.com");
+        content.SetShareType (ContentType.Webpage);
 
 		ssdk.ShareContent (PlatformType.WeChatMoments, content);
+
+      
 	}
 
-	public void DoShareTestFriend()
+	public void DoShareTestFriend(string tableId)
 	{
-		ShareContent content = new ShareContent ();
-		content.SetText("4399 游戏分享测试Text");
-		content.SetImageUrl ("http://imga3.5054399.com/upload_pic/2017/3/23/4399_11332611981.jpg");
-		content.SetTitle ("4399 游戏分享测试");
-		content.SetUrl("http://www.4399.com");
-		content.SetShareType (ContentType.Webpage);
-
-		ssdk.ShareContent (PlatformType.WeChat, content);
-	}
+        ShareContent content = new ShareContent();
+        content.SetText("邀请胶己人麻将");
+        content.SetImageUrl("http://imga3.5054399.com/upload_pic/2017/3/23/4399_11332611981.jpg");
+        content.SetTitle("桌子号："+tableId);
+        content.SetUrl("http://www.4399.com");
+        content.SetShareType(ContentType.Webpage);
+        ssdk.ShareContent (PlatformType.WeChat, content);
+    }
 
 	public Sprite myWXPic;
 	public void InitImagePath()

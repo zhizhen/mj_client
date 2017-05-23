@@ -78,6 +78,7 @@ public class LoginPanel : BasePanel {
         network.Connect("123.207.241.224",8888);
         //network.Connect("192.168.0.119", 8888);
         NetClient.Register();
+        //SDKMgr.Instance.DoShareTestFriend();
     }
 
     private void updateUserInfo(string openId, string unionId, string nickName, string imageUrl)
