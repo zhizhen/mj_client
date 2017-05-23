@@ -62,6 +62,8 @@ public class RoomPanel : BasePanel {
     private int _curHeCard;
 
     public bool isTurn = false;
+
+    private bool isgang = false;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
@@ -296,7 +298,10 @@ public class RoomPanel : BasePanel {
         });
         _gang.onClick.AddListener(delegate {
             // ProtoReq.Gang(0);//没记录牌
-            ProtoReq.Gang(DataMgr.Instance._curCard);
+            if (isgang)
+                ProtoReq.AnGang(DataMgr.Instance._curCard);
+            else
+                ProtoReq.Gang(DataMgr.Instance._curCard);
             _fun.SetActive(false);
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
@@ -622,6 +627,7 @@ public class RoomPanel : BasePanel {
             }
             if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
             {
+                isgang = false;
                 _fun.SetActive(true);
                 _gang.gameObject.SetActive(true);
             }
@@ -690,6 +696,7 @@ public class RoomPanel : BasePanel {
 
         if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
         {
+            isgang = true;
             _fun.SetActive(true);
             _gang.gameObject.SetActive(true);
         }
