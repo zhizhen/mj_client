@@ -80,9 +80,11 @@ public class ProtoReq{
         gang.card = num;
         NetClient.Instance().WriteMsg("Table.Angang", gang);
     }
-    public static void Pass()
+    public static void Pass(int id,bool auto)
     {
         Table.Pass pass = new Table.Pass();
+        pass.id = id;
+        pass.auto = auto;
         NetClient.Instance().WriteMsg("Table.Pass", pass);    
     }
 

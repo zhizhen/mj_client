@@ -31,6 +31,7 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.JoinRsp", joinTable_rsp);
         dic.Add("Table.QuitRsp", quit_rsp);
         dic.Add("Table.Ready", ready_rsp);
+        dic.Add("Table.Start", start);
         dic.Add("Table.Cards", get_cards);
         dic.Add("Table.Turn", turn);
         dic.Add("Table.Play", play);
@@ -93,7 +94,10 @@ public class ProtoRes:Singleton<ProtoRes>{
     {
         TableController.Instance.ready((Table.Ready)msg.body);
     }
-
+    private void start(Msg msg)
+    {
+        TableController.Instance.start((Table.Start)msg.body);
+    }
     private void get_cards(Msg msg)
     {
         TableController.Instance.getCards((Table.Cards)msg.body);

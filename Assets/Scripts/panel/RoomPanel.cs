@@ -19,7 +19,7 @@ public class RoomPanel : BasePanel {
     {
         base_name = PanelTag.ROOM_PANEL;
     }
-
+    private int _timeCount;
     private Button _zhunbei;
     private Button _get;
     private GameObject _list;
@@ -141,7 +141,7 @@ public class RoomPanel : BasePanel {
                 ProtoReq.Play(num);
                 //setSelfHe(num);
                 initCard();
-                endTimeCount();
+                //endTimeCount();
             });
         }
 
@@ -157,7 +157,7 @@ public class RoomPanel : BasePanel {
             ProtoReq.Play(num);
             //setSelfHe(num);
             initCard();
-            endTimeCount();
+            //endTimeCount();
         });
     }
     private void initHead()
@@ -220,7 +220,7 @@ public class RoomPanel : BasePanel {
                         _fun.SetActive(true);
                         _hu.gameObject.SetActive(true);
                     }
-                    beginTimeCount();
+                    //beginTimeCount();
                     return;
                 }
                 IconMgr.Instance.SetImage(_selfCard.transform.FindChild("hand/grid").transform.GetChild(index).FindChild("value").GetComponent<Image>(), "zm1_"+CardConst.GetCardBigNum(i,CardController.Instance._myCardList[i][j]));
@@ -318,7 +318,7 @@ public class RoomPanel : BasePanel {
         });
 
         _pass.onClick.AddListener(delegate {
-            ProtoReq.Pass();
+            ProtoReq.Pass(MainRole.Instance.Id,false);
             // endTimeCount();
             _fun.SetActive(false);
             _hu.gameObject.SetActive(false);
@@ -425,10 +425,11 @@ public class RoomPanel : BasePanel {
         base.AddListener();
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.AddEventListener(GameEventConst.CARD_TO_HAND, getCard);
-        EventDispatcher.Instance.AddEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
+        EventDispatcher.Instance.AddEventListener<int,int,int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
-        EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.AddEventListener(GameEventConst.START, onStart);
+       // EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
@@ -440,10 +441,11 @@ public class RoomPanel : BasePanel {
         base.RemoveListener();
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.CARD_TO_HAND, getCard);
-        EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.GET_NEW_CARD, getCurCard);
+        EventDispatcher.Instance.RemoveEventListener<int,int,int>(GameEventConst.GET_NEW_CARD, getCurCard);
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
-        EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
+        EventDispatcher.Instance.RemoveEventListener(GameEventConst.START, onStart);
+        // EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
@@ -562,35 +564,6 @@ public class RoomPanel : BasePanel {
         }
     }
     //收到那个人的turn
-    private void turnTo(bool boo,int id)
-    {
-        if (GameConst.zhuang)
-        {
-            //默认都是十三张
-            GameConst.zhuangPos = id.idToPos();
-            //if (GameConst.zhuangPos == 1)
-            //    DataMgr.Instance.rightCardNum = 14;
-            //if (GameConst.zhuangPos == 2)
-            //    DataMgr.Instance.topCardNum = 14;
-            //if (GameConst.zhuangPos == 3)
-            //    DataMgr.Instance.leftCardNum = 14;
-            GameConst.zhuang = false;
-            initOtherHandCard(1);
-            initOtherHandCard(2);
-            initOtherHandCard(3);
-        }
-        if (boo)
-        {
-            //自己的turn
-            Debug.Log("自己的turn");
-        }
-        else
-        {
-            //比人的turn
-            Debug.Log("别人的turn");
-            beginTimeCount();
-        }
-    }
     private void addPlayer()
     {
         foreach (var item in RoleController.Instance._playerDic)
@@ -602,6 +575,48 @@ public class RoomPanel : BasePanel {
                 obj.FindChild("head").gameObject.SetActive(true);
 
                 _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ready").gameObject.SetActive(item.Value.IsReady);
+                if (GameConst.isFangzZhu)
+                {
+                    if (item.Value.Id == MainRole.Instance.Id)
+                    {
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").gameObject.SetActive(false);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(true);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.RemoveAllListeners();
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.AddListener(delegate
+                        {
+                            ProtoReq.Quit(item.Value.Id);
+                        });
+                    }
+                    else
+                    {
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").gameObject.SetActive(true);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").GetComponent<Button>().onClick.RemoveAllListeners();
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").GetComponent<Button>().onClick.AddListener(delegate {
+                            ProtoReq.Kick(item.Value.Id);
+                        });
+                        
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(false);
+                    }
+
+                }
+                else
+                {
+                    if (item.Value.Id == MainRole.Instance.Id)
+                    {
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/tick").gameObject.SetActive(false);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(true);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.RemoveAllListeners();
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.AddListener(delegate
+                        {
+                            ProtoReq.Quit(item.Value.Id);
+                        });
+                    }
+                    else
+                    {
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/tick").gameObject.SetActive(false);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(false);
+                    }
+                }
             }
         }
     }
@@ -630,6 +645,7 @@ public class RoomPanel : BasePanel {
         if (pos!=MainRole.Instance.Id.idToPos())
         {
             Debug.Log("检测00000");
+            bool isPass = true;
             Card card1 = new Card(DataMgr.Instance._curCard);
             //一系列判断
             CardController.Instance.addCard(card1.CardType, card1.CardNum);
@@ -638,6 +654,7 @@ public class RoomPanel : BasePanel {
             {
                 _fun.SetActive(true);
                 _hu.gameObject.SetActive(true);
+                isPass = false;
             }
             else
             {
@@ -648,14 +665,29 @@ public class RoomPanel : BasePanel {
             {
                 _fun.SetActive(true);
                 _peng.gameObject.SetActive(true);
+                isPass = false;
             }
             if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
             {
                 isgang = false;
                 _fun.SetActive(true);
                 _gang.gameObject.SetActive(true);
+                isPass = false;
             }
-
+            if (!isPass)
+            {
+                ProtoReq.Pass(MainRole.Instance.Id, true);
+            }
+            else
+            {
+                //_timeCount =
+                beginTimeCount();
+                _timeCount = GlobleTimer.Instance.SetTimer(10000, delegate
+                {
+                    endTimeCount();
+                    ProtoReq.Pass(MainRole.Instance.Id, false);
+                });
+            }
         }
     }
 
@@ -675,20 +707,21 @@ public class RoomPanel : BasePanel {
     {
         ProtoReq.Ready();
     }
-    private void getCard()
+    private void onStart()
     {
         SoundMgr._instance.bgmPlay("beijing-fangjian");
-        GameConst.zhuang = true;
-        copyAfter(); 
+        copyAfter();
         _after.SetActive(true);
         _before.SetActive(false);
         _hu.gameObject.SetActive(false);
         _peng.gameObject.SetActive(false);
         _gang.gameObject.SetActive(false);
         _pass.gameObject.SetActive(true);
-        initCard();
-
         initFeng();
+    }
+    private void getCard()
+    {
+        initCard();
     }
 
     private void initFeng()
@@ -709,27 +742,32 @@ public class RoomPanel : BasePanel {
         }
     }
 
-    private void getCurCard(int num)
+    private void getCurCard(int roleId,int num,int leftCard)
     {
-        IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
-        beginTimeCount();
-        isTurn = true;
-        DataMgr.Instance._curCard = num;
-        Card card = new Card(DataMgr.Instance._curCard);
-        //一系列判断
-
-        if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
+        if (roleId == MainRole.Instance.Id)
         {
-            isgang = true;
-            _fun.SetActive(true);
-            _gang.gameObject.SetActive(true);
+            IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
+            //beginTimeCount();
+            isTurn = true;
+            DataMgr.Instance._curCard = num;
+            Card card = new Card(DataMgr.Instance._curCard);
+            //一系列判断
+            if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
+            {
+                isgang = true;
+                _fun.SetActive(true);
+            }
+            CardController.Instance.addCard(card.CardType, card.CardNum);
+            _handCard.SetActive(true);
+            if (CardController.Instance.checkCard(true))
+            {
+                _fun.SetActive(true);
+                _hu.gameObject.SetActive(true);
+            }
         }
-        CardController.Instance.addCard(card.CardType, card.CardNum);
-        _handCard.SetActive(true);
-        if (CardController.Instance.checkCard(true))
+        else
         {
-            _fun.SetActive(true);
-            _hu.gameObject.SetActive(true);
+            
         }
     }
 

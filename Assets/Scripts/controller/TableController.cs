@@ -18,6 +18,7 @@ public class TableController :Singleton<TableController> {
     {
         Debug.Log("桌子号" + create.tab_id);
         GameConst.tableId = create.tab_id;
+        GameConst.isFangzZhu = true;
         // RoomPanel.Instance.load(); 
         ProtoReq.JoinTable(create.tab_id);
     }
@@ -59,7 +60,18 @@ public class TableController :Singleton<TableController> {
             EventDispatcher.Instance.Dispatch(GameEventConst.TURN_TO, false,turn.id);
         }
     }
+    public void start(Table.Start start)
+    {
+        Debug.Log("收到start协议");
+        
+        DataMgr.Instance.zhuangId = start.id;
+        DataMgr.Instance.curRound = start.round;
+        if (start.status == 1)
+        {
+            EventDispatcher.Instance.Dispatch(GameEventConst.START);
+        }
 
+    }
     public void play(Table.Play play)
     {
         Debug.Log("收到play返回");
@@ -83,7 +95,7 @@ public class TableController :Singleton<TableController> {
     public void newCard(Table.NewCard card)
     {
         Debug.Log("摸牌");
-        EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.card);
+        EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.id,card.card,card.leftcard);
     }
 
     public void anGang(Table.Angang gang)

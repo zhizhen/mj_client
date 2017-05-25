@@ -30,6 +30,10 @@ public class DataMgr : Singleton<DataMgr> {
     public int[] heCardIndex = { 0, 0, 0, 0 };
     public int curHeIndex = 0;
 
+    public int curRound = 1;
+    public int zhuangId = 0;
+
+
     public DataMgr()
     {
         _leftCardList = new List<int>();
