@@ -40,6 +40,7 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.Pass", pass);
         dic.Add("Table.NewCard", newCard);
         dic.Add("Table.Angang",anGang);
+        dic.Add("Table.Hu", hu);
     }
 
    
@@ -142,6 +143,11 @@ public class ProtoRes:Singleton<ProtoRes>{
     private void quit_rsp(Msg msg)
     {
         TableController.Instance.quitTable((Table.QuitRsp)msg.body);
+    }
+
+    private void hu(Msg msg)
+    {
+        TableController.Instance.hu((Table.Hu)msg.body);
     }
     #endregion
 }

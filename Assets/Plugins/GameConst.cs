@@ -6,7 +6,7 @@ public class GameConst {
 
     public static MonoBehaviour driver;
     public static int tableId;
-    public static int timeCount = 15;
+    public static int timeCount = 10;
 
     public static int selfPos = 0;
 

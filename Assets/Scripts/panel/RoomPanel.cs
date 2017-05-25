@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class RoomPanel : BasePanel {
 
@@ -64,6 +65,7 @@ public class RoomPanel : BasePanel {
     public bool isTurn = false;
 
     private bool isgang = false;
+    private bool isSelfHu = false;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
@@ -136,12 +138,8 @@ public class RoomPanel : BasePanel {
                 isTurn = false;
                 string name = obj.FindChild("value").GetComponent<Image>().sprite.name;
                 int num = GameTools.getCardNumByName(name);
-                Debug.Log("牌号:" + GameTools.getCardNumByName(name));
-                CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
                 ProtoReq.Play(num);
-                //setSelfHe(num);
-                initCard();
-                //endTimeCount();
+              
             });
         }
 
@@ -152,11 +150,9 @@ public class RoomPanel : BasePanel {
             isTurn = false;
             string name = _handCard.transform.FindChild("value").GetComponent<Image>().sprite.name;
             int num = GameTools.getCardNumByName(name);
-            Debug.Log("牌号:" + GameTools.getCardNumByName(name));
-            CardController.Instance.delCard(CardConst.getCardInfo(num).type, CardConst.getCardInfo(num).value);
             ProtoReq.Play(num);
             //setSelfHe(num);
-            initCard();
+            //initCard();
             //endTimeCount();
         });
     }
@@ -219,6 +215,7 @@ public class RoomPanel : BasePanel {
                     {
                         _fun.SetActive(true);
                         _hu.gameObject.SetActive(true);
+                        isSelfHu = true;
                     }
                     //beginTimeCount();
                     return;
@@ -291,17 +288,31 @@ public class RoomPanel : BasePanel {
         {
             //CardController.Instance.hu
             // ProtoReq.
+            List<int> cards = new List<int>();
+            for (int i = 0; i < CardController.Instance._myCardList.Length; i++)
+            {
+                for (int j = 0; j < CardController.Instance._myCardList[i].Count; j++)
+                {
+                    cards.Add(CardConst.GetCardBigNum(i, CardController.Instance._myCardList[i][j]));
+                }
+            }
+            if (isSelfHu)
+            {
+                cards.Remove(DataMgr.Instance._curCard);
+            }
+
+            ProtoReq.Hu(1,DataMgr.Instance._curCard,cards);
             _fun.SetActive(false);
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
         });
         _gang.onClick.AddListener(delegate {
-            // ProtoReq.Gang(0);//没记录牌
-            if (isgang)
-                ProtoReq.AnGang(DataMgr.Instance._curCard);
-            else
-                ProtoReq.Gang(DataMgr.Instance._curCard);
+             ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
+            //if (isgang)
+            //    ProtoReq.AnGang(DataMgr.Instance._curCard);
+            //else
+            //    ProtoReq.Gang(DataMgr.Instance._curCard);
             _fun.SetActive(false);
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
@@ -429,10 +440,10 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
         EventDispatcher.Instance.AddEventListener(GameEventConst.START, onStart);
-       // EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
+        //EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
-        EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
+        //EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.AddEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
     }
 
@@ -445,10 +456,10 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.START, onStart);
-        // EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
+        //EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.PENG, onPeng);
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
-        EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
+        //EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
     }
     private void onTimeEnd()
@@ -540,29 +551,6 @@ public class RoomPanel : BasePanel {
                 break;
         }
     }
-    private void onAnGang(int pos, int card)
-    {
-        switch (pos)
-        {
-            case 0:
-                selfGang(card, 0);
-                DataMgr.Instance.selfOtherPos++;
-                isTurn = true;
-                break;
-            case 1:
-                rightGang(card, 1);
-                DataMgr.Instance.rightOtherPos++;
-                break;
-            case 2:
-                topGang(card, 2);
-                DataMgr.Instance.TopOtherPos++;
-                break;
-            case 3:
-                leftGang(card, 3);
-                DataMgr.Instance.leftOtherPos++;
-                break;
-        }
-    }
     //收到那个人的turn
     private void addPlayer()
     {
@@ -642,7 +630,7 @@ public class RoomPanel : BasePanel {
             DataMgr.Instance.heCardIndex[pos]++;
             DataMgr.Instance.curHeIndex = pos;
         }
-        if (pos!=MainRole.Instance.Id.idToPos())
+        if (pos != MainRole.Instance.Id.idToPos())
         {
             Debug.Log("检测00000");
             bool isPass = true;
@@ -652,6 +640,7 @@ public class RoomPanel : BasePanel {
 
             if (CardController.Instance.checkCard(false))
             {
+                isSelfHu = false;
                 _fun.SetActive(true);
                 _hu.gameObject.SetActive(true);
                 isPass = false;
@@ -688,6 +677,12 @@ public class RoomPanel : BasePanel {
                     ProtoReq.Pass(MainRole.Instance.Id, false);
                 });
             }
+        }
+        else
+        {
+            Debug.Log("牌号:" + card);
+            CardController.Instance.delCard(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
+            initCard();
         }
     }
 
@@ -761,6 +756,7 @@ public class RoomPanel : BasePanel {
             _handCard.SetActive(true);
             if (CardController.Instance.checkCard(true))
             {
+                isSelfHu = true;
                 _fun.SetActive(true);
                 _hu.gameObject.SetActive(true);
             }

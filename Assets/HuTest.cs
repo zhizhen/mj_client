@@ -21,6 +21,11 @@ public class HuTest : MonoBehaviour {
         CardController.Instance.addCard(2, 8);
 
         Debug.Log(CardController.Instance.checkCard(true));
+
+        GlobleTimer.Instance.SetTimer(1, delegate
+        {
+            Debug.Log("定时器测试");
+        });
     }
 	
 	// Update is called once per frame

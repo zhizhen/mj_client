@@ -2,6 +2,7 @@
 using System.Collections;
 using NetWork;
 using Table;
+using System.Collections.Generic;
 
 public class ProtoReq{
     NetClient network;
@@ -74,12 +75,12 @@ public class ProtoReq{
         NetClient.Instance().WriteMsg("Table.Gang", gang);
     }
 
-    public static void AnGang(int num)
-    {
-        Table.Angang gang = new Table.Angang();
-        gang.card = num;
-        NetClient.Instance().WriteMsg("Table.Angang", gang);
-    }
+    //public static void AnGang(int num)
+    //{
+    //    Table.Angang gang = new Table.Angang();
+    //    gang.card = num;
+    //    NetClient.Instance().WriteMsg("Table.Angang", gang);
+    //}
     public static void Pass(int id,bool auto)
     {
         Table.Pass pass = new Table.Pass();
@@ -99,5 +100,14 @@ public class ProtoReq{
     {
         Table.NewCard card = new NewCard();
         NetClient.Instance().WriteMsg("Table.NewCard", card);
+    }
+
+    public static void Hu(int type, int card, List<int> cards)
+    {
+        Table.Hu hu = new Table.Hu();
+        hu.hutype = type;
+        hu.card = card;
+        hu.cards.AddRange(cards);
+        NetClient.Instance().WriteMsg("Table.Hu", hu);
     }
 }

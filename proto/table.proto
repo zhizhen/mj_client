@@ -51,7 +51,6 @@ message Role {
   required bool ready = 4;
   required bool online = 5;
   required string url = 6;
-
 }
 
 // 准备
@@ -85,6 +84,8 @@ message Turn{
 message Play{
 	required int32 id = 1;
 	required int32 card = 2;
+	required int32 leftcard = 3;//此人剩余牌数
+	required int32 err_no = 4;
 }
 
 // 碰
@@ -92,6 +93,7 @@ message Peng{
 	required int32 id = 1;
 	required int32 from = 2;
 	required int32 card = 3;
+	required int32 err_no = 4;
 }
 
 // 暗杠
@@ -100,16 +102,24 @@ message Angang{
 	required int32 card = 3;
 }
 
-// 杠
+// 杠 from == id的话则认为是暗杠，此时自己知道card内容，别人card=0
 message Gang{
 	required int32 id = 1;
 	required int32 from = 2;
 	required int32 card = 3;
+	required int32 err_no = 4;
 }
+
 
 // 胡
 message Hu{
 	required int32 id = 1;
+	required int32 from = 2;
+	required int32 hutype = 3;
+	required int32 err_no = 4;
+	required int32 card = 5;
+	repeated int32 cards = 6;
+	
 }
 
 // 过
@@ -122,6 +132,6 @@ message Pass{
 message NewCard{
 	required int32 card = 1;
 	required int32 id = 2;
-	required int32 leftcard = 3;
+	required int32 leftcard = 3;//桌面剩余牌数
 }
 

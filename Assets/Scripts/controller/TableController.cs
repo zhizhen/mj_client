@@ -107,6 +107,11 @@ public class TableController :Singleton<TableController> {
     public void quitTable(Table.QuitRsp quit)
     {
         Debug.Log("退出");
+        HallPanel.Instance.load();
 
+    }
+    public void hu(Table.Hu hu)
+    {
+        Debug.Log("胡了");
     }
 }

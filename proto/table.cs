@@ -351,6 +351,20 @@ namespace Table
       get { return _card; }
       set { _card = value; }
     }
+    private int _leftcard;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"leftcard", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int leftcard
+    {
+      get { return _leftcard; }
+      set { _leftcard = value; }
+    }
+    private int _err_no;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"err_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int err_no
+    {
+      get { return _err_no; }
+      set { _err_no = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -381,6 +395,13 @@ namespace Table
     {
       get { return _card; }
       set { _card = value; }
+    }
+    private int _err_no;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"err_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int err_no
+    {
+      get { return _err_no; }
+      set { _err_no = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -437,6 +458,13 @@ namespace Table
       get { return _card; }
       set { _card = value; }
     }
+    private int _err_no;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"err_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int err_no
+    {
+      get { return _err_no; }
+      set { _err_no = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -454,6 +482,41 @@ namespace Table
       get { return _id; }
       set { _id = value; }
     }
+    private int _from;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"from", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int from
+    {
+      get { return _from; }
+      set { _from = value; }
+    }
+    private int _hutype;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"hutype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hutype
+    {
+      get { return _hutype; }
+      set { _hutype = value; }
+    }
+    private int _err_no;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"err_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int err_no
+    {
+      get { return _err_no; }
+      set { _err_no = value; }
+    }
+    private int _card;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"card", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int card
+    {
+      get { return _card; }
+      set { _card = value; }
+    }
+    private readonly global::System.Collections.Generic.List<int> _cards = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"cards", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> cards
+    {
+      get { return _cards; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
