@@ -42,6 +42,20 @@ public class ProtoReq{
         Table.ReadyReq ready = new Table.ReadyReq();
         NetClient.Instance().WriteMsg("Table.ReadyReq", ready);
     }
+
+    public static void Quit(int tableId)
+    {
+        Table.QuitReq quit = new QuitReq();
+        quit.id = tableId;
+        NetClient.Instance().WriteMsg("Table.QuitReq", quit);
+    }
+
+    public static void Kick(int roleId)
+    {
+        Table.KickReq kick = new KickReq();
+        kick.id = roleId;
+        NetClient.Instance().WriteMsg("Table.KickReq", kick);
+    }
     public static void Turn()
     {
         Table.Turn turn = new Table.Turn();
@@ -83,11 +97,5 @@ public class ProtoReq{
     {
         Table.NewCard card = new NewCard();
         NetClient.Instance().WriteMsg("Table.NewCard", card);
-    }
-
-    public static void QuiTable()
-    {
-        Table.Quit quit = new Quit();
-        NetClient.Instance().WriteMsg("Table.Quit", quit);
     }
 }

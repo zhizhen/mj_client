@@ -137,10 +137,44 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Quit")]
-  public partial class Quit : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuitReq")]
+  public partial class QuitReq : global::ProtoBuf.IExtensible
   {
-    public Quit() {}
+    public QuitReq() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuitRsp")]
+  public partial class QuitRsp : global::ProtoBuf.IExtensible
+  {
+    public QuitRsp() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KickReq")]
+  public partial class KickReq : global::ProtoBuf.IExtensible
+  {
+    public KickReq() {}
     
     private int _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -187,8 +221,15 @@ namespace Table
       get { return _ready; }
       set { _ready = value; }
     }
+    private bool _online;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"online", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool online
+    {
+      get { return _online; }
+      set { _online = value; }
+    }
     private string _url;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public string url
     {
       get { return _url; }
@@ -220,6 +261,37 @@ namespace Table
     {
       get { return _id; }
       set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Start")]
+  public partial class Start : global::ProtoBuf.IExtensible
+  {
+    public Start() {}
+    
+    private int _status;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int status
+    {
+      get { return _status; }
+      set { _status = value; }
+    }
+    private int _id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _round;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"round", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int round
+    {
+      get { return _round; }
+      set { _round = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -399,6 +471,13 @@ namespace Table
       get { return _id; }
       set { _id = value; }
     }
+    private bool _auto;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"auto", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool auto
+    {
+      get { return _auto; }
+      set { _auto = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -415,6 +494,20 @@ namespace Table
     {
       get { return _card; }
       set { _card = value; }
+    }
+    private int _id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _leftcard;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"leftcard", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int leftcard
+    {
+      get { return _leftcard; }
+      set { _leftcard = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

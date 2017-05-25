@@ -29,6 +29,7 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.CreateRsp", createTable_rsp);
         dic.Add("Table.Join", joined);
         dic.Add("Table.JoinRsp", joinTable_rsp);
+        dic.Add("Table.QuitRsp", quit_rsp);
         dic.Add("Table.Ready", ready_rsp);
         dic.Add("Table.Cards", get_cards);
         dic.Add("Table.Turn", turn);
@@ -133,5 +134,10 @@ public class ProtoRes:Singleton<ProtoRes>{
     {
         TableController.Instance.anGang((Table.Angang)msg.body);
     }
-    #endregion 
+
+    private void quit_rsp(Msg msg)
+    {
+        TableController.Instance.quitTable((Table.QuitRsp)msg.body);
+    }
+    #endregion
 }

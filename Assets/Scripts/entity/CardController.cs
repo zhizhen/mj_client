@@ -7,6 +7,7 @@ public class CardController:Singleton<CardController>{
     public List<int>[] _myCardList;//起的类型牌
     private List<int>[] _pengCardList;//碰的类型牌
     private List<int>[] _gangCardList;//扛的类型牌
+    private List<int>[] _anGangCardList;//暗杠的类型牌
 
     public Card _lastCard;//最后起的牌
 
@@ -30,6 +31,7 @@ public class CardController:Singleton<CardController>{
         _myCardList = new List<int>[5];
         _pengCardList = new List<int>[5];
         _gangCardList = new List<int>[5];
+        _anGangCardList = new List<int>[5];
         for (int i = 0; i < 5; i++)
         {
             List<int> list1 = new List<int>();
@@ -38,6 +40,8 @@ public class CardController:Singleton<CardController>{
             _pengCardList[i] = list2;
             List<int> list3 = new List<int>();
             _gangCardList[i] = list3;
+            List<int> list4 = new List<int>();
+            _anGangCardList[i] = list4;
         }
         _lastCard = new Card();
         _tempPengCardList = new List<Card>();
@@ -130,6 +134,7 @@ public class CardController:Singleton<CardController>{
             _myCardList[i].Clear();
             _pengCardList[i].Clear();
             _gangCardList[i].Clear();
+            _anGangCardList[i].Clear();
         }
     }
     //检测是否胡牌
@@ -594,9 +599,9 @@ public class CardController:Singleton<CardController>{
     //检测是否大四喜
     private bool checkD4X_HU()
     {
-        if (_gangCardList[1].Count == 16)
+        if (_gangCardList[CARD_TYPE.风].Count == 16)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 if (_myCardList[i][0] == _myCardList[i][1])
                 {
@@ -609,7 +614,7 @@ public class CardController:Singleton<CardController>{
     //检测是否大三元
     private bool checkD3Y_HU()
     {
-        if (_gangCardList[0].Count == 12)
+        if (_gangCardList[CARD_TYPE.ZFB].Count == 12)
         {
             for (int i = 0; i < 6; i++)
             {
@@ -703,7 +708,7 @@ public class CardController:Singleton<CardController>{
     //检测是否胡小四喜  
     private bool CheckX4X_HU()
     {
-        if (_gangCardList[1].Count == 12)
+        if (_gangCardList[CARD_TYPE.风].Count == 12)
         {
             int iJingPos = -1;
             for (int i = 0; i < 6; i++)
@@ -747,7 +752,7 @@ public class CardController:Singleton<CardController>{
     //检测是否胡小三元  
     private bool CheckX3Y_HU()
     {
-        if (_gangCardList[0].Count == 8)
+        if (_gangCardList[CARD_TYPE.ZFB].Count == 8)
         {
             if (_myCardList[CARD_TYPE.ZFB].Count == 5)
             {

@@ -91,4 +91,10 @@ public class TableController :Singleton<TableController> {
         Debug.Log("暗杠");
         EventDispatcher.Instance.Dispatch<int,int>(GameEventConst.AN_GANG, gang.id.idToPos(), gang.card);
     }
+
+    public void quitTable(Table.QuitRsp quit)
+    {
+        Debug.Log("退出");
+
+    }
 }

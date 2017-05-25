@@ -19,19 +19,28 @@ message JoinReq {
 	required int32 tab_id = 1;
 }
 
-message Join {
+//加入桌子返回给所有其他人
+message Join{
 	required int32 id = 1;
 	required Role role = 2;
 }
 
-// 加入返回
+// 加入返回给加入者
 message JoinRsp{
 	required int32 err_no = 1;
 	repeated Role roles = 3;
 }
 
 //退出桌子
-message Quit{
+message QuitReq{
+	required int32 id = 1;
+}
+//通知客户端谁离开了，离开时别人的话，显示空位，自己的话，关闭窗口
+message QuitRsp{
+	required int32 id = 1;
+}
+//踢人
+message KickReq{
 	required int32 id = 1;
 }
 
@@ -40,7 +49,9 @@ message Role {
   required string name = 2; 
   required int32 pos = 3;
   required bool ready = 4;
-  required string url = 5;
+  required bool online = 5;
+  required string url = 6;
+
 }
 
 // 准备
@@ -51,6 +62,13 @@ message ReadyReq{
 // 准备结果
 message Ready{
 	required int32 id = 1;
+}
+
+//status = 1,代表开始一局，2代表结束一局，id代表本局的庄家，round代表第几局
+message Start{
+	required int32 status = 1;
+	required int32 id = 2;
+	required int32 round = 3;
 }
 
 // 发牌
@@ -97,10 +115,13 @@ message Hu{
 // 过
 message Pass{
 	required int32 id = 1;
+	required bool auto = 2;
 }
 
 // 摸底牌
 message NewCard{
 	required int32 card = 1;
+	required int32 id = 2;
+	required int32 leftcard = 3;
 }
 
