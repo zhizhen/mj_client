@@ -745,7 +745,7 @@ public class RoomPanel : BasePanel {
 
     private void getCurCard(int roleId,int num,int leftCard)
     {
-        if (roleId == MainRole.Instance.Id)
+        if (num!=0)
         {
             IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
             //beginTimeCount();
