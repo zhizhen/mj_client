@@ -591,7 +591,7 @@ public class RoomPanel : BasePanel {
                 {
                     if (item.Value.Id == MainRole.Instance.Id)
                     {
-                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/tick").gameObject.SetActive(false);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").gameObject.SetActive(false);
                         _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(true);
                         _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.RemoveAllListeners();
                         _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").GetComponent<Button>().onClick.AddListener(delegate
@@ -601,7 +601,7 @@ public class RoomPanel : BasePanel {
                     }
                     else
                     {
-                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/tick").gameObject.SetActive(false);
+                        _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/ti").gameObject.SetActive(false);
                         _before.transform.FindChild("role" + RoleController.Instance.getPlayerPos(item.Value.Id) + "/quit").gameObject.SetActive(false);
                     }
                 }
