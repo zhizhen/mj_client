@@ -663,7 +663,7 @@ public class RoomPanel : BasePanel {
                 _gang.gameObject.SetActive(true);
                 isPass = false;
             }
-            if (!isPass)
+            if (isPass)
             {
                 ProtoReq.Pass(MainRole.Instance.Id, true);
             }
