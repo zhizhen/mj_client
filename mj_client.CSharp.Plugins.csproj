@@ -103,7 +103,9 @@
     <Compile Include="Assets\Plugins\TimeCount.cs" />
     <Compile Include="Assets\Plugins\UI\CardProxy.cs" />
     <Compile Include="Assets\Plugins\UI\PengAndGangProxy.cs" />
+    <Compile Include="Assets\Plugins\UI\UGUIEventType.cs" />
     <Compile Include="Assets\Plugins\UI\UIDepth.cs" />
+    <Compile Include="Assets\Plugins\UI\UIEventHandlerBase.cs" />
     <Compile Include="Assets\Plugins\UI\UILoading.cs" />
     <Compile Include="Assets\Plugins\const\GameConfig.cs" />
     <Compile Include="Assets\Plugins\const\URL.cs" />

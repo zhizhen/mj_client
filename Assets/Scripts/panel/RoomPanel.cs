@@ -286,6 +286,7 @@ public class RoomPanel : BasePanel {
 
         _hu.onClick.AddListener(delegate
         {
+            GlobleTimer.Instance.ClearTimer(_timeCount);
             //CardController.Instance.hu
             // ProtoReq.
             List<int> cards = new List<int>();
@@ -308,7 +309,8 @@ public class RoomPanel : BasePanel {
             _gang.gameObject.SetActive(false);
         });
         _gang.onClick.AddListener(delegate {
-             ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
+            GlobleTimer.Instance.ClearTimer(_timeCount);
+            ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
             //if (isgang)
             //    ProtoReq.AnGang(DataMgr.Instance._curCard);
             //else
@@ -320,6 +322,8 @@ public class RoomPanel : BasePanel {
         });
         _peng.onClick.AddListener(delegate {
             //CardController.Instance.peng(0, 0);
+            GlobleTimer.Instance.ClearTimer(_timeCount);
+            
             ProtoReq.Peng(DataMgr.Instance._curCard);
             isTurn = true;
             _fun.SetActive(false);
@@ -329,6 +333,7 @@ public class RoomPanel : BasePanel {
         });
 
         _pass.onClick.AddListener(delegate {
+            GlobleTimer.Instance.ClearTimer(_timeCount);
             ProtoReq.Pass(MainRole.Instance.Id,false);
             // endTimeCount();
             _fun.SetActive(false);

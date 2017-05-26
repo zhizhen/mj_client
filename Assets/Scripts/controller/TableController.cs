@@ -75,18 +75,33 @@ public class TableController :Singleton<TableController> {
     public void play(Table.Play play)
     {
         Debug.Log("收到play返回");
-        DataMgr.Instance._curCard = play.card;
-        Debug.Log("现在的cur" + play.card);
-        EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
+        if (play.err_no == 0)
+        {
+            DataMgr.Instance._curCard = play.card;
+            Debug.Log("现在的cur" + play.card);
+            EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
+        }
+        else
+        {
+            QuickTips.ShowRedQuickTips("play___" + play.err_no);
+        }
+       
     }
 
     public void gang(Table.Gang gang)
     {
-        EventDispatcher.Instance.Dispatch(GameEventConst.GANG, gang.id.idToPos(), gang.from.idToPos(), gang.card);
+        if (gang.err_no == 0)
+            EventDispatcher.Instance.Dispatch(GameEventConst.GANG, gang.id.idToPos(), gang.from.idToPos(), gang.card);
+        else
+            QuickTips.ShowRedQuickTips("Gang__" + gang.err_no);
     }
+
     public void peng(Table.Peng peng)
     {
-        EventDispatcher.Instance.Dispatch(GameEventConst.PENG, peng.id.idToPos(), peng.from.idToPos(), peng.card);
+        if (peng.err_no == 0)
+            EventDispatcher.Instance.Dispatch(GameEventConst.PENG, peng.id.idToPos(), peng.from.idToPos(), peng.card);
+        else
+            QuickTips.ShowRedQuickTips("peng___" + peng.err_no);
     }
     public void pass(Table.Pass pass)
     {
@@ -113,6 +128,9 @@ public class TableController :Singleton<TableController> {
     }
     public void hu(Table.Hu hu)
     {
-        Debug.Log("胡了");
+        if (hu.err_no == 0)
+            Debug.Log("胡了");
+        else
+            QuickTips.ShowRedQuickTips("hu___" + hu.err_no);
     }
 }
