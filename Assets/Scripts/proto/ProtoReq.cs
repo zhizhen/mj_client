@@ -70,6 +70,7 @@ public class ProtoReq{
     }
     public static void Gang(int num)
     {
+        Debug.Log("杠了个：" + num);
         Table.Gang gang = new Table.Gang();
         gang.card = num;
         NetClient.Instance().WriteMsg("Table.Gang", gang);

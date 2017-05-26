@@ -155,6 +155,12 @@ public class RoomPanel : BasePanel {
             //initCard();
             //endTimeCount();
         });
+
+        foreach (var item in RoleController.Instance._playerDic)
+        {
+            _after.transform.FindChild(item.Value.Id.idToPos().ToString()).GetComponent<Text>().text = item.Value.Id.ToString();
+        }
+
     }
     private void initHead()
     {
@@ -297,7 +303,7 @@ public class RoomPanel : BasePanel {
                     cards.Add(CardConst.GetCardBigNum(i, CardController.Instance._myCardList[i][j]));
                 }
             }
-            if (isSelfHu)
+            if (!isSelfHu)
             {
                 cards.Remove(DataMgr.Instance._curCard);
             }
