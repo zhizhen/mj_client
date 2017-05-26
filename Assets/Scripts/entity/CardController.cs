@@ -510,28 +510,24 @@ public class CardController:Singleton<CardController>{
         {
             if (check12Card(value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14))
                 return true;
-            return false;
         }
         //中将
         if (checkAACard(value4, value5))
         {
             if (check3Card(value1, value2, value3) && check9Card(value6, value7, value8, value9, value10, value11, value12, value13, value14))
                 return true;
-            return false;
         }
         //中将
         if (checkAACard(value7, value8))
         {
             if (check6Card(value1, value2, value4, value4, value5, value6) && check6Card(value9, value10, value11, value12, value13, value14))
                 return true;
-            return false;
         }
         //中将
         if (checkAACard(value10, value11))
         {
             if (check3Card(value12, value13, value14) && check9Card(value1, value2, value3, value4, value5, value6, value7, value8, value9))
                 return true;
-            return false;
         }
         //右将
 
@@ -539,7 +535,6 @@ public class CardController:Singleton<CardController>{
         {
             if (check12Card(value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12))
                 return true;
-            return false;
         }
         return false;
     }

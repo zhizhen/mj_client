@@ -704,6 +704,10 @@ public class RoomPanel : BasePanel {
     }
     private void onStart()
     {
+       
+    }
+    private void getCard()
+    {
         SoundMgr._instance.bgmPlay("beijing-fangjian");
         copyAfter();
         _after.SetActive(true);
@@ -713,9 +717,6 @@ public class RoomPanel : BasePanel {
         _gang.gameObject.SetActive(false);
         _pass.gameObject.SetActive(true);
         initFeng();
-    }
-    private void getCard()
-    {
         initCard();
     }
 
