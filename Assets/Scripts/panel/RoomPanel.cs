@@ -305,6 +305,7 @@ public class RoomPanel : BasePanel {
             }
             if (!isSelfHu)
             {
+
                 cards.Remove(DataMgr.Instance._curCard);
             }
 
