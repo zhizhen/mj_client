@@ -76,6 +76,7 @@ public class TableController :Singleton<TableController> {
     {
         Debug.Log("收到play返回");
         DataMgr.Instance._curCard = play.card;
+        Debug.Log("现在的cur" + play.card);
         EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
     }
 

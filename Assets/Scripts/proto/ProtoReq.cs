@@ -91,6 +91,7 @@ public class ProtoReq{
 
     public static void Peng(int num)
     {
+        Debug.Log("碰了:" + num);
         Table.Peng peng = new Table.Peng();
         peng.card = num;
         NetClient.Instance().WriteMsg("Table.Peng", peng);
