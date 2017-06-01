@@ -253,6 +253,34 @@ public class CardController:Singleton<CardController>{
 
         return false;
     }
+
+    public int checkGangCard()
+    {
+        _tempGangCardList.Clear();
+        for (int i = 0; i < 5; i++)
+        {
+            if (_myCardList[i].Count < 4)
+                continue;
+            for (int j = 0; j < _myCardList[i].Count; j++)
+            {
+                int temp = 0;
+                for (int k = 0; k < _myCardList[i].Count; k++)
+                {
+                    
+                    if (j != k)
+                    {
+                        if (_myCardList[i][j] == _myCardList[i][k])
+                            temp++;
+                    }
+                }
+                if (temp >= 3)
+                {
+                    return new Card(i, _myCardList[i][j]).BigNum;
+                }
+            }
+        }
+        return 0;
+    }
     public bool checkAnGang(int type, int num)
     {
         _tempGangCardList.Clear();

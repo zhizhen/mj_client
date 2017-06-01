@@ -20,6 +20,9 @@ public class RoomPanel : BasePanel {
     {
         base_name = PanelTag.ROOM_PANEL;
     }
+
+    private int _gangCur = 0;
+
     private int _timeCount;
     private Button _zhunbei;
     private Button _get;
@@ -223,6 +226,14 @@ public class RoomPanel : BasePanel {
                         _hu.gameObject.SetActive(true);
                         isSelfHu = true;
                     }
+                    int gangTemp = CardController.Instance.checkGangCard();
+                    if (gangTemp != 0)
+                    {
+                        _fun.SetActive(true);
+                        _gang.gameObject.SetActive(true);
+                        _gangCur = gangTemp;
+                    }
+                    //if(CardController.Instance.checkGang())
                     //beginTimeCount();
                     return;
                 }
@@ -314,10 +325,14 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
+            _gangCur = 0;
         });
         _gang.onClick.AddListener(delegate {
             GlobleTimer.Instance.ClearTimer(_timeCount);
-            ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
+            if(_gangCur==0)
+                 ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
+            else
+                ProtoReq.Gang(_gangCur);//没记录牌
             //if (isgang)
             //    ProtoReq.AnGang(DataMgr.Instance._curCard);
             //else
@@ -326,6 +341,7 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
+            _gangCur = 0;
         });
         _peng.onClick.AddListener(delegate {
             //CardController.Instance.peng(0, 0);
@@ -337,6 +353,7 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
+            _gangCur = 0;
         });
 
         _pass.onClick.AddListener(delegate {
@@ -347,6 +364,7 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
+            _gangCur = 0;
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -760,11 +778,11 @@ public class RoomPanel : BasePanel {
             DataMgr.Instance._curCard = num;
             Card card = new Card(DataMgr.Instance._curCard);
             //一系列判断
-            if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
-            {
-                isgang = true;
-                _fun.SetActive(true);
-            }
+            //if (CardController.Instance.checkAnGang(card.CardType, card.CardNum))
+            //{
+            //    isgang = true;
+            //    _fun.SetActive(true);
+            //}
             CardController.Instance.addCard(card.CardType, card.CardNum);
             _handCard.SetActive(true);
             if (CardController.Instance.checkCard(true))
@@ -772,6 +790,13 @@ public class RoomPanel : BasePanel {
                 isSelfHu = true;
                 _fun.SetActive(true);
                 _hu.gameObject.SetActive(true);
+            }
+            int gangTemp = CardController.Instance.checkGangCard();
+            if (gangTemp != 0)
+            {
+                _fun.SetActive(true);
+                _gang.gameObject.SetActive(true);
+                _gangCur = gangTemp;
             }
         }
         else
