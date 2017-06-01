@@ -68,8 +68,8 @@ public class RoomPanel : BasePanel {
     private bool isSelfHu = false;
 
 
-    private delegate void ONGANG();
-    private ONGANG gangBack = null;
+    private delegate void ON_GANG();
+    private ON_GANG gangBack = null;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
@@ -402,6 +402,7 @@ public class RoomPanel : BasePanel {
     {
         CardController.Instance.gang(CardConst.getCardInfo(card).type, CardConst.getCardInfo(card).value);
         initCard();
+        Debug.Log("重新整牌");
         newPengOrGang(_selfCard.transform.FindChild("other/grid/" + pos + "Gang").gameObject, card,DataMgr.Instance.selfOtherPos);
     }
 

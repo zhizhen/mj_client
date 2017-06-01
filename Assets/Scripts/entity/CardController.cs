@@ -310,39 +310,39 @@ public class CardController:Singleton<CardController>{
     //扛
     public bool gang(int type,int num)
     {
-        addCard(type, num);
-        foreach (var item in _tempGangCardList)
-        {
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
+        //addCard(type, num);
+        //foreach (var item in _tempGangCardList)
+        //{
+            delCard(type, num);
+            delCard(type, num);
+            delCard(type, num);
+            delCard(type, num);
 
-            if (_gangCardList[item.CardType].Count == 0)
+            if (_gangCardList[type].Count == 0)
             {
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
+                _gangCardList[type].Add(num);
+                _gangCardList[type].Add(num);
+                _gangCardList[type].Add(num);
+                _gangCardList[type].Add(num);
             }
             else
             {
                 //排序
-                foreach (var gang in _gangCardList[item.CardType])
+                foreach (var gang in _gangCardList[type])
                 {
-                    if (gang > item.CardNum)
+                    if (gang > num)
                     {
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
+                        _gangCardList[type].Insert(gang, num);
+                        _gangCardList[type].Insert(gang, num);
+                        _gangCardList[type].Insert(gang, num);
+                        _gangCardList[type].Insert(gang, num);
                         break;
                     }
                 }
             }
             return true;
-        }
-        return false;
+        //}
+       // return false;
     }
 
     public bool AnGang(int type, int num)

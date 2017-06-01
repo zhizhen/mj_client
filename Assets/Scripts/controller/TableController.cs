@@ -130,7 +130,7 @@ public class TableController :Singleton<TableController> {
 
     public void newCard(Table.NewCard card)
     {
-        Debug.Log("摸牌");
+        Debug.Log("摸牌"+card.card);
         EventDispatcher.Instance.Dispatch(GameEventConst.GET_NEW_CARD,card.id,card.card,card.leftcard);
     }
 
