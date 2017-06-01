@@ -21,8 +21,6 @@ public class RoomPanel : BasePanel {
         base_name = PanelTag.ROOM_PANEL;
     }
 
-    private int _gangCur = 0;
-
     private int _timeCount;
     private Button _zhunbei;
     private Button _get;
@@ -67,8 +65,11 @@ public class RoomPanel : BasePanel {
 
     public bool isTurn = false;
 
-    private bool isgang = false;
     private bool isSelfHu = false;
+
+
+    private delegate void ONGANG();
+    private ONGANG gangBack = null;
     public override void InitPanel(Transform uiSprite)
     {
         base.InitPanel(uiSprite);
@@ -142,7 +143,7 @@ public class RoomPanel : BasePanel {
                 string name = obj.FindChild("value").GetComponent<Image>().sprite.name;
                 int num = GameTools.getCardNumByName(name);
                 ProtoReq.Play(num);
-              
+                GlobleTimer.Instance.ClearTimer(_timeCount);
             });
         }
 
@@ -157,6 +158,7 @@ public class RoomPanel : BasePanel {
             //setSelfHe(num);
             //initCard();
             //endTimeCount();
+            GlobleTimer.Instance.ClearTimer(_timeCount);
         });
 
         foreach (var item in RoleController.Instance._playerDic)
@@ -231,7 +233,10 @@ public class RoomPanel : BasePanel {
                     {
                         _fun.SetActive(true);
                         _gang.gameObject.SetActive(true);
-                        _gangCur = gangTemp;
+                        gangBack = delegate ()
+                        {
+                            ProtoReq.Gang(gangTemp);
+                        };
                     }
                     //if(CardController.Instance.checkGang())
                     //beginTimeCount();
@@ -325,14 +330,10 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
-            _gangCur = 0;
         });
         _gang.onClick.AddListener(delegate {
             GlobleTimer.Instance.ClearTimer(_timeCount);
-            if(_gangCur==0)
-                 ProtoReq.Gang(DataMgr.Instance._curCard);//没记录牌
-            else
-                ProtoReq.Gang(_gangCur);//没记录牌
+            gangBack.Invoke();
             //if (isgang)
             //    ProtoReq.AnGang(DataMgr.Instance._curCard);
             //else
@@ -341,7 +342,6 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
-            _gangCur = 0;
         });
         _peng.onClick.AddListener(delegate {
             //CardController.Instance.peng(0, 0);
@@ -353,7 +353,6 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
-            _gangCur = 0;
         });
 
         _pass.onClick.AddListener(delegate {
@@ -364,7 +363,6 @@ public class RoomPanel : BasePanel {
             _hu.gameObject.SetActive(false);
             _peng.gameObject.SetActive(false);
             _gang.gameObject.SetActive(false);
-            _gangCur = 0;
         });
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
@@ -688,9 +686,12 @@ public class RoomPanel : BasePanel {
             }
             if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
             {
-                isgang = false;
                 _fun.SetActive(true);
                 _gang.gameObject.SetActive(true);
+                gangBack = delegate ()
+                {
+                    ProtoReq.Gang(CardConst.GetCardBigNum(card1.CardType, card1.CardNum));
+                };
                 isPass = false;
             }
             if (isPass)
@@ -704,6 +705,11 @@ public class RoomPanel : BasePanel {
                 _timeCount = GlobleTimer.Instance.SetTimer(10000, delegate
                 {
                     endTimeCount();
+                    _peng.gameObject.SetActive(false);
+                    _gang.gameObject.SetActive(false);
+                    _hu.gameObject.SetActive(false);
+                    _fun.gameObject.SetActive(false);
+                    DataMgr.Instance._curCard = 0;
                     ProtoReq.Pass(MainRole.Instance.Id, false);
                 });
             }
@@ -770,6 +776,10 @@ public class RoomPanel : BasePanel {
 
     private void getCurCard(int roleId,int num,int leftCard)
     {
+        _hu.gameObject.SetActive(false);
+        _peng.gameObject.SetActive(false);
+        _gang.gameObject.SetActive(false);
+        _fun.gameObject.SetActive(false);
         if (num!=0)
         {
             IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
@@ -796,7 +806,10 @@ public class RoomPanel : BasePanel {
             {
                 _fun.SetActive(true);
                 _gang.gameObject.SetActive(true);
-                _gangCur = gangTemp;
+                gangBack = delegate ()
+                {
+                    ProtoReq.Gang(gangTemp);
+                };
             }
         }
         else

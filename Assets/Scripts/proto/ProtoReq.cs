@@ -84,6 +84,7 @@ public class ProtoReq{
     //}
     public static void Pass(int id,bool auto)
     {
+        Debug.Log("发送pass");
         Table.Pass pass = new Table.Pass();
         pass.id = id;
         pass.auto = auto;

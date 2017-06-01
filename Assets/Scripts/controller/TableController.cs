@@ -125,7 +125,7 @@ public class TableController :Singleton<TableController> {
     }
     public void pass(Table.Pass pass)
     {
-
+        Debug.Log("收到pass");
     }
 
     public void newCard(Table.NewCard card)
