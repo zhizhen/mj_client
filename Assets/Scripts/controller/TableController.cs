@@ -26,13 +26,33 @@ public class TableController :Singleton<TableController> {
     public void joinedTable(Table.JoinRsp join)
     {
         Debug.Log("JoinRsp");
-        for (int i = 0; i < join.roles.Count; i++)
+        if (join.err_no == 0)
         {
-            RoleController.Instance.addPlayer(join.roles[i]);
-            
-            Debug.Log("role" + i + join.roles[i].name);
+            for (int i = 0; i < join.roles.Count; i++)
+            {
+                RoleController.Instance.addPlayer(join.roles[i]);
+
+                Debug.Log("role" + i + join.roles[i].name);
+            }
+            RoomPanel.Instance.load();
         }
-        RoomPanel.Instance.load();
+        else if (join.err_no == 1)
+        {
+            QuickTips.ShowRedQuickTips("房间不存在");
+        }
+        else if (join.err_no == 2)
+        {
+            QuickTips.ShowRedQuickTips("人数已满");
+        }
+        else if (join.err_no == 3)
+        {
+            QuickTips.ShowRedQuickTips("已经在座位上，可能别处登录");
+        }
+        else if (join.err_no == 4)
+        {
+            QuickTips.ShowRedQuickTips("没有适合座位了");
+        }
+        
     }
 
     public void joined(Table.Join join)

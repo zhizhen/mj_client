@@ -133,5 +133,43 @@ message NewCard{
 	required int32 card = 1;
 	required int32 id = 2;
 	required int32 leftcard = 3;//桌面剩余牌数
+	//required int32 counter = 4; //计数倒计时
 }
+
+message SwitchAuto{
+	required int32 id = 1;
+	required bool isauto = 2;
+}
+
+
+//语音
+message VoiceChat{
+	required int32 id = 1;
+	required bytes data = 2;
+}
+
+//快捷消息
+message QuickMsg{
+	required int32 msgid = 1;
+}
+
+message JiangMa{
+	repeated int32 cards = 1;
+}
+
+//本局分数
+message RoundScore{
+	repeated Score scores = 1;
+	
+}
+
+
+message Score{
+	required int32 id = 1;
+	required int32 hu = 2; //1-胡，2、放炮，0、nothing，3,自摸
+	required int32 hu_type = 3;
+	required int32 score = 4;
+}
+
+
 
