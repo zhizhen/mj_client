@@ -165,5 +165,25 @@ public class TableController :Singleton<TableController> {
     public void roundScore(Table.RoundScore score)
     {
         Debug.Log("收到本局分数");
+        for (int i = 0; i < score.end_cards.Count; i++)
+        {
+            switch (score.end_cards[i].id.idToPos())
+            {
+                case 0:
+                    DataMgr.Instance._selfCardList = score.end_cards[i].cards;
+                    break;
+                case 1:
+                    DataMgr.Instance._rightCardList = score.end_cards[i].cards;
+                    break;
+                case 2:
+                    DataMgr.Instance._topCardList = score.end_cards[i].cards;
+                    break;
+                case 3:
+                    DataMgr.Instance._leftCardList = score.end_cards[i].cards;
+                    break;
+            }
+        }
+
+        EventDispatcher.Instance.Dispatch(GameEventConst.ROUND_SCORE);
     }
 }

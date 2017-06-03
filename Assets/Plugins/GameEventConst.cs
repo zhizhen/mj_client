@@ -17,4 +17,5 @@ public class GameEventConst{
     public const string TIME_COUNT_END = "TIME_COUNT_END";
     public const string START = "START";
     public const string END = "END";
+    public const string ROUND_SCORE = "ROUND_SCORE";
 }

@@ -468,6 +468,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<int, int, int>(GameEventConst.GANG, onGang);
         //EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.AddEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
+        EventDispatcher.Instance.AddEventListener(GameEventConst.ROUND_SCORE, onRoundScore);
     }
 
     public override void RemoveListener()
@@ -484,6 +485,87 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<int, int, int>(GameEventConst.GANG, onGang);
         //EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.AN_GANG, onAnGang);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.TIME_COUNT_END, onTimeEnd);
+        EventDispatcher.Instance.RemoveEventListener(GameEventConst.ROUND_SCORE, onRoundScore);
+    }
+
+    private void onRoundScore()
+    {
+        //隐藏手牌
+        _after.transform.FindChild("leftCard/hand").gameObject.SetActive(false);
+        _after.transform.FindChild("selfCard/hand").gameObject.SetActive(false);
+        _after.transform.FindChild("topCard/hand").gameObject.SetActive(false);
+        _after.transform.FindChild("rightCard/hand").gameObject.SetActive(false);
+        _handCard.SetActive(false);
+
+        //显示摊牌
+        GameObject objHand = _after.transform.FindChild("hand").gameObject;
+
+        objHand.SetActive(true);
+        GameObject obj;
+        int sum = 0;
+        //pos0
+        obj = objHand.transform.FindChild("hand0/grid").gameObject;
+        sum = DataMgr.Instance._selfCardList.Count;
+        int index = 0;
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            if (i < sum)
+            {
+                obj.transform.GetChild(i).gameObject.SetActive(true);
+                IconMgr.Instance.SetImage(obj.transform.GetChild(i).FindChild("value").GetComponent<Image>(), "zm2_"+DataMgr.Instance._selfCardList[index]);
+                index++;
+            }
+            else
+                obj.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        //pos1
+        obj = objHand.transform.FindChild("hand1/grid").gameObject;
+        index = 0;
+        sum = DataMgr.Instance._rightCardList.Count;
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            if (i < sum)
+            {
+                obj.transform.GetChild(i).gameObject.SetActive(true);
+                IconMgr.Instance.SetImage(obj.transform.GetChild(i).FindChild("value").GetComponent<Image>(), "youmian2_" + DataMgr.Instance._rightCardList[index]);
+                index++;
+            }
+               
+            else
+                obj.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        //pos2
+        obj = objHand.transform.FindChild("hand2/grid").gameObject;
+        index = 0;
+        sum = DataMgr.Instance._topCardList.Count;
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            if (i < sum)
+            {
+                obj.transform.GetChild(i).gameObject.SetActive(true);
+                IconMgr.Instance.SetImage(obj.transform.GetChild(i).FindChild("value").GetComponent<Image>(), "shangmian1_" + DataMgr.Instance._topCardList[index]);
+                index++;
+            }
+
+            else
+                obj.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        //pos3
+        obj = objHand.transform.FindChild("hand3/grid").gameObject;
+        index = 0;
+        sum = DataMgr.Instance._rightCardList.Count;
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            if (i < sum)
+            {
+                obj.transform.GetChild(obj.transform.childCount - 1 - i).gameObject.SetActive(true);
+                IconMgr.Instance.SetImage(obj.transform.GetChild(obj.transform.childCount - 1 - i).FindChild("value").GetComponent<Image>(), "left2_" + DataMgr.Instance._rightCardList[index]);
+                index++;
+            }
+            else
+                obj.transform.GetChild(obj.transform.childCount - 1 - i).gameObject.SetActive(false);
+        }
+
     }
     private void onTimeEnd()
     {
