@@ -696,17 +696,17 @@ public class RoomPanel : BasePanel {
             else
             {
                 //_timeCount =
-                beginTimeCount();
-                _timeCount = GlobleTimer.Instance.SetTimer(10000, delegate
-                {
-                    endTimeCount();
-                    _peng.gameObject.SetActive(false);
-                    _gang.gameObject.SetActive(false);
-                    _hu.gameObject.SetActive(false);
-                    _fun.gameObject.SetActive(false);
-                    DataMgr.Instance._curCard = 0;
-                    ProtoReq.Pass(MainRole.Instance.Id, false);
-                });
+                //beginTimeCount();
+                //_timeCount = GlobleTimer.Instance.SetTimer(10000, delegate
+                //{
+                //    endTimeCount();
+                //    _peng.gameObject.SetActive(false);
+                //    _gang.gameObject.SetActive(false);
+                //    _hu.gameObject.SetActive(false);
+                //    _fun.gameObject.SetActive(false);
+                //    DataMgr.Instance._curCard = 0;
+                //    ProtoReq.Pass(MainRole.Instance.Id, false);
+                //});
             }
         }
         else
