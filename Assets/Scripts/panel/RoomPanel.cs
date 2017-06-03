@@ -659,8 +659,14 @@ public class RoomPanel : BasePanel {
             bool isPass = true;
             Card card1 = new Card(DataMgr.Instance._curCard);
             //一系列判断
+            if (CardController.Instance.checkPeng(card1.CardType, card1.CardNum))
+            {
+                _fun.SetActive(true);
+                _peng.gameObject.SetActive(true);
+                isPass = false;
+            }
             CardController.Instance.addCard(card1.CardType, card1.CardNum);
-
+           
             if (CardController.Instance.checkCard(false))
             {
                 isSelfHu = false;
@@ -672,12 +678,6 @@ public class RoomPanel : BasePanel {
             {
                 CardController.Instance.delCard(card1.CardType, card1.CardNum);
                 _hu.gameObject.SetActive(false);
-            }
-            if (CardController.Instance.checkPeng(card1.CardType, card1.CardNum))
-            {
-                _fun.SetActive(true);
-                _peng.gameObject.SetActive(true);
-                isPass = false;
             }
             if (CardController.Instance.checkGang(card1.CardType, card1.CardNum))
             {
