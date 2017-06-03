@@ -100,7 +100,7 @@ public class TableController :Singleton<TableController> {
         {
             DataMgr.Instance._curCard = play.card;
             Debug.Log("现在的cur" + play.card);
-            EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card);
+            EventDispatcher.Instance.Dispatch(GameEventConst.PUT_HE_CARD, play.id.idToPos(), play.card,play.leftcard);
         }
         else
         {

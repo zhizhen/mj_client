@@ -133,6 +133,7 @@ public class ProtoRes:Singleton<ProtoRes>{
     }
     private void newCard(Msg msg)
     {
+
         TableController.Instance.newCard((Table.NewCard)msg.body);
 
     }

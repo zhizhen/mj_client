@@ -460,7 +460,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.AddEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.AddEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.AddEventListener<int,int,int>(GameEventConst.GET_NEW_CARD, getCurCard);
-        EventDispatcher.Instance.AddEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
+        EventDispatcher.Instance.AddEventListener<int, int,List<int>>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.AddEventListener(GameEventConst.ADD_PLAYER, addPlayer);
         EventDispatcher.Instance.AddEventListener(GameEventConst.START, onStart);
         //EventDispatcher.Instance.AddEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
@@ -476,7 +476,7 @@ public class RoomPanel : BasePanel {
         EventDispatcher.Instance.RemoveEventListener<int>(GameEventConst.READY_TO_PALY, onReady);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.CARD_TO_HAND, getCard);
         EventDispatcher.Instance.RemoveEventListener<int,int,int>(GameEventConst.GET_NEW_CARD, getCurCard);
-        EventDispatcher.Instance.RemoveEventListener<int, int>(GameEventConst.PUT_HE_CARD, putHeCard);
+        EventDispatcher.Instance.RemoveEventListener<int, int, List<int>>(GameEventConst.PUT_HE_CARD, putHeCard);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.ADD_PLAYER, addPlayer);
         EventDispatcher.Instance.RemoveEventListener(GameEventConst.START, onStart);
         //EventDispatcher.Instance.RemoveEventListener<bool,int>(GameEventConst.TURN_TO, turnTo);
@@ -631,7 +631,7 @@ public class RoomPanel : BasePanel {
             }
         }
     }
-    private void putHeCard(int pos, int card)
+    private void putHeCard(int pos, int card,List<int> leftCards)
     {
         switch (pos)
         {
