@@ -488,19 +488,22 @@ public class CardController:Singleton<CardController>{
         //左边两个将
         if (checkAACard(value1, value2))
         {
-            return check6Card(value3, value4, value5, value6, value7, value8);
+            if (check6Card(value3, value4, value5, value6, value7, value8))
+                return true;
         }
         //中间两个将
         if (checkAACard(value4, value5))
         {
-            return check3Card(value1, value2, value3) && check3Card(value6, value7, value8);
+            if (check3Card(value1, value2, value3) && check3Card(value6, value7, value8))
+                return true;
         }
 
 
         //右边两个将
         if (checkAACard(value7, value8))
         {
-            return check6Card(value1, value2, value3, value4, value5, value6);
+            if (check6Card(value1, value2, value3, value4, value5, value6))
+                return true;
         }
 
         return false;
@@ -511,7 +514,8 @@ public class CardController:Singleton<CardController>{
         //左将
         if (checkAACard(value1, value2))
         {
-            return check9Card(value3, value4, value5, value6, value7, value8, value9,value10,value11);
+            if (check9Card(value3, value4, value5, value6, value7, value8, value9, value10, value11))
+                return true;
         }
         //中将
         if (checkAACard(value4, value5))
@@ -522,12 +526,17 @@ public class CardController:Singleton<CardController>{
         //中将
         if (checkAACard(value7, value8))
         {
-            return check3Card(value9, value10, value11) && check6Card(value1, value2, value3, value4, value5, value6);
+            if (check3Card(value9, value10, value11) && check6Card(value1, value2, value3, value4, value5, value6))
+                return true;
         }
 
         //右将
         if (checkAACard(value10, value11))
-            return check9Card(value1, value2, value3, value4, value5, value6,value7,value8,value9);
+        {
+            if (check9Card(value1, value2, value3, value4, value5, value6, value7, value8, value9))
+                return true;
+        }
+           
         return false;
     }
     //检测是否胡牌
