@@ -22,7 +22,6 @@ public class RoomPanel : BasePanel {
     }
 
     private int _timeCount;
-    private Button _zhunbei;
     private Button _get;
     private GameObject _list;
     private GameObject _grid;
@@ -367,11 +366,6 @@ public class RoomPanel : BasePanel {
         _before.transform.FindChild("invite").GetComponent<Button>().onClick.AddListener(delegate
         {
             weixinInvite();
-        });
-
-        _before.transform.FindChild("Button").GetComponent<Button>().onClick.AddListener(delegate
-        {
-            toReady();
         });
     }
 
@@ -734,10 +728,6 @@ public class RoomPanel : BasePanel {
         SDKMgr.Instance.DoShareTestFriend(GameConst.tableId);
 #endif
 
-    }
-    private void toReady()
-    {
-        ProtoReq.Ready();
     }
     private void onStart()
     {

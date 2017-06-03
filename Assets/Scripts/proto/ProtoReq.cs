@@ -113,4 +113,16 @@ public class ProtoReq{
         hu.cards.AddRange(cards);
         NetClient.Instance().WriteMsg("Table.Hu", hu);
     }
+
+    public static void PassHu()
+    {
+        NetClient.Instance().WriteMsg("Table.PassHu", new Table.PassHu());
+    }
+    public static void VoiceChat(byte[] data)
+    {
+        Table.VoiceChat voice = new Table.VoiceChat();
+        voice.data = data;
+        NetClient.Instance().WriteMsg("Table.VoiceChat", voice);
+    }
+
 }

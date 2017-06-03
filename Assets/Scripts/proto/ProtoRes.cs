@@ -41,6 +41,8 @@ public class ProtoRes:Singleton<ProtoRes>{
         dic.Add("Table.NewCard", newCard);
         dic.Add("Table.Angang",anGang);
         dic.Add("Table.Hu", hu);
+
+        dic.Add("Table.RoundScore", roundScore);
     }
 
    
@@ -148,6 +150,11 @@ public class ProtoRes:Singleton<ProtoRes>{
     private void hu(Msg msg)
     {
         TableController.Instance.hu((Table.Hu)msg.body);
+    }
+
+    private void roundScore(Msg msg)
+    {
+        TableController.Instance.roundScore((Table.RoundScore)msg.body);
     }
     #endregion
 }

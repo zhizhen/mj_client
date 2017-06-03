@@ -26,6 +26,7 @@ public class TableController :Singleton<TableController> {
     public void joinedTable(Table.JoinRsp join)
     {
         Debug.Log("JoinRsp");
+        ProtoReq.Ready();
         if (join.err_no == 0)
         {
             for (int i = 0; i < join.roles.Count; i++)
@@ -152,5 +153,10 @@ public class TableController :Singleton<TableController> {
             Debug.Log("胡了");
         else
             QuickTips.ShowRedQuickTips("hu___" + hu.err_no);
+    }
+
+    public void roundScore(Table.RoundScore score)
+    {
+        Debug.Log("收到本局分数");
     }
 }
