@@ -16,4 +16,5 @@ public class GameEventConst{
     public const string AN_GANG = "AN_GANG";
     public const string TIME_COUNT_END = "TIME_COUNT_END";
     public const string START = "START";
+    public const string END = "END";
 }

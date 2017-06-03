@@ -91,6 +91,10 @@ public class TableController :Singleton<TableController> {
         {
             EventDispatcher.Instance.Dispatch(GameEventConst.START);
         }
+        if (start.status == 2)
+        {
+            EventDispatcher.Instance.Dispatch(GameEventConst.END);
+        }
 
     }
     public void play(Table.Play play)
@@ -150,7 +154,10 @@ public class TableController :Singleton<TableController> {
     public void hu(Table.Hu hu)
     {
         if (hu.err_no == 0)
+        {
             Debug.Log("胡了");
+        }
+           
         else
             QuickTips.ShowRedQuickTips("hu___" + hu.err_no);
     }

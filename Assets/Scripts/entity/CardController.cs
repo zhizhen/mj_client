@@ -142,6 +142,11 @@ public class CardController:Singleton<CardController>{
     {
         //if (getOrPut == CARD_STATE.CARD_GET)
         //{
+        if (Check13Y_HU())
+        {
+            Debug.Log("胡13幺");
+            return true;
+        }
             if (checkD4X_HU())
             {
                 Debug.Log("胡大四喜");
@@ -253,7 +258,10 @@ public class CardController:Singleton<CardController>{
 
         return false;
     }
-
+    public bool checkBuGang(int type,int num)
+    {
+        return false;
+    }
     public int checkGangCard()
     {
         _tempGangCardList.Clear();
@@ -343,43 +351,6 @@ public class CardController:Singleton<CardController>{
             return true;
         //}
        // return false;
-    }
-
-    public bool AnGang(int type, int num)
-    {
-        addCard(type, num);
-        foreach (var item in _tempGangCardList)
-        {
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
-            delCard(item.CardType, item.CardNum);
-
-            if (_gangCardList[item.CardType].Count == 0)
-            {
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
-                _gangCardList[item.CardType].Add(item.CardNum);
-            }
-            else
-            {
-                //排序
-                foreach (var gang in _gangCardList[item.CardType])
-                {
-                    if (gang > item.CardNum)
-                    {
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        _gangCardList[item.CardType].Insert(gang, item.CardNum);
-                        break;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
     //检测是否胡牌
     private bool checkAACard(int value1, int value2)
@@ -665,7 +636,7 @@ public class CardController:Singleton<CardController>{
     private bool Check4Gang_HU()
     { return false; }
     //检测是否胡十三幺  
-    private bool Chekc13Y_HU()
+    private bool Check13Y_HU()
     {
         if (_13Y)
         {

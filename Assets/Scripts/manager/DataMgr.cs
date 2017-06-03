@@ -16,6 +16,8 @@ public class DataMgr : Singleton<DataMgr> {
     public List<int> _rightPengCardList;//you碰的类型牌
     public List<int> _rightGangCardList;//you扛的类型牌
 
+    public Dictionary<int, Dictionary<int,GameObject>> _everyPeng;
+
     public int _curCard;
 
     public int leftCardNum = 13;
@@ -47,5 +49,7 @@ public class DataMgr : Singleton<DataMgr> {
         _rightCardList = new List<int>();
         _rightPengCardList = new List<int>();
         _rightGangCardList = new List<int>();
+
+        _everyPeng = new Dictionary<int, Dictionary<int, GameObject>>();
     }
 }
