@@ -84,7 +84,7 @@ message Turn{
 message Play{
 	required int32 id = 1;
 	required int32 card = 2;
-	required int32 leftcard = 3;//此人剩余牌数
+	repeated int32 leftcard = 3;//此人剩余牌数
 	required int32 err_no = 4;
 }
 
@@ -128,6 +128,11 @@ message Pass{
 	required bool auto = 2;
 }
 
+//有人胡了之后，检测自己能不能胡，不能胡就马上发PassHu给服务器，以马上结束本局
+message PassHu{
+	required int32 id = 1;
+}
+
 // 摸底牌
 message NewCard{
 	required int32 card = 1;
@@ -160,9 +165,15 @@ message JiangMa{
 //本局分数
 message RoundScore{
 	repeated Score scores = 1;
-	
+	repeated EndCards end_cards = 2;
 }
 
+
+//最后所有人的翻牌
+message EndCards{
+	required int32 id = 1;
+	repeated int32 cards = 2;
+}
 
 message Score{
 	required int32 id = 1;

@@ -351,13 +351,13 @@ namespace Table
       get { return _card; }
       set { _card = value; }
     }
-    private int _leftcard;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"leftcard", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int leftcard
+    private readonly global::System.Collections.Generic.List<int> _leftcard = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"leftcard", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> leftcard
     {
       get { return _leftcard; }
-      set { _leftcard = value; }
     }
+  
     private int _err_no;
     [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"err_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int err_no
@@ -546,6 +546,23 @@ namespace Table
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PassHu")]
+  public partial class PassHu : global::ProtoBuf.IExtensible
+  {
+    public PassHu() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewCard")]
   public partial class NewCard : global::ProtoBuf.IExtensible
   {
@@ -669,6 +686,37 @@ namespace Table
     public global::System.Collections.Generic.List<Table.Score> scores
     {
       get { return _scores; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<Table.EndCards> _end_cards = new global::System.Collections.Generic.List<Table.EndCards>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"end_cards", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<Table.EndCards> end_cards
+    {
+      get { return _end_cards; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EndCards")]
+  public partial class EndCards : global::ProtoBuf.IExtensible
+  {
+    public EndCards() {}
+    
+    private int _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<int> _cards = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"cards", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> cards
+    {
+      get { return _cards; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
