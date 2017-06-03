@@ -59,6 +59,7 @@ public class HallPanel : BasePanel
     private GameObject _input;
     private Button _button;
     private Button _close;
+    private Button _closeCreate;
     private int _roomNum;
     private Button _button0;
     private Button _button1;
@@ -85,6 +86,7 @@ public class HallPanel : BasePanel
 
         _button = _input.transform.FindChild("confirm").GetComponent<Button>();
         _close = _input.transform.FindChild("close").GetComponent<Button>();
+       
         _button0 = _input.transform.FindChild("anniu/button0").GetComponent<Button>();
         _button1 = _input.transform.FindChild("anniu/button1").GetComponent<Button>();
         _button2 = _input.transform.FindChild("anniu/button2").GetComponent<Button>();
@@ -101,7 +103,7 @@ public class HallPanel : BasePanel
         _shuruItem = _shuruGrid.transform.FindChild("item").gameObject;
 
         _createRoom = uiSprite.transform.FindChild("createRoom").gameObject;
-
+        _closeCreate = _createRoom.transform.FindChild("close").GetComponent<Button>();
         _times0 = _createRoom.transform.FindChild("jsGroup/10").GetComponent<Toggle>();
         _times1 = _createRoom.transform.FindChild("jsGroup/11").GetComponent<Toggle>();
 
@@ -309,6 +311,10 @@ public class HallPanel : BasePanel
         _close.onClick.AddListener(delegate
         {
             _input.SetActive(false);
+        });
+        _closeCreate.onClick.AddListener(delegate
+        {
+            _createRoom.SetActive(false);
         });
         _button0.onClick.AddListener(delegate
         {
