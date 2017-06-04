@@ -79,9 +79,11 @@ public class BasePanel{
         component.gameObject.SetActive(true);
         component.parent = _root.transform;
         component.name = base_name;
-        
+
         component.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 0, 0);
         component.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
+        component.transform.localScale = Vector3.one;
 
         InitPanel(component);
         startUp(obj);
@@ -100,8 +102,11 @@ public class BasePanel{
     }
 
     public virtual void startUp(object obj = null)
-    { 
-        
+    {
+        for (int i = 0; i < _root.transform.childCount - 1; i++)
+        {
+            _root.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     public virtual void AddListener()
@@ -109,7 +114,8 @@ public class BasePanel{
         
     }
     public virtual void RemoveListener()
-    { 
-        
+    {
+
+
     }
 }

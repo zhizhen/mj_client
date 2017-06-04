@@ -3,11 +3,11 @@ package Login;
 message LoginReq
 {
 	required string account = 1;
-	required string token = 2;
+	required string name = 2;
+	required string url = 3;
 }
 
 message LoginRsp
 {
-	required string account = 1;
-	required string token = 2;
+	required int32 id = 1;
 }

@@ -1,19 +1,56 @@
 package Table;
 
-message MatchReq{
-
+// 创建桌子
+message CreateReq{
+	required string token = 1;
+	required int32 playoffs = 2;
+	required int32 times = 3;
+	required int32 jiangma = 4;
+	required int32 maima = 5;
 }
 
-message MatchRsp{
+// 创建返回
+message CreateRsp{
+	required int32 tab_id = 1;
+}
+
+// 加入桌子
+message JoinReq {
+	required int32 tab_id = 1;
+}
+
+//加入桌子返回给所有其他人
+message Join{
+	required int32 id = 1;
+	required Role role = 2;
+}
+
+// 加入返回给加入者
+message JoinRsp{
 	required int32 err_no = 1;
+	repeated Role roles = 3;
 }
 
-// 匹配结果
-message MatchResult{
-	required bool i_am_red = 1;
-	required string name = 2;
-	required int32 lv = 3;
-	required int32 icon = 4;
+//退出桌子
+message QuitReq{
+	required int32 id = 1;
+}
+//通知客户端谁离开了，离开时别人的话，显示空位，自己的话，关闭窗口
+message QuitRsp{
+	required int32 id = 1;
+}
+//踢人
+message KickReq{
+	required int32 id = 1;
+}
+
+message Role {  
+  required int32 id = 1;  
+  required string name = 2; 
+  required int32 pos = 3;
+  required bool ready = 4;
+  required bool online = 5;
+  required string url = 6;
 }
 
 // 准备
@@ -22,40 +59,128 @@ message ReadyReq{
 }
 
 // 准备结果
-message ReadyRsp{
+message Ready{
+	required int32 id = 1;
 }
 
-// 准备通知
-message ReadyNotify{
-
+//status = 1,代表开始一局，2代表结束一局，id代表本局的庄家，round代表第几局
+message Start{
+	required int32 status = 1;
+	required int32 id = 2;
+	required int32 round = 3;
 }
 
-// 游戏开始 
-message StartNotify{
-	required bool is_red = 1;	// 是否执红
-	required bool is_first = 2;	// 是否先手
+// 发牌
+message Cards{
+	repeated int32 cards = 1;
 }
 
-message Move
-{
-	required int32 srow = 1;
-	required int32 scol = 2;
-	required int32 drow = 3;
-	required int32 dcol = 4;
+// 本轮操作人
+message Turn{
+	required int32 id = 1;
 }
 
-message MoveReq
-{
-	required Move move = 1;
+// 打牌
+message Play{
+	required int32 id = 1;
+	required int32 card = 2;
+	repeated int32 leftcard = 3;//此人剩余牌数
+	required int32 err_no = 4;
 }
 
-message MoveRsp
-{
-	required int32 err_no = 1;
-	optional Move move = 2;
+// 碰
+message Peng{
+	required int32 id = 1;
+	required int32 from = 2;
+	required int32 card = 3;
+	required int32 err_no = 4;
 }
 
-message MoveNotify
-{
-	required Move move = 1;
+// 暗杠
+message Angang{
+	required int32 id = 1;
+	required int32 card = 3;
 }
+
+// 杠 from == id的话则认为是暗杠，此时自己知道card内容，别人card=0
+message Gang{
+	required int32 id = 1;
+	required int32 from = 2;
+	required int32 card = 3;
+	required int32 err_no = 4;
+}
+
+
+// 胡
+message Hu{
+	required int32 id = 1;
+	required int32 from = 2;
+	required int32 hutype = 3;
+	required int32 err_no = 4;
+	required int32 card = 5;
+	repeated int32 cards = 6;
+	
+}
+
+// 过
+message Pass{
+	required int32 id = 1;
+	required bool auto = 2;
+}
+
+//有人胡了之后，检测自己能不能胡，不能胡就马上发PassHu给服务器，以马上结束本局
+message PassHu{
+	required int32 id = 1;
+}
+
+// 摸底牌
+message NewCard{
+	required int32 card = 1;
+	required int32 id = 2;
+	required int32 leftcard = 3;//桌面剩余牌数
+	//required int32 counter = 4; //计数倒计时
+}
+
+message SwitchAuto{
+	required int32 id = 1;
+	required bool isauto = 2;
+}
+
+
+//语音
+message VoiceChat{
+	required int32 id = 1;
+	required bytes data = 2;
+}
+
+//快捷消息
+message QuickMsg{
+	required int32 msgid = 1;
+}
+
+message JiangMa{
+	repeated int32 cards = 1;
+}
+
+//本局分数
+message RoundScore{
+	repeated Score scores = 1;
+	repeated EndCards end_cards = 2;
+}
+
+
+//最后所有人的翻牌
+message EndCards{
+	required int32 id = 1;
+	repeated int32 cards = 2;
+}
+
+message Score{
+	required int32 id = 1;
+	required int32 hu = 2; //1-胡，2、放炮，0、nothing，3,自摸
+	required int32 hu_type = 3;
+	required int32 score = 4;
+}
+
+
+

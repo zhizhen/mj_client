@@ -20,6 +20,16 @@ public class GlobleTimer:SingletonMonoBehaviour<GlobleTimer> {
     private readonly List<float> m_kTimerRecords = new List<float>();
     private readonly List<uint> m_kTimerTickCounts = new List<uint>();
 
+    uint mNow = 0;
+    uint t = 0;
+
+    void updateNow()
+    {
+        t = (uint)(Time.time * 1000);
+        if (t > mNow)
+            mNow = t;
+    }
+
     public float timeScale {
         get { return Time.timeScale; }
         set { Time.timeScale = value; }
