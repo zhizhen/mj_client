@@ -853,6 +853,7 @@ public class RoomPanel : BasePanel {
         _peng.gameObject.SetActive(false);
         _gang.gameObject.SetActive(false);
         _fun.gameObject.SetActive(false);
+        setCenterPos(roleId);
         if (num!=0)
         {
             IconMgr.Instance.SetImage(_handCard.transform.FindChild("value").GetComponent<Image>(), "zm1_" + num);
@@ -927,5 +928,20 @@ public class RoomPanel : BasePanel {
             IconMgr.Instance.SetImage(proxy.images[i], proxy.startStrs[i] + card);
         }
         
+    }
+    private void setCenterPos(int id)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == RoleController.Instance._playerDic[id].Pos)
+            {
+                _center.transform.FindChild(i.ToString()).gameObject.SetActive(true);
+            }
+            else
+            {
+                _center.transform.FindChild(i.ToString()).gameObject.SetActive(false);
+            }
+        }
+
     }
 }
